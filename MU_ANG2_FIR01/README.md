@@ -4,7 +4,7 @@
 
 Based on 'Deploy Angular 2 CLI Apps to Firebase' at https://coryrylan.com/blog/deploy-angular-2-cli-apps-to-firebase
 
-In this post we're going to cover how to get an Angular 2 application up and running and then deploy it to Firebase. First lets cover how to use the Angular CLI to help bootstrap our application’s build process.
+In this post we're going to cover how to get an Angular 2 application up and running and then in a later post how to deploy it to Firebase. First lets cover how to use the Angular CLI to help bootstrap our application’s build process.
 
 ##Angular 2 CLI
 
@@ -53,3 +53,10 @@ When saving the file, witness in the terminal window that the source code is aut
 
 ***my cool app works!***
 
+### Running unit tests
+
+From inside the my-cool-app folder, run ```ng test``` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+###Build for Production
+
+I won't cover all the CLI commands in this post. I recommend checking out the [CLI Docs](https://cli.angular.io/). We will just start with running ```ng build --prod```. This command runs a build for our project but with additional production optimizations such as bundling and minification. Now your project should have a dist/ directory. This is where all of our compiled ready to deploy code is located every time we run a build.
