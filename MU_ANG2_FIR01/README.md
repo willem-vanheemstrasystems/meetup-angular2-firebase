@@ -10,6 +10,8 @@ In this post we're going to cover how to get an Angular 2 application up and run
 
 The Angular 2 CLI is an officially supported project by the Angular team. You can find more information at [https://cli.angular.io](https://cli.angular.io/). First we will install the Angular CLI tool. To install we install via NPM running the following command: ```npm install angular-cli -g```. This will install the CLI globally to our machine to help us create new Angular projects.
 
+Note: [Angular CLI Reference](https://cli.angular.io/reference.pdf)
+
 Once installed we can create a new Angular 2 app by running the following command: ```ng new my-cool-app```. Next open your app in your favorite editor (here: Visual Studio Code).
 
 You should see something similar to this (as of CLI beta 10):
