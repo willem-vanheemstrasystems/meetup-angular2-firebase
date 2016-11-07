@@ -37,3 +37,19 @@ You should see in your browser:
 
 ***app works!***
 
+Inside my-cool-app/src/app/app.component.ts change the following line of code from:
+
+```javascript
+  title = 'app works!';
+```
+
+to:
+
+```javascript
+  title = 'my cool app works!';
+```
+
+When saving the file, witness in the terminal window that the source code is automatically re-processed and the text in the browser now reads:
+
+***my cool app works!***
+
