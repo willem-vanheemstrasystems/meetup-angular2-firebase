@@ -55,7 +55,7 @@ When saving the file, witness in the terminal window that the source code is aut
 
 ### Running unit tests
 
-From inside the my-cool-app folder, run ```ng test``` to execute the unit tests via [Karma](https://karma-runner.github.io).
+From inside the my-cool-app folder, run ```ng test``` to execute the unit tests via [Karma](https://karma-runner.github.io). The test should fail if the title on the page is ***not*** 'app works!'
 
 ###Build for Production
 
