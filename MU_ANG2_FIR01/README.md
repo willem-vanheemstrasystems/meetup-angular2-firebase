@@ -29,3 +29,11 @@ my-cool-app
   README.md
   tslint.json
 ```
+
+### Run the Development server
+From inside the my-cool-app folder, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+You should see in your browser:
+
+***app works!***
+
