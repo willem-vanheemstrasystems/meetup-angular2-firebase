@@ -17,19 +17,15 @@ Once installed we can create a new Angular 2 app by running the following comman
 You should see something similar to this (as of CLI beta 10):
 
 ```javascript
-MY-COOL-APP
-  > config
+my-cool-app
   > e2e
   > node_modules
-  > public
   > src
-  > typings
   .editorconfig
   .gitignore
   angular-cli.json
-  angular-cli-build.js
   package.json
+  protractor.conf.js
   README.md
   tslint.json
-  typings.json
 ```
