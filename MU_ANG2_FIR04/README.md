@@ -180,4 +180,6 @@ $ ng test
 
 which will execute Karma to run all your unit tests.
 
+NOTE: This does currently not work! Read up on testing with the latest Angular 2 RC and Karma for example here https://angular.io/docs/ts/latest/guide/testing.html
+
 more...
