@@ -87,4 +87,14 @@ Now that we have created an Angular 2 project and deployed it to Firebase I reco
 
 ###Angular Ingredients
 
+To meet the needs of our Todo application, we will need:
+
+- a ***Todo*** class to represent individual todo’s
+
+- a ***TodoService*** to create, update and remove todo’s
+
+- a ***TodoApp*** component to display the user interface
+
+So let’s add these ingredients one by one.
+
 more...
