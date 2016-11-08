@@ -97,4 +97,24 @@ To meet the needs of our Todo application, we will need:
 
 So let’s add these ingredients one by one.
 
+####Creating the Todo Class
+
+Because we use TypeScript, we can use a class to represent Todo items, so let’s use Angular CLI to generate a Todo class for us:
+
+```javascript
+$ ng generate class Todo
+```
+
+which will create:
+
+- src/app/todo.spec.ts
+
+- src/app/todo.ts
+
+Let’s open up ```src/app/todo.ts``` and replace its contents with:
+
+```javascript
+
+```
+
 more...
