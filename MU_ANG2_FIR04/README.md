@@ -114,7 +114,15 @@ which will create:
 Let’s open up ```src/app/todo.ts``` and replace its contents with:
 
 ```javascript
+export class Todo {
+  id: number;
+  title: string = '';
+  complete: boolean = false;
 
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+}
 ```
 
 more...
