@@ -125,4 +125,59 @@ export class Todo {
 }
 ```
 
+Each Todo item has 3 properties:
+
+- id: number, unique ID of the todo item
+
+- title: string, title of the todo item
+
+- complete: boolean, whether or not the todo item is complete
+
+The constructor logic allows us to specify property values during instantiation:
+
+```javascript
+let todo = new Todo({
+  title: 'Read SitePoint article',
+  complete: false
+});
+```
+
+In case Angular CLI has not generated ***src/app/todo.spec.ts*** for us, let’s create it and add a unit test to make sure the constructor logic works as expected:
+
+javascript
+```
+import {
+  beforeEach, beforeEachProviders,
+  describe, xdescribe,
+  expect, it, xit,
+  async, inject
+} from '@angular/core/testing';
+import {Todo} from './todo';
+
+describe('Todo', () => {
+
+  it('should create an instance', () => {
+    expect(new Todo()).toBeTruthy();
+  });
+
+  it('should accept values in the constructor', () => {
+    let todo = new Todo({
+      title: 'hello',
+      complete: true
+    });
+    expect(todo.title).toEqual('hello');
+    expect(todo.complete).toEqual(true);
+  });
+
+});
+```
+
+To verify whether our code works as expected, we can now run the unit tests:
+
+```javascript
+$ ng test
+```
+
+which will execute Karma to run all your unit tests.
+
 more...
