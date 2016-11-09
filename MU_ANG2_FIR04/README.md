@@ -406,7 +406,226 @@ which will create:
 
 - src/app/todo-app/todo-app.component.ts
 
-- src/app/todo-app/index.ts
+Template and styles can also be specified inline inside the script file. Angular CLI creates separate files by default, so we will use separate files in this article.
+
+Let’s start by adding the component’s view to src/app/todo-app/todo-app.component.html:
+
+```javascript
+<section class="todoapp">
+  <header class="header">
+    <h1>Todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+  </header>
+  <section class="main" *ngIf="todos.length > 0">
+    <ul class="todo-list">
+      <li *ngFor="let todo of todos" [class.completed]="todo.complete">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+          <label>{{todo.title}}</label>
+          <button class="destroy" (click)="removeTodo(todo)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <footer class="footer" *ngIf="todos.length > 0">
+    <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
+  </footer>
+</section>
+```
+
+Here is a super short primer on Angular’s template syntax in case you have never seen it yet:
+
+- [property]="expression": set property to result of expression
+
+- (event)="statement": execute statement when event occurred
+
+- [(property)]="expression": create two-way binding with expression
+
+- [class.special]="expression": add special CSS class to element when expression is truthy
+
+- [style.color]="expression": set color CSS property to result of expression
+
+If you’re not familiar with Angular’s template syntax, you should definitely read [the official template syntax documentation](https://angular.io/docs/ts/latest/guide/template-syntax.html).
+
+Let’s see what that means for our view. At the top there is an input to create a new todo:
+
+```javascript
+<input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+```
+
+- [(ngModel)]="newTodo.title": adds a two-way binding between the input value and newTodo.title
+
+- (keyup.enter)="addTodo()": tells Angular to execute addTodo() when the enter key was pressed while typing in the input element
+
+Don’t worry about where newTodo or addTodo() come from yet, we will get there shortly. Just try to understand the semantics of the view for now.
+
+Next there is a section to display the todo’s:
+
+```javascript
+<section class="main" *ngIf="todos.length > 0">
+```
+
+- *ngIf="todos.length > 0": only show the section element and all its children when there is at least 1 todo
+
+Within that section, we ask Angular to generate an li element for each todo:
+
+```javascript
+<li *ngFor="let todo of todos" [class.completed]="todo.complete">
+```
+
+- *ngFor="let todo of todos": loop over all todo’s and assign current todo to a variable called todo for each iteration
+
+- [class.completed]="todo.complete": apply CSS class complete to li element when todo.complete is truthy
+
+and finally we display todo details for each todo within the ngFor loop:
+
+```javascript
+<div class="view">
+  <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+  <label>{{todo.title}}</label>
+  <button class="destroy" (click)="removeTodo(todo)"></button>
+</div>
+```
+
+- (click)="toggleTodoComplete(todo)": execute toggleTodoComplete(todo) when checkbox is clicked
+
+- [checked]="todo.complete": assign the value of todo.complete to the property checked of the element
+
+- (click)="removeTodo(todo)": execute removeTodo(todo) when destroy button is clicked
+
+Ok, let’s breathe. That was quite a bit of syntax we went through
+
+If you want to learn every detail about Angular’s template syntax, make sure to read the [official template documentation](https://angular.io/docs/ts/latest/guide/template-syntax.html).
+
+You may wonder how expressions like addTodo() and newTodo.title can be evaluated. We haven’t defined them yet, so how can Angular know what we mean?
+
+That’s exactly where the ***expression context*** comes in. The expression context of a component is the component instance. And the component instance is an instantiation of the component class.
+
+The component class of our ```TodoAppComponent``` is defined in ```src/app/todo-app/todo-app.component.ts```.
+
+Angular CLI already created the TodoAppComponent class boilerplate for us:
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-todo-app',
+  templateUrl: './todo-app.component.html',
+  styleUrls: ['./todo-app.component.css']
+})
+export class TodoAppComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+so we can immediately start adding our custom logic.
+
+We will be needing the TodoService instance, so let’s start by injecting it in our component.
+
+First we import the TodoService class and specify it in the providers array of the Component decoration:
+
+```javascript
+// Import class so we can register it as dependency injection token
+import {TodoService} from '../todo.service';
+
+@Component({
+  // ...
+  providers: [TodoService]
+})
+export class TodoAppComponent {
+  // ...
+}
+```
+
+The TodoAppComponent‘s dependency injector will now recognize the TodoService class as a dependency injection token and return a single instance of TodoService when we ask for it.
+
+Angular’s dependency injection system accepts a variety of dependency injection recipes. The syntax above is a shorthand notation for the Class provider recipe that provides dependencies using the singleton pattern. Check out Angular’s dependency injection documentation for more details.
+
+Now that the component’s dependency injector knows what it needs to provide, we ask it to inject the TodoService instance in our component by specifying the dependency in the TodoAppComponent constructor:
+
+```javascript
+// Import class so we can use it as dependency injection token in the constructor
+import {TodoService} from '../todo.service';
+
+@Component({
+  // ...
+})
+export class TodoAppComponent {
+
+  // Ask Angular DI system to inject the dependency
+  // associated with the dependency injection token `TodoService`
+  // and assign it to a property called `todoService`
+  constructor(private todoService: TodoService) {
+  }
+
+  // Service is now available as this.todoService
+  toggleTodoComplete(todo) {
+    this.todoService.toggleTodoComplete(todo);
+  }
+}
+```
+
+We can now implement all logic we need in our view by adding properties and methods to our TodoAppComponent class:
+
+```javascript
+import {Component} from '@angular/core';
+import {Todo} from '../todo';
+import {TodoService} from '../todo.service';
+
+@Component({
+  moduleId: module.id,
+  selector: 'todo-app',
+  templateUrl: 'todo-app.component.html',
+  styleUrls: ['todo-app.component.css'],
+  providers: [TodoService]
+})
+export class TodoAppComponent {
+
+  newTodo: Todo = new Todo();
+
+  constructor(private todoService: TodoService) {
+  }
+
+  addTodo() {
+    this.todoService.addTodo(this.newTodo);
+    this.newTodo = new Todo();
+  }
+
+  toggleTodoComplete(todo) {
+    this.todoService.toggleTodoComplete(todo);
+  }
+
+  removeTodo(todo) {
+    this.todoService.deleteTodoById(todo.id);
+  }
+
+  get todos() {
+    return this.todoService.getAllTodos();
+  }
+
+}
+```
+
+We first instantiate a newTodo property and assign a new Todo() when the component class is instantiated. This is the newTodo we added a two-way binding to in our view:
+
+```javascript
+<input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+```
+
+Whenever the input value changes in the view, the value in the component instance is updated. And whenever the value in the component instance changes, the value in the input element in the view changes.
+
+Next we implement all methods we used in our view.
+
+Their implementation is very short and should be self-explanatory as we delegate all business logic to the todoService.
+
+Delegating business logic to a service is a good programming practice as it allows us to centrally manage and test the business logic.
+
+
 
 
 more...
