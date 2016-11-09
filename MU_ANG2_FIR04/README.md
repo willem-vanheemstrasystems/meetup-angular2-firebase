@@ -360,16 +360,53 @@ describe('Service: Todo', () => {
       
   });   
   
-  
-  // more ...
-  
-  
-  
-  
+  describe('#toggleTodoComplete(todo)', () => {
+
+    it('should return the updated todo with inverse complete status', inject([TodoService], (service: TodoService) => {
+      let todo = new Todo({title: 'Hello 1', complete: false});
+      service.addTodo(todo);
+      let updatedTodo = service.toggleTodoComplete(todo);
+      expect(updatedTodo.complete).toEqual(true);
+      service.toggleTodoComplete(todo);
+      expect(updatedTodo.complete).toEqual(false);
+    }));
+
+  });
+
 });
 ```
 
+Karma comes pre-configured with ***Jasmine***. You can read the [Jasmine documentation](http://jasmine.github.io/2.4/introduction.html) to learn more about the Jasmine syntax.
 
+To check whether our business logic is valid, we run our unit tests again:
+
+```javascript
+$ ng test
+```
+
+Ok, now that we have a working TodoService, it’s time to implement the interface part of the application.
+
+In Angular 2, parts of the interface are represented by ***components***.
+
+####Creating the TodoApp Component
+
+Again, let’s use Angular CLI to generate the component for us:
+
+```javascript
+$ ng generate component TodoApp
+```
+
+which will create:
+
+- src/app/todo-app/todo-app.component.css
+
+- src/app/todo-app/todo-app.component.html
+
+- src/app/todo-app/todo-app.component.spec.ts
+
+- src/app/todo-app/todo-app.component.ts
+
+- src/app/todo-app/index.ts
 
 
 more...

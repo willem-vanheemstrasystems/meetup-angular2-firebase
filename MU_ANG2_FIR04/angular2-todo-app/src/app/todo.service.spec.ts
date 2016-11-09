@@ -88,10 +88,17 @@ describe('Service: Todo', () => {
       
   });   
   
-  
-  
-  
-  
-  
-  
+  describe('#toggleTodoComplete(todo)', () => {
+
+    it('should return the updated todo with inverse complete status', inject([TodoService], (service: TodoService) => {
+      let todo = new Todo({title: 'Hello 1', complete: false});
+      service.addTodo(todo);
+      let updatedTodo = service.toggleTodoComplete(todo);
+      expect(updatedTodo.complete).toEqual(true);
+      service.toggleTodoComplete(todo);
+      expect(updatedTodo.complete).toEqual(false);
+    }));
+
+  });  
+
 });
