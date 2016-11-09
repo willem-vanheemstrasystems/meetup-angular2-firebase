@@ -146,13 +146,10 @@ In case Angular CLI has not generated ***src/app/todo.spec.ts*** for us, let’s c
 
 javascript
 ```
-import {
-  beforeEach, beforeEachProviders,
-  describe, xdescribe,
-  expect, it, xit,
-  async, inject
-} from '@angular/core/testing';
-import {Todo} from './todo';
+/* tslint:disable:no-unused-variable */
+
+import { TestBed, async } from '@angular/core/testing';
+import { Todo } from './todo';
 
 describe('Todo', () => {
 
@@ -180,6 +177,5 @@ $ ng test
 
 which will execute Karma to run all your unit tests.
 
-NOTE: This does currently not work! Read up on testing with the latest Angular 2 RC and Karma for example here https://angular.io/docs/ts/latest/guide/testing.html
 
 more...
