@@ -628,7 +628,56 @@ Their implementation is very short and should be self-explanatory as we delegate
 
 Delegating business logic to a service is a good programming practice as it allows us to centrally manage and test the business logic.
 
+In order for the whole project to work you would need to add the following into app.component.ts:
 
+```javascript
+...
+import { TodoAppComponent } from './todo-app/todo-app.component';
 
+@Component({
+  ...
+  directives: [TodoAppComponent]
+})
+...
+```
 
-more...
+and in app.component.html:
+
+```javascript
+...
+<app-todo-app></app-todo-app>
+```
+
+##Summary
+
+Angular 2 is a beast, no doubt. A very powerful beast!
+
+We’ve covered a lot so let’s recap what we have learned in this article:
+
+- We learned how to install Angular CLI and how much time it saves us when creating new applications or adding features to existing applications.
+
+- We learned how to implement business logic in an Angular service and how to test our business logic using unit tests.
+
+- We learned how to use a component to interact with the user and how to delegate logic to a service using dependency injection.
+
+- We learned the basics of Angular template syntax and briefly touched on how Angular dependency injection works.
+
+- Finally, we learned how to quickly deploy our application to GitHub Pages.
+
+There is a lot more to learn about Angular 2 that we hope to cover in future articles, such as how to:
+
+- communicate with a REST API backend using Angular 2’s HTTP service
+
+- filter todo’s using Angular pipes
+
+- implement routing to make it a multi-page application
+
+- and much, much more.
+
+So stay tuned for more about this wonderful world of Angular 2.
+
+##Serve the App
+
+```javascript
+ng serve
+```
