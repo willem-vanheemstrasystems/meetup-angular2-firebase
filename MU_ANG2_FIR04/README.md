@@ -144,8 +144,7 @@ let todo = new Todo({
 
 In case Angular CLI has not generated ***src/app/todo.spec.ts*** for us, let’s create it and add a unit test to make sure the constructor logic works as expected:
 
-javascript
-```
+```javascript
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
