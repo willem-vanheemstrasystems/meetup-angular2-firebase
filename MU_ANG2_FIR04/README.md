@@ -573,7 +573,7 @@ export class TodoAppComponent {
 We can now implement all logic we need in our view by adding properties and methods to our TodoAppComponent class:
 
 ```javascript
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Todo} from '../todo';
 import {TodoService} from '../todo.service';
 
@@ -589,6 +589,9 @@ export class TodoAppComponent {
   newTodo: Todo = new Todo();
 
   constructor(private todoService: TodoService) {
+  }
+
+  ngOnInit() {
   }
 
   addTodo() {
