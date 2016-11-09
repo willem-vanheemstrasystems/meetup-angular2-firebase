@@ -7,5 +7,5 @@ import { TodoAppComponent } from './todo-app/todo-app.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = ''; // Used to be 'app works!'
 }
