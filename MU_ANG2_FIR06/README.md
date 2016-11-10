@@ -1,8 +1,10 @@
 ##README.md
 
-#Meetup - Angular 2 Firebase 02
+#Meetup - Angular 2 Firebase 06
 
 Based on 'Deploy Angular 2 CLI Apps to Firebase' at https://coryrylan.com/blog/deploy-angular-2-cli-apps-to-firebase
+
+Based on 'Simple app that consumes Angular Material 2 components' at https://github.com/jelbourn/material2-app
 
 In this post we're going to cover how to get an Angular 2 application up and running and deploy it to Firebase. First lets cover how to use the Angular CLI to help bootstrap our application’s build process.
 
