@@ -207,7 +207,8 @@ You can extend the example above to define a second (or third or fourth) theme t
 ```
 
 With this, any element inside of a parent with the unicorn-dark-theme class will use this dark theme.
-Theming your own components
+
+####Theming your own components
 
 For more details about theming your own components, see [theming-your-components.md](https://github.com/angular/material2/blob/master/docs/theming-your-components.md)
 
