@@ -6,6 +6,8 @@ Based on 'Deploy Angular 2 CLI Apps to Firebase' at https://coryrylan.com/blog/d
 
 Based on 'Simple app that consumes Angular Material 2 components' at https://github.com/jelbourn/material2-app
 
+See an example at [https://material2-app.firebaseapp.com/](https://material2-app.firebaseapp.com/)
+
 In this post we're going to cover how to get an Angular 2 application up and running and deploy it to Firebase. First lets cover how to use the Angular CLI to help bootstrap our application’s build process.
 
 ##Angular 2 CLI
@@ -62,6 +64,19 @@ From inside the my-cool-app folder, run ```ng test``` to execute the unit tests 
 ###Build for Production
 
 I won't cover all the CLI commands in this post. I recommend checking out the [CLI Docs](https://cli.angular.io/). We will just start with running ```ng build --prod```. This command runs a build for our project but with additional production optimizations such as bundling and minification. Now your project should have a dist/ directory. This is where all of our compiled ready to deploy code is located every time we run a build.
+
+##Material Design
+
+---
+
+
+INCLUDE MATERIAL DESIGN 2 INSTRUCTIONS HERE
+
+
+
+
+
+---
 
 ##Firebase CLI
 
