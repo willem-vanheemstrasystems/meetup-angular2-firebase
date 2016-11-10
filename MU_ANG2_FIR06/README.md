@@ -139,7 +139,77 @@ You can also concatenate the file with the rest of your application's css.
 
 When you want more customization than a pre-built theme offers, you can create your own theme file.
 
-more ...
+A theme file is a simple Sass file that defines your palettes and passes them to mixins that output the corresponding styles. A typical theme file will look something like this (e.g. src/candy-app-theme.scss):
+
+```javascript
+@import '~@angular/material/core/theming/all-theme';
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include md-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: md-palette($md-indigo);
+$candy-app-accent:  md-palette($md-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    md-palette($md-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: md-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+```
+
+You only need this single Sass file; you do not need to use Sass to style the rest of your app.
+
+If you are using the Angular CLI, support for compiling Sass to css is built-in; you only have to add a new entry to the "styles" list in angular-cli.json pointing to the theme file (e.g., candy-app-theme.scss).
+
+```javascript
+...
+  "styles": [
+    "styles.css",
+    "candy-app-theme.scss"
+  ],
+...
+```
+
+If you're not using the Angular CLI, you can use any existing Sass tooling to build the file (such as gulp-sass or grunt-sass). The simplest approach is to use the node-sass CLI; you simply run:
+
+```javascript
+node-sass src/unicorn-app-theme.scss dist/unicorn-app-theme.css
+```
+
+and then include the output file in your application.
+
+The theme file can be concatenated and minified with the rest of the application's css.
+
+####Multiple themes
+
+You can extend the example above to define a second (or third or fourth) theme that is gated by some selector. For example, we could append the following to the example above to define a secondary dark theme:
+
+```javascript
+.unicorn-dark-theme {
+  $dark-primary: md-palette($md-blue-grey);
+  $dark-accent:  md-palette($md-amber, A200, A100, A400);
+  $dark-warn:    md-palette($md-deep-orange);
+
+  $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);   
+}
+```
+
+With this, any element inside of a parent with the unicorn-dark-theme class will use this dark theme.
+Theming your own components
+
+For more details about theming your own components, see [theming-your-components.md](https://github.com/angular/material2/blob/master/docs/theming-your-components.md)
 
 ####Additional setup for md-slide-toggle and md-slider:
 
