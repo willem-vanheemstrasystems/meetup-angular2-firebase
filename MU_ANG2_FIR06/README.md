@@ -16,12 +16,12 @@ The Angular 2 CLI is an officially supported project by the Angular team. You ca
 
 Note: [Angular CLI Reference](https://cli.angular.io/reference.pdf)
 
-Once installed we can create a new Angular 2 app by running the following command: ```ng new my-cool-app```. Next open your app in your favorite editor (here: Visual Studio Code).
+Once installed we can create a new Angular 2 app by running the following command: ```ng new my-material-design-app```. Next open your app in your favorite editor (here: Visual Studio Code).
 
 You should see something similar to this (as of CLI beta 10):
 
 ```javascript
-my-cool-app
+my-material-design-app
   > e2e
   > node_modules
   > src
@@ -41,7 +41,7 @@ You should see in your browser:
 
 ***app works!***
 
-Inside my-cool-app/src/app/app.component.ts change the following line of code from:
+Inside my-material-design-app/src/app/app.component.ts change the following line of code from:
 
 ```javascript
   title = 'app works!';
@@ -50,12 +50,12 @@ Inside my-cool-app/src/app/app.component.ts change the following line of code fr
 to:
 
 ```javascript
-  title = 'my cool app works!';
+  title = 'my material design app works!';
 ```
 
 When saving the file, witness in the terminal window that the source code is automatically re-processed and the text in the browser now reads:
 
-***my cool app works!***
+***my material design app works!***
 
 ### Running unit tests
 
@@ -142,7 +142,7 @@ more ...
 
 So now that we have learned how to use the Angular 2 CLI to package up our app for deployment we will use the Firebase CLI to create a live hosting project to deploy to.
 
-First you will want to log into Firebase and go to [https://console.firebase.google.com/](https://console.firebase.google.com/). Once in the console select “Create New Project”. For our project we will name it “my-cool-app”.
+First you will want to log into Firebase and go to [https://console.firebase.google.com/](https://console.firebase.google.com/). Once in the console select “Create New Project”. For our project we will name it “my-material-design-app”.
 
 - screenshot goes here - 
 
@@ -154,7 +154,7 @@ Now that Firebase CLI is installed, at the root of your Angular CLI project run 
 
 - screenshot goes here - 
 
-Select the Hosting option in the command line. Next select our project ```my-cool-app``` that we created earlier. Next it will ask what file to use for the Firebase real time database rules. For now you can just use the default.
+Select the Hosting option in the command line. Next select our project ```my-material-design-app``` that we created earlier. Next it will ask what file to use for the Firebase real time database rules. For now you can just use the default.
 
 ***The next step is important!*** The cli will ask what folder to use as the public directory. For our project we want to use the ```dist/``` directory instead of Firebase’s default ```public/``` directory. So type in the command line ```dist```.
 
