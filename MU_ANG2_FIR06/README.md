@@ -72,6 +72,66 @@ I won't cover all the CLI commands in this post. I recommend checking out the [C
 
 INCLUDE MATERIAL DESIGN 2 INSTRUCTIONS HERE
 
+###Install Angular Material components
+
+```javascript
+npm install --save @angular/material
+```
+
+###Import the Angular Material NgModule
+
+src/app/app.module.ts
+
+```javascript
+import { MaterialModule } from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    MaterialModule.forRoot()
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+###Include the core and theme styles:
+
+This is required to apply all of the core and theme styles to your application. You can either use a pre-built theme, or define your own custom theme.
+
+See the [theming guide](https://github.com/angular/material2/blob/master/docs/theming.md) for instructions.
+
+####Additional setup for md-slide-toggle and md-slider:
+
+The slide-toggle and slider components have a dependency on [HammerJS](http://hammerjs.github.io/).
+
+Add HammerJS to your application via npm, a CDN (such as the Google CDN), or served directly from your app.
+
+####[Optional] Using Material Design icons with md-icon:
+
+If you want to use Material Design icons in addition to Angular Material components, load the Material Design font in your index.html.
+
+md-icon supports any font icons or svg icons, so this is only one option for an icon source.
+
+src/index.html
+
+```javascript
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+```
+
+more ...
 
 
 
