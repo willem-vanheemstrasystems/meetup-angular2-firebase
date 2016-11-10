@@ -113,6 +113,34 @@ This is required to apply all of the core and theme styles to your application. 
 
 See the [theming guide](https://github.com/angular/material2/blob/master/docs/theming.md) for instructions.
 
+####Using a pre-built theme
+
+Angular Material comes prepackaged with several pre-built theme css files. These theme files also include all of the styles for core (styles common to all components), so you only have to include a single css file for Angular Material in your app.
+
+You can include a theme file directly into your application from @angular/material/core/theming/prebuilt
+
+If you're using Angular CLI, this is as simple as including one line in your src/styles.css file:
+
+```javascript
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+```
+
+Alternatively, you can just reference the file directly. This would look something like
+
+```javascript
+<link href="node_modules/@angular/material/core/theming/prebuilt/indigo-pink.css" rel="stylesheet">
+```
+
+The actual path will depend on your server setup.
+
+You can also concatenate the file with the rest of your application's css.
+
+####Defining a custom theme
+
+When you want more customization than a pre-built theme offers, you can create your own theme file.
+
+more ...
+
 ####Additional setup for md-slide-toggle and md-slider:
 
 The slide-toggle and slider components have a dependency on [HammerJS](http://hammerjs.github.io/).
