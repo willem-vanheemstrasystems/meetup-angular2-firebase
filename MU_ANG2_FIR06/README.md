@@ -67,11 +67,6 @@ I won't cover all the CLI commands in this post. I recommend checking out the [C
 
 ##Material Design
 
----
-
-
-INCLUDE MATERIAL DESIGN 2 INSTRUCTIONS HERE
-
 ###Install Angular Material components
 
 ```javascript
@@ -230,12 +225,48 @@ src/index.html
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 ```
 
-more ...
+####Material Design Elements
 
+In src/app/app.component.html write below HTML, which is used by Material Design:
 
+```javascript
+<md-toolbar color="primary">
+  <button class="app-icon-button">
+    <i class="material-icons app-toolbar-menu">menu</i>
+  </button>
+  &nbsp;My Material Design App
+  <span class="app-toolbar-filler"></span>
+  <button md-button [md-menu-trigger-for]="menu_01">
+   MENU_01
+  </button>
+  <md-menu #menu_01="mdMenu">
+    <button md-menu-item>Menu_01 Item 1</button>
+    <button md-menu-item>Menu_01 Item 2</button>
+    <button md-menu-item>Menu_01 Item 3</button>
+  </md-menu>
+  <button md-button [md-menu-trigger-for]="menu_02">
+   MENU_02
+  </button>
+  <md-menu #menu_02="mdMenu">
+    <button md-menu-item>Menu_02 Item 1</button>
+    <button md-menu-item>Menu_02 Item 2</button>
+    <button md-menu-item>Menu_02 Item 3</button>
+  </md-menu>  
+</md-toolbar>
 
+<md-tab-group>
+  <md-tab label="Tab_01">
+    <p>Tab 01</p>
+  </md-tab>
+  <md-tab label="Tab_02">
+    <p>Tab 02</p>
+  </md-tab>
+</md-tab-group>
 
----
+<div class="app-content">
+  <h1>{{ title }}</h1>
+</div>
+```
 
 ##Firebase CLI
 
