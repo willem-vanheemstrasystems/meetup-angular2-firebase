@@ -1025,6 +1025,36 @@ Now update the file src/app/home/home.component.html as follows:
 
 When the page reloads in the browser at http://localhost:4200 we will see a list of lessons with description and duration of each lesson, retrieved from the firebase database! 
 
+======== EXTRA ==========
+
+In order to have syntax checking and auto-completion of TypeScript in your code editor, follow these steps:
+
+Inside of the project folder, type:
+
+```javascript
+npm install -g typescript
+```
+
+This will install the TypeScript Compiler (tsc) for global use.
+
+NOTE: TypeScript Definition (tsd) manager for DefinitelyTyped is deprecated. Use instead Typings.
+
+See How to Upgrade from TSD to typings' at http://ilikekillnerds.com/2016/01/how-to-upgrade-from-tsd-to-typings/
+
+Simply run the following to install typings:
+
+```javascript
+npm install typings -g
+``` 
+
+This will create a ```typings.json``` file in the root of your project. 
+
+NOTE: Angular 2 includes it's typings in the node module. Using TSD or Typings makes no difference for Angular 2.
+
+To add support for Angular 2 follow the advice of this blog post 'Adding Custom Typings files d ts in an Angular 2 TypeScript Application' at https://www.bennadel.com/blog/3169-adding-custom-typings-files-d-ts-in-an-angular-2-typescript-application.htm   
+
+=========================
+
 ###Angular 2 Smart Components vs Presentation Components: What's the Difference and When to Use Each ?
 
 In this lesson we are going to learn that Angular 2 Components usually fall into two categories: Smart Components and Presentation Components. We are going to learn the differences between the two, and also we will learn when to use each and why.
