@@ -1,6 +1,6 @@
 ##README.md
 
-#Angular 2 - Firebase 008
+#Angular 2 - Firebase 009
 
 Based on 'Build an Application with Angular 2' at https://angular-university.io/course/build-an-application-with-angular2
 
