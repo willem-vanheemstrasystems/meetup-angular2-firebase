@@ -129,46 +129,6 @@ Well, now we have a vehicle list, but how can we interact with it? Passing it to
 Go to app.model in the terminal and type ```ng g service vehicle```. After the command executes, refresh app.model. Two files will be created, vehicle.service.spec.ts and vehicle.service.ts. The last one is interesting to us. For now we won’t implement any complex logic to obtain the list and will just hard code our vehicles list. In the following code we import the Injectable decorator, set up our list, assign given list to class field and return it by demand:
 
 ```javascript
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
 import { Injectable } from '@angular/core';
  
 var vehicles = [
