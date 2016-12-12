@@ -107,9 +107,26 @@ All the basic component infrastructure is present here.
 
 OK, we’ll definitely need to store a list of our vehicles somewhere. Let’s add field vehicles: Vehicle[]; to the VehiclesListComponent class. Of course, Vehicle will be highlighted in red—currently, the TS compiler knows nothing about it. To fix this, add import { Vehicle } from '../model/vehicle'; to the imports section and save the file. The red highlighting should disappear. If not, make a small edit (like adding space) and save again—unfortunately, the current version of the TypeScript plugin has poor validation.
 
-Well, now we have a vehicle list, but how can we interact with it? Passing it to the constructor would make our code less flexible by requiring a concrete list to be specified when creating a vehicle list component. There’s a better solution—Angular 2 supports Dependency Injection out-of-the-box, and it can be accomplished using Angular 2 Services.
+```javascript
+...
+import { Vehicle } from '../model/vehicle';
+...
+export class VehiclesListComponent implements OnInit {
+ 
+  vehicles: Vehicle[];
+  
+  constructor() { }
+ 
+  ngOnInit() {
+  }
+ 
+}
+...
+```
 
-Go to app.model in the terminal and type ng g service vehicle. After the command executes, refresh app.model. Two files will be created, vehicle.service.spec.ts and vehicle.service.ts. The last one is interesting to us. For now we won’t implement any complex logic to obtain the list and will just hard code our vehicles list. In the following code we import the Injectable decorator, set up our list, assign given list to class field and return it by demand:
+Well, now we have a vehicle list, but how can we interact with it? Passing it to the constructor would make our code less flexible by requiring a concrete list to be specified when creating a vehicle list component. There’s a better solution—Angular 2 supports ***Dependency Injection*** out-of-the-box, and it can be accomplished using Angular 2 Services.
+
+Go to app.model in the terminal and type ```ng g service vehicle```. After the command executes, refresh app.model. Two files will be created, vehicle.service.spec.ts and vehicle.service.ts. The last one is interesting to us. For now we won’t implement any complex logic to obtain the list and will just hard code our vehicles list. In the following code we import the Injectable decorator, set up our list, assign given list to class field and return it by demand:
 
 
 
