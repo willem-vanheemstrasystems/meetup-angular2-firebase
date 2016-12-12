@@ -2,6 +2,8 @@
 
 Based on 'Creating My First Web App with Angular 2 in Eclipse' at https://www.genuitec.com/first-angular-2-app/
 
+See also 'Angular 2 in Eclipse' at https://jaxenter.com/angular-2-intellij-netbeans-eclipse-128461.html
+
 Angular 2 is a framework for building desktop and mobile web applications. After hearing rave reviews about Angular 2, I decided to check it out and take my first steps into modern web development. In this article, I’ll show you how to create a simple master-details application using Angular 2, TypeScript, Angular CLI and Eclipse Java EE.
 
 #Tools and Prerequisites
@@ -25,6 +27,8 @@ Angular 2 is a framework for building desktop and mobile web applications. After
 (https://marketplace.eclipse.org/content/tm-terminal)
 
 - Basic TypeScript, HTML and Eclipse usage knowledge
+
+NOTE: Try this TypeScript IDE for Eclipse instead: http://typecsdev.com/
 
 ##The Goal
 
@@ -65,6 +69,47 @@ export class Vehicle {
 ```
 
 The class contains only four fields describing some vehicle.
+
+###Components
+
+It’s time to make some UI bricks for our application, called components. Open the Terminal view for folder (Your Project)>Java Resources>src>app and type ng g component vehicle-list. The CLI command ng with the key g (or generate) is responsible for generating Angular 2 application entities and, particularly, components.
+
+As you can conclude from its name, vehicle-list is responsible for displaying a list with vehicle details. Let’s expand vehicle-list folder and open vehicles-list.component.ts:
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+ 
+@Component({
+  moduleId: module.id,
+  selector: 'app-vehicles-list',
+  templateUrl: 'vehicles-list.component.html',
+  styleUrls: ['vehicles-list.component.css']
+})
+export class VehiclesListComponent implements OnInit {
+ 
+  constructor() { }
+ 
+  ngOnInit() {
+  }
+ 
+}
+```
+
+All the basic component infrastructure is present here.
+
+- The first line is importing the ***Component*** decorator function. This function is describing metadata for any Angular 2 reusable UI component.
+
+- ***Selector*** specifies the tag name that would trigger this component’s insertion.
+
+- ***TemplateUrl*** and ***styleUrls*** specify file names that contain an html-based template for the component UI and css styling for it.
+
+- ***Class VehiclesListComponent*** should contain almost all inner component logic written in TypeScript. For now it contains only an empty ***constructor*** and empty ***ngOnInit*** lifecycle hook. This hook can be useful for some “heavy” initialization like network or database calls, constructor should be used only for basic initialization, without any heavy IO.
+
+OK, we’ll definitely need to store a list of our vehicles somewhere. Let’s add field vehicles: Vehicle[]; to the VehiclesListComponent class. Of course, Vehicle will be highlighted in red—currently, the TS compiler knows nothing about it. To fix this, add import { Vehicle } from '../model/vehicle'; to the imports section and save the file. The red highlighting should disappear. If not, make a small edit (like adding space) and save again—unfortunately, the current version of the TypeScript plugin has poor validation.
+
+Well, now we have a vehicle list, but how can we interact with it? Passing it to the constructor would make our code less flexible by requiring a concrete list to be specified when creating a vehicle list component. There’s a better solution—Angular 2 supports Dependency Injection out-of-the-box, and it can be accomplished using Angular 2 Services.
+
+Go to app.model in the terminal and type ng g service vehicle. After the command executes, refresh app.model. Two files will be created, vehicle.service.spec.ts and vehicle.service.ts. The last one is interesting to us. For now we won’t implement any complex logic to obtain the list and will just hard code our vehicles list. In the following code we import the Injectable decorator, set up our list, assign given list to class field and return it by demand:
 
 
 
