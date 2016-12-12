@@ -412,6 +412,6 @@ table.tftable tr:hover {background-color: #DDD; left: .1em;}
 
 [vehicles.zip](https://resources.cloud.genuitec.com/wp-content/uploads/2016/09/vehicles.zip) — Sample project for this blog
 
-https://angular.io/docs/ts/latest/tutorial/—Tour of Heroes tutorial for Angular 2
+https://angular.io/docs/ts/latest/tutorial/ — Tour of Heroes tutorial for Angular 2
 
-https://cli.angular.io/—Angular CLI with commands description
+https://cli.angular.io/ — Angular CLI with commands description
