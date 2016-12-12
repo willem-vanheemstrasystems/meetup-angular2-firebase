@@ -378,7 +378,7 @@ export class VehicleListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(vehicle: Vehicle) { this.selectedVehicle 
+  onSelect(vehicle: Vehicle) { this.selectedVehicle = vehicle; }
 
 }
 ```
