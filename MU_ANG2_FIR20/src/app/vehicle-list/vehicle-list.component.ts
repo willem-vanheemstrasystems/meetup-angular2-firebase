@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../model/vehicle';
 import { VehicleService } from '../model/vehicle.service';
+import { VehicleDetailsComponent } from '../vehicle-details/vehicle-details.component';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -12,7 +13,8 @@ import { VehicleService } from '../model/vehicle.service';
 export class VehicleListComponent implements OnInit {
 
   vehicles: Vehicle[];
-
+  selectedVehicle: Vehicle;
+    
   constructor(private vehicleService: VehicleService) { 
     this.vehicles = this.vehicleService.getVehicles();
   }
@@ -20,4 +22,6 @@ export class VehicleListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSelect(vehicle: Vehicle) { this.selectedVehicle = vehicle; }
+      
 }

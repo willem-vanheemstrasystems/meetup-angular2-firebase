@@ -233,6 +233,185 @@ describe('VehicleListComponent', () => {
 });
 ```
 
+Replace the content of app.component.html with the following:
 
+```javascript
+<h1>{{title}}</h1>
+<app-vehicle-list></app-vehicle-list>
+```
 
-.. continue reading the reference at the top of this README file, for more instructions.
+Change the title in app.component.ts as follows:
+
+```javascript
+...
+export class AppComponent {
+  title = 'Vehicle Registry';
+}
+...
+```
+
+Replace the content of vehicle.component.css with:
+
+```javascript
+table.tftable {color:#333333;border-width: 1px;border-color: #a9a9a9;border-collapse: collapse;}
+table.tftable th {background-color:#b8b8b8;border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;text-align:left;}
+table.tftable tr {background-color:#ffffff;}
+table.tftable td {border-width: 1px;padding: 8px;border-style: solid;border-color: #a9a9a9;}
+table.tftable tr:hover {background-color: #DDD; left: .1em;}
+.selected { background-color: #CFD8DC !important;}
+```
+
+We’re basically done with the component, let’s switch to UI. Open vehicle-list.component.html and replace its mock contents with our table.
+
+```javascript
+<table class="tftable">
+  <tr><th>ID</th><th>Name</th><th>Type</th><th>Mass</th>
+  <tr *ngFor="let vehicle of vehicles">
+	<td>{{vehicle.id}}</td> <td>{{vehicle.name}}</td> <td>{{vehicle.type}}</td> <td>{{vehicle.mass}}</td>
+  </tr>
+</table>
+```
+
+We do a conceptually simple thing here—create a table with a constant header and then iterate over vehicles list, creating a table row for each vehicle. A row is composed of cells with corresponding properties.
+
+- *ngFor is a built-in directive iterating over a list (vehicles in our case).
+
+- {{ }} tells Angular to read a given property from the TypeScript model and render it.
+
+Also, we specify table class here because we want to have some styling for it—corresponding styles are put into vehicles-list.component.css.
+
+With ng serve still active (or if not, run ```ng serve```), the browser should show a table with vehicles at http://localhost:4200
+
+###Plugging In
+
+Ok, we’re done with our initial UI. 
+
+###Master-Details
+
+Our table is pretty, but not very interactive, huh? OK, let’s make it a bit more “dynamic” by adding a Details view that displays a clicked table row and allows the fields to be edited. Let’s create VehicleDetailsComponent under the same parent with VehiclesListComponent using command:
+
+```javascript
+ng g component vehicle-details.
+```
+
+Like it was for Vehicles List, a folder with ts and html/css files will be created. We’ll need to modify 2 of them. VehicleDetailsComponent in vehicle-details.component.ts needs to have a field for current vehicle—vehicle:Vehicle, with @Input directive above. This decorator declares the vehicle field as an input, which makes passing an actual value to it much easier.
+
+```javascript
+import { Component, OnInit, Input } from '@angular/core';
+import { Vehicle } from '../model/vehicle';
+
+@Component({
+  selector: 'vehicle-details',
+  templateUrl: 'vehicle-details.component.html',
+  styleUrls: ['vehicle-details.component.css']
+})
+
+export class VehicleDetailsComponent implements OnInit {
+
+  @Input()
+  vehicle:Vehicle;
+    
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+Now let’s update the template file for it, vehicle-details.component.html, to:
+
+```javascript
+<div *ngIf="vehicle">
+    <h2>{{vehicle.name}} properties</h2>
+    <table>
+   	 <tr>
+   		 <td><label>ID: </label></td>
+   		 <td>{{vehicle.id}}</td>
+   	 </tr>
+   	 <tr>
+   		 <td><label>Name: </label></td>
+   		 <td><input [(ngModel)]="vehicle.name" placeholder="name" /></td>
+   	 </tr>
+   	 <tr>
+   		 <td><label>Type: </label></td>
+   		 <td><input [(ngModel)]="vehicle.type" placeholder="type" /></td>
+   	 </tr>
+   	 <tr>
+   		 <td><label>Mass: </label></td>
+   		 <td><input [(ngModel)]="vehicle.mass" placeholder="mass" /></td>
+   	 </tr>
+    </table>
+</div>
+```
+
+- *ngIf=”vehicle”—Designates to only proceed with the content when vehicle field has value, which is needed to avoid errors when selection is empty.
+
+- [(ngModel)]=”vehicle.name” (same for type and mass)—Implements bi-directional data binding between input field and corresponding property.
+
+Now, we need to change our VehiclesListComponent to handle selection. Let’s add a selectedVehicle field and a method onSelect to handle selection.
+
+Also, in the html template we’ll need to add a tag for the details component. To make it work, we need to import VehicleDetailsComponent. After given changes, vehicles-list.component.ts will look like the following:
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+import { Vehicle } from '../model/vehicle';
+import { VehicleService } from '../model/vehicle.service';
+import { VehicleDetailsComponent } from '../vehicle-details/vehicle-details.component';
+
+@Component({
+  selector: 'app-vehicle-list',
+  templateUrl: './vehicle-list.component.html',
+  styleUrls: ['./vehicle-list.component.css'],
+  providers: [VehicleService]
+})
+
+export class VehicleListComponent implements OnInit {
+
+  vehicles: Vehicle[];
+  selectedVehicle:Vehicle;
+
+  constructor(private vehicleService: VehicleService) { 
+    this.vehicles = this.vehicleService.getVehicles();
+  }
+
+  ngOnInit() {
+  }
+
+  onSelect(vehicle: Vehicle) { this.selectedVehicle 
+
+}
+```
+
+Next, let’s change the vehicles list template, ```vehicles-list.component.html```. We need to add the click handler to each table row to call the corresponding selection method—(click)="onSelect(vehicle)". Also, let’s add a tag for the vehicle details component below our table:
+
+```javascript
+<table class="tftable">
+  <tr><th>ID</th><th>Name</th><th>Type</th><th>Mass</th>
+  <tr *ngFor="let vehicle of vehicles"
+      (click)="onSelect(vehicle)">
+	<td>{{vehicle.id}}</td> <td>{{vehicle.name}}</td> <td>{{vehicle.type}}</td> <td>{{vehicle.mass}}</td>
+  </tr>
+</table>
+<app-vehicle-details [vehicle]="selectedVehicle"></app-vehicle-details>
+```
+
+You can try editing any value under the “properties” and the change will be immediately reflected in the table, nothing extra needed for it! Perfect.
+
+###A Little Bit of Styling
+
+It looks pretty good now, but it’s a bit difficult to determine which row is selected. Let’s fix this. Add an attribute [class.selected]="vehicle === selectedVehicle" to the <tr> tag in vehicles-list.component.html. Its meaning is pretty obvious—add a CSS class for the case when the current row’s vehicle equals the selected one. Of course, to make this work, we need to add corresponding style to vehicles-list.component.css:
+
+.selected { background-color: #CFD8DC !important;}
+
+Let’s add hovering style too! It’s as easy as adding one line to the css file:
+
+table.tftable tr:hover {background-color: #DDD; left: .1em;}
+
+###Resources
+
+[vehicles.zip](https://resources.cloud.genuitec.com/wp-content/uploads/2016/09/vehicles.zip) — Sample project for this blog
+
+https://angular.io/docs/ts/latest/tutorial/—Tour of Heroes tutorial for Angular 2
+
+https://cli.angular.io/—Angular CLI with commands description
