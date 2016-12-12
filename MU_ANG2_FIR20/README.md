@@ -152,8 +152,6 @@ var vehicles = [
 	},
 ];
  
-    
- 
 @Injectable()
 export class VehicleService {
  
@@ -169,6 +167,72 @@ export class VehicleService {
  
 }
 ```
+
+Now go back to vehicles-list.component.ts, import VehicleService in the same way as Vehicle is imported, and make 2 more edits: add providers: [VehicleService] to @Component and change constructor to:
+
+```javascript
+...
+@Component({
+  ...
+  providers: [VehicleService]
+})
+
+export class VehiclesListComponent implements OnInit {
+...
+  vehicles: Vehicles[];
+  ...
+  constructor(private vehicleService: VehicleService) {
+	this.vehicles = this.vehicleService.getVehicles();
+  }
+...
+}
+```
+
+To avoid compilation errors, you’ll need to keep consistent not only component ts script, but also spec.ts script generated for unit tests. Since we changed the constructor a bit, open it, import VehiclesService as it’s done above and change component creation to the following:
+
+```javascript
+...
+import { VehicleService } from '../model/vehicle.service';
+...
+let component = new VehiclesListComponent(this._injector.get(VehicleService));
+...
+```
+
+Here is the new vehicle-list.component.spec.ts, including the above:
+
+```javascript
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
+import { VehicleListComponent } from './vehicle-list.component';
+import { VehicleService } from '../model/vehicle.service';
+
+describe('VehicleListComponent', () => {
+  let component: VehicleListComponent;
+  let fixture: ComponentFixture<VehicleListComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ VehicleListComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(VehicleListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    let component = new VehiclesListComponent(this._injector.get(VehicleService));  
+    expect(component).toBeTruthy();
+  });
+});
+```
+
 
 
 .. continue reading the reference at the top of this README file, for more instructions.

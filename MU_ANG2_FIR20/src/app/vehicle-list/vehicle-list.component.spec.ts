@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { VehicleListComponent } from './vehicle-list.component';
+import { VehicleService } from '../model/vehicle.service';
 
 describe('VehicleListComponent', () => {
   let component: VehicleListComponent;
@@ -23,6 +24,7 @@ describe('VehicleListComponent', () => {
   });
 
   it('should create', () => {
+    let component = new VehiclesListComponent(this._injector.get(VehicleService));  
     expect(component).toBeTruthy();
   });
 });
