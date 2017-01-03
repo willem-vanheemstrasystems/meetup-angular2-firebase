@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import { HomeComponent } from './home/home.component';
 import {LessonsService} from "./shared/model/lessons.service";
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {LessonsService} from "./shared/model/lessons.service";
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AppRoutingModule
   ],
   providers: [LessonsService],
   bootstrap: [AppComponent]
