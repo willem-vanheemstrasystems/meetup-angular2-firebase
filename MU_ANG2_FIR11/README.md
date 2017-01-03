@@ -217,9 +217,9 @@ Angular Material comes prepackaged with several pre-built theme css files. These
 
 You can include a theme file directly into your application from @angular/material/core/theming/prebuilt
 
-NOTE: rename src/style.css to src/style.scss
+NOTE: rename src/styles.css to src/styles.scss
 
-If you're using Angular CLI, this is as simple as including one line in your src/style.scss file:
+If you're using Angular CLI, this is as simple as including one line in your src/styles.scss file:
 
 ```javascript
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
