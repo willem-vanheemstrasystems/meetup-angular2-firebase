@@ -18,7 +18,7 @@ Enter one of the projects created during Meetup, via the Terminal (e.g. C:> cd U
 
 NOTE: Visual Studio Code's TypeScript support can operate in two different modes:
 
-1) FileScope: Does not associate different files with one another (unless explicitely referenced).
+1) FileScope: Does not associate different files with one another (unless explicitly referenced).
 
 2) Explicit Project: Uses ```tsconfig.json``` to associate the files with one another as one project. RECOMMENDED
 
