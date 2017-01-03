@@ -12,6 +12,7 @@ import 'rxjs/add/operator/do';
 import { HomeComponent } from './home/home.component';
 import {LessonsService} from "./shared/model/lessons.service";
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule.forRoot()
   ],
   providers: [LessonsService],
   bootstrap: [AppComponent]
