@@ -551,6 +551,30 @@ Leave the following part of html in home.component.html:
 
 ```javascript
 <md-card>
+<h2>All Lessons</h2>
+
+<h4>Total Lessons: {{lessons?.length}}</h4>
+
+<input class="search-bar" placeholder="Search">
+
+<div class="lessons-list-container v-h-center-block-parent">
+
+  <table class="table lessons-list card card-strong">
+    <tbody>
+    <tr *ngFor="let lesson of lessons">
+      <td class="lesson-title"> {{lesson.description}} </td>
+      <td class="duration">
+        <i class="md-icon duration-icon">access_time</i>
+        <span>{{lesson.duration}}</span>
+      </td>
+    </tr>
+    </tbody>  
+  </table>
+
+</div>
+</md-card>
+
+<md-card>
 <button md-button>FLAT</button>
 <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
 <button md-raised-button color="primary">PRIMARY RAISED</button>
