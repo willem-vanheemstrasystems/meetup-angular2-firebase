@@ -219,10 +219,13 @@ You can include a theme file directly into your application from @angular/materi
 
 NOTE: rename src/styles.css to src/styles.scss
 
-If you're using Angular CLI, this is as simple as including one line in your src/styles.scss file:
+If you're using Angular CLI, this is as simple as including one line in your src/styles.scss file and set the body margin:
 
 ```javascript
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+body {
+  margin: 0;
+}
 ```
 
 ###Defining a custom theme
@@ -269,12 +272,25 @@ $unicorn-app-theme: md-light-theme($unicorn-app-primary, $unicorn-app-accent, $u
 /* Alternatively, you can import and @include the theme mixins for each component */
 /* that you are using. */
 @include angular-material-theme($unicorn-app-theme);
+
+.m2app-dark {
+  $dark-primary: md-palette($md-pink, 700, 500, 900);
+  $dark-accent:  md-palette($md-blue-grey, A200, A100, A400);
+  $dark-warn:    md-palette($md-deep-orange);
+
+  $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);
+}
 ```
 
-Now import unicorn-app-theme in src/styles.scss:
+Now import unicorn-app-theme in src/styles.scss and set the body margin:
 
 ```javascript
-@import 'themes/unicorn-app-theme';
+@import 'themes/unicorn-app-theme' and set the body margin;
+body {
+  margin: 0;
+}
 ...
 ```
 
@@ -494,4 +510,198 @@ Try to see if material design is used successfully by serving the application:
 
 ```javascript
 ng serve
+```
+
+##Refactor HTML
+
+Instead of having both headings & navigation and content all in the home component html, it is preferred to move the headings & navigation to the app component html, as follows:
+
+app.component.html:
+
+```javascript
+<md-sidenav-layout [class.m2app-dark]="isDarkTheme">
+
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    Sidenav
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+
+    Angular Material2 Example App
+
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+  </md-toolbar>
+
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+  
+</md-sidenav-layout>
+
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button md-fab><md-icon>check circle</md-icon></button>
+</span>
+```
+
+Leave the following part of html in home.component.html:
+
+```javascript
+<md-card>
+<button md-button>FLAT</button>
+<button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
+<button md-raised-button color="primary">PRIMARY RAISED</button>
+<button md-raised-button color="accent">ACCENT RAISED</button>
+</md-card>
+
+<md-card> <md-checkbox>Unchecked</md-checkbox> <md-checkbox
+	[checked]="true">Checked</md-checkbox> <md-checkbox
+	[indeterminate]="true">Indeterminate</md-checkbox> <md-checkbox
+	[disabled]="true">Disabled</md-checkbox> </md-card>
+
+<md-card> <md-radio-button name="symbol">Alpha</md-radio-button>
+<md-radio-button name="symbol">Beta</md-radio-button> <md-radio-button
+	name="symbol" disabled>Gamma</md-radio-button> </md-card>
+
+<md-card class="app-input-section"> <md-input
+	placeholder="First name"></md-input> <md-input #nickname
+	placeholder="Nickname" maxlength="50"> <md-hint align="end">
+{{nickname.characterCount}} / 50 </md-hint> </md-input> <md-input> <md-placeholder>
+<i class="material-icons app-input-icon">android</i> Favorite phone </md-placeholder> </md-input> <md-input
+	placeholder="Motorcycle model"> <span md-prefix> <i
+	class="material-icons app-input-icon">motorcycle</i> &nbsp;
+</span> </md-input> </md-card>
+
+<md-card> <md-list class="app-list"> <md-list-item
+	*ngFor="let food of foods">
+<h3 md-line>{{food.name}}</h3>
+<p md-line class="demo-secondary-text">{{food.rating}}</p>
+</md-list-item> </md-list> </md-card>
+
+<md-card> <md-spinner class="app-spinner"></md-spinner> <md-spinner
+	color="accent" class="app-spinner"></md-spinner> </md-card>
+
+<md-card> <label> Indeterminate progress-bar <md-progress-bar
+		class="app-progress" mode="indeterminate"
+		aria-label="Indeterminate progress-bar example"></md-progress-bar>
+</label> <label> Determinate progress bar - {{progress}}% <md-progress-bar
+		class="app-progress" color="accent" mode="determinate"
+		[value]="progress" aria-label="Determinate progress-bar example"></md-progress-bar>
+</label> </md-card>
+
+<md-card> <md-tab-group> <md-tab label="Earth">
+<p>EARTH</p>
+</md-tab> <md-tab label="Fire">
+<p>FIRE</p>
+</md-tab> </md-tab-group> </md-card>
+
+<md-card> <md-icon>build</md-icon> </md-card>
+
+<md-card>
+<button md-button [md-menu-trigger-for]="menu">MENU</button>
+</md-card>
+
+<md-menu #menu="mdMenu">
+<button md-menu-item>Lemon</button>
+<button md-menu-item>Lime</button>
+<button md-menu-item>Banana</button>
+</md-menu>
+
+<md-card>
+<p>Last dialog result: {{lastDialogResult}}</p>
+<button md-raised-button (click)="openDialog()">DIALOG</button>
+<button md-raised-button (click)="showSnackbar()">SNACKBAR</button>
+</md-card>
+```
+
+The styling will have changed badly, as there is no css in app.component.css. So, copy the following css from home.component.css to app.component.css.
+
+```javascript
+md-sidenav-layout.m2app-dark {
+  background: black;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.app-sidenav {
+  padding: 10px;
+  min-width: 100px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+```
+
+That leaves home.component.css with the following:
+
+```javascript
+md-card {
+  margin: 20px;
+}
+
+md-checkbox {
+  margin: 10px;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+.app-input-icon {
+  font-size: 16px;
+}
+
+.app-list {
+  border: 1px solid rgba(0,0,0,0.12);
+  width: 350px;
+  margin: 20px;
+}
+
+.app-progress {
+  margin: 20px;
+}
 ```

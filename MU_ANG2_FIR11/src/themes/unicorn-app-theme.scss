@@ -21,3 +21,13 @@ $unicorn-app-theme: md-light-theme($unicorn-app-primary, $unicorn-app-accent, $u
 /* Alternatively, you can import and @include the theme mixins for each component */
 /* that you are using. */
 @include angular-material-theme($unicorn-app-theme);
+
+.m2app-dark {
+  $dark-primary: md-palette($md-pink, 700, 500, 900);
+  $dark-accent:  md-palette($md-blue-grey, A200, A100, A400);
+  $dark-warn:    md-palette($md-deep-orange);
+
+  $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);
+}
