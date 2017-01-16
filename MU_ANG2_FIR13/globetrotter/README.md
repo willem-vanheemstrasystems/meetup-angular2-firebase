@@ -421,24 +421,6 @@ NOTE: Placing components into the entryComponents portion of the NgModule declar
 
 SEE ALSO: https://github.com/angular/material2 FOR MORE MATERIAL 2 ANGULAR COMPONENTS
 
-###Additional setup for gestures
-
-Some components ()md-slide-toggle, md-slider, mdTooltip) rely on HammerJS for gestures. In order to get the full feature-set of these components, HammerJS must be loaded into the application.
-
-You can add HammerJS to your application via npm, a CDN (such as the Google CDN), or served directly from your app.
-
-If you want to include HammerJS from npm, you can install it:
-
-```javascript
-npm install --save hammerjs 
-```
-
-After installing, import HammerJS on your app's module. src/app/app.module.ts
-
-```javascript
-import 'hammerjs';
-```
-
 ###[Optional] Using Material Design icons with md-icon:
 
 If you want to use Material Design icons in addition to Angular Material components, load the Material Design font in your index.html.
