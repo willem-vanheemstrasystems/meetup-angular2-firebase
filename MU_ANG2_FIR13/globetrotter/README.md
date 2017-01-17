@@ -190,7 +190,7 @@ If you are using the Angular CLI, support for compiling Sass to css is built-in;
 ...
 ```
 
-If it does not already exist, create a file 'src/themes/unicorn-app-theme.scss':
+If it does not already exist, create a file 'src/themes/unicorn-app-theme.scss' with the following content:
 
 ```javascript
 @import '~@angular/material/core/theming/all-theme';
