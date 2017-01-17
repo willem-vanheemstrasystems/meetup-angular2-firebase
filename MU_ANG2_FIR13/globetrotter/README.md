@@ -250,9 +250,9 @@ body {
 
 ###Routing
 
-If the file does not yet exist, create src/app/app-routing.module.ts:
-
 See also 'Refactor Routes to a Routing Module' at https://angular.io/docs/ts/latest/tutorial/toh-pt5.html
+
+If the file does not yet exist, create src/app/app-routing.module.ts with the following content:
 
 ```javascript
 import { NgModule }             from '@angular/core';
