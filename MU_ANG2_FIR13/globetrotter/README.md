@@ -314,7 +314,7 @@ const routes: Routes = [
 
 Now you should be able to serve the application.
 
-For example HTML elements of Material 2, copy the HTML from https://github.com/jelbourn/material2-app/blob/master/src/app/app.component.html into the src/home/home.component.html
+For example HTML elements of Material 2, copy the HTML from https://github.com/jelbourn/material2-app/blob/master/src/app/app.component.html into the src/app/home/home.component.html
 
 ```javascript
 <md-sidenav-layout [class.m2app-dark]="isDarkTheme">
@@ -329,7 +329,7 @@ For example HTML elements of Material 2, copy the HTML from https://github.com/j
 </span>
 ```
 
-Paste the css from https://raw.githubusercontent.com/jelbourn/material2-app/master/src/app/app.component.css into src/home/home.component.css:
+Paste the css from https://raw.githubusercontent.com/jelbourn/material2-app/master/src/app/app.component.css into src/app/home/home.component.css:
 
 ```javascript
 md-sidenav-layout.m2app-dark {
@@ -341,7 +341,7 @@ md-sidenav-layout.m2app-dark {
 }
 ```
 
-Also, copy the following parts of the content of https://github.com/jelbourn/material2-app/blob/master/src/app/app.component.ts to src/home/home.component.ts
+Also, copy the following parts of the content of https://github.com/jelbourn/material2-app/blob/master/src/app/app.component.ts to src/app/home/home.component.ts
 
 ```javascript
 import { Component, OnInit, Optional } from '@angular/core';
