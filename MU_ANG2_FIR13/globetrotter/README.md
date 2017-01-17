@@ -341,7 +341,7 @@ md-sidenav-layout.m2app-dark {
 }
 ```
 
-Also, copy the following parts of the content of https://github.com/jelbourn/material2-app/blob/master/src/app/app.component.ts to src/home.component.ts
+Also, copy the following parts of the content of https://github.com/jelbourn/material2-app/blob/master/src/app/app.component.ts to src/home/home.component.ts
 
 ```javascript
 import { Component, OnInit, Optional } from '@angular/core';
