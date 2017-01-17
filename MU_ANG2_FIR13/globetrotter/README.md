@@ -433,7 +433,11 @@ md-icon supports any font icons or svg icons, so this is only one option for an 
 Add to src/index.html:
 
 ```javascript
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<head>
+   ...
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   ...
+</head>   
 ```
 
 Try to see if material design is used successfully by serving the application:
