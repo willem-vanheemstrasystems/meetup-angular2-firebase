@@ -41,7 +41,7 @@ This will create a new project called globetrotter in your current directory.
 
 ##Material 2
 
-Following the Getting Started guide at https://github.com/angular/material2/blob/master/GETTING_STARTED.mdhttps://github.com/angular/material2/blob/master/guides/getting-started.md
+Following the Getting Started guide at https://github.com/angular/material2/blob/master/guides/getting-started.md
 
 Install Angular Material components:
 
