@@ -818,27 +818,39 @@ NOTE: You need to provide a ***Google Maps API key*** to be able to see a Map. G
 
 ```javascript
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ApplicationRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent, DialogContent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    DialogContent,
+    AboutComponent
+  ],
+  entryComponents: [DialogContent],
   imports: [
     BrowserModule,
-    CommonModule,
     FormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_KEY'
+    HttpModule,
+    MaterialModule.forRoot(),
+    AppRoutingModule,
+        AgmCoreModule.forRoot({
+      apiKey: 'Your API Key'
     })
   ],
   providers: [],
-  declarations: [ AppComponent ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
 ```
 
 ##Extending the app component
