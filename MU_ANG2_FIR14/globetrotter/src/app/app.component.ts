@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title: string = 'My Google Map';
+  lat: number = 52.258107; // center of Holland
+  lng: number = 5.600592;  // center of Holland
 }
