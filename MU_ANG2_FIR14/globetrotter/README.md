@@ -857,20 +857,27 @@ export class AppModule { }
 
 Angular CLI already created an app component that we'll now use to create our first google map.
 
-Open the file src/app/app.component.ts and modify it like below:
+Open the file src/app/about/about.component.ts and modify it like below:
 
 ```javascript
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-about',
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.css']
 })
-export class AppComponent {
+export class AboutComponent implements OnInit {
+
   title: string = 'My Google Map';
   lat: number = 52.258107; // center of Holland
   lng: number = 5.600592;  // center of Holland
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }
 ```
 
