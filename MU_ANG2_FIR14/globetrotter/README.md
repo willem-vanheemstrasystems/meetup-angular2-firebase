@@ -876,7 +876,7 @@ export class AppComponent {
 
 ##Setup the template
 
-Open the file src/app/app.component.html and paste the following content:
+Open the file src/app/about/about.component.html and paste the following content:
 
 ```javascript
 <h1>{{ title }}</h1>
@@ -891,7 +891,7 @@ Open the file src/app/app.component.html and paste the following content:
 
 ##Setup the CSS file
 
-Open the file src/app/app.component.css and paste the following content:
+Open the file src/app/about/about.component.css and paste the following content:
 
 ```javascript
 .sebm-google-map-container {
