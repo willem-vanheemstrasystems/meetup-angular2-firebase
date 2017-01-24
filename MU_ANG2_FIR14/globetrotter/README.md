@@ -699,8 +699,8 @@ In src/app/app.component.html add:
 ...
   <md-sidenav #sidenav mode="side" class="app-sidenav">
     Sidenav
-    <button md-button (click)=""><md-icon>Home</md-icon></button>
-    <button md-button (click)=""><md-icon>About</md-icon></button>
+    <a href="home">Home</a>
+    <a href="about">About</a>
   </md-sidenav>
 ...
 ```
