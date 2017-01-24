@@ -705,20 +705,207 @@ In src/app/app.component.html add:
 ...
 ```
 
+# angular2-google-maps-001
+Angular2 Google Maps 001
 
+Based on 'Getting Started: angular2-google-maps' at https://angular-maps.com/docs/getting-started.html
 
-Good luck!
+See also https://www.udemy.com/learn-to-build-a-google-map-app-using-angular-2/
 
+And 'Learn to Build a Google Map Using Angular 2' at https://www.youtube.com/watch?v=dQFLwEJgMEI
 
+#Getting Started
 
+Let's start from zero and build an Angular 2 app with angular2-google-maps
 
+##Playing with angular2-google-maps
 
+If you just want to play with angular2-google-maps and don't want to set up a full project with NPM, you can use the following Plunker. It has all the dependencies to play with Angular2, Typescript and of course angular2-google-maps:
 
+(Play with angular2-google-maps on Plunker)[http://plnkr.co/edit/YX7W20?p=preview]
 
+##Setting up a basic project structure
 
+###Installing TypeScript
 
+angular2-google-maps works best with TypeScript version 1.8+. If you have an older version of TypeScript or haven't installed TypeScript yet, please run the following command:
 
+```javascript
+tsc -version
+```
 
-In addition, you can try and re-instate the list of courses and classes coming from firebase (as discussed in previous meetings, see MU_ANG2_FIR09), now in this newly created app. As you can see the Home component already has an position where it says 'All Lessons'.
+Only if your typescript version is below 1.8, install the newer version.
 
-Best of luck!
+```javascript
+npm install -g typescript@2.1.4
+```
+
+###Create an Angular CLI project
+
+We start by creating a project with (Angular CLI)[https://cli.angular.io/]. Angular CLI makes it easy to create an application that already works and allows you to follow the best practices. 
+
+Check if you have Angular-Cli (ng) installed
+
+```javascript
+ng version
+```
+
+If you haven't installed Angular CLI yet, please run the following command first:
+
+```javascript
+npm install -g angular-cli@webpack
+```
+
+Run the following commands to create a new Angular 2 project with Angular CLI:
+
+```javascript
+cd ../ // Come out of the reports_maps directory!
+ng new my-maps-project
+```
+
+Same named files and directories (between cakephp and angular2):
+
+- You can safely move the directory 'e2e' & 'node_modules' into 'reports_maps' directory.
+
+- You can safely move the files 'angular-cli.json', 'karma.conf.js', 'package.json' (rename inside to 'reports_maps'), 'protractor.conf.js', 'tslint.json' into the 'reports_maps' directory.
+
+- Try to combine the content of the following files if possible, so all is in the 'reports_maps' directory:
+
+  .editorconfig
+  .gitignore
+  README.md
+
+- The 'src' directory needs special attention as cakephp AND angular2 have a 'scr' folder:
+
+  As the 'src' folders have no same-name files or directories, you can safely copy all from 'my-maps-project/src' to 'reports_maps/src'.
+
+Now ***remove*** the 'my-maps-project' folder. It is no longer needed. 
+
+Try to see if the new app works by running:
+
+```javascript
+cd reports_maps
+ng serve
+```
+
+When you open your web browser to localhost:4200 a page should show and state:
+
+```javascript
+App works!
+```
+
+Close the server, before continuing, by using the following key strokes in the terminal where you typed the ng serve command:
+
+```javascript
+CTRL+C
+```
+
+Reload the browser page, to make sure the server is no longer running.
+
+#Install angular2-google-maps
+
+angular2-google-maps gets shipped via the Node Package Manager (NPM). Run the following command to add it to your new project:
+
+```javascript
+npm install angular2-google-maps --save
+```
+
+##Setup @NgModule
+
+Open src/app/app.module.ts and import the AgmCoreModule.
+
+NOTE: You need to provide a ***Google Maps API key*** to be able to see a Map. Get an API key (here)[https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key].
+
+```javascript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+
+import { AgmCoreModule } from 'angular2-google-maps/core';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'YOUR_KEY'
+    })
+  ],
+  providers: [],
+  declarations: [ AppComponent ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule {}
+```
+
+##Extending the app component
+
+Angular CLI already created an app component that we'll now use to create our first google map.
+
+Open the file src/app/app.component.ts and modify it like below:
+
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title: string = 'My Google Map';
+  lat: number = 52.258107; // center of Holland
+  lng: number = 5.600592;  // center of Holland
+}
+```
+
+##Setup the template
+
+Open the file src/app/app.component.html and paste the following content:
+
+```javascript
+<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+<sebm-google-map [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+</sebm-google-map>
+```
+
+##Setup the CSS file
+
+Open the file src/app/app.component.css and paste the following content:
+
+```javascript
+.sebm-google-map-container {
+  height: 500px;
+}
+```
+
+***CSS styling is required!***
+
+It is really important that you define a height for the css class .sebm-google-map-container. Otherwise, you won't see a map on the page!
+
+#Build and run your application
+
+Great! So we have created all the needed source files, so everything should be ready to build an run the application.
+
+Run the following command in the project root folder:
+
+```javascript
+ng serve
+```
+
+Then, open the following URL in your browser: http://localhost:4200/
+
+The command starts the following things:
+
+Starts the TypeScript compiler and compiles all sources files (watches also for file changes in the source files and recompiles all files if something has changed)
+Starts a local web server to serve the Angular 2 application. It refreshes the page when served files change.
+
+When everything works as expected, you should see your first Google Map created with angular2-google-maps!
