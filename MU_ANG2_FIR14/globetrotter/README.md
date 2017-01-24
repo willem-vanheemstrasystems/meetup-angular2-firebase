@@ -843,7 +843,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     HttpModule,
     MaterialModule.forRoot(),
     AppRoutingModule,
-        AgmCoreModule.forRoot({
+    AgmCoreModule.forRoot({
       apiKey: 'Your API Key'
     })
   ],
