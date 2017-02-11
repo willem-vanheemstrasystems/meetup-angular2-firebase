@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultListComponent } from '../result-list/result-list.component';
+import { ButtonsComponent } from '../buttons/buttons.component';
+import { CalculatorService } from '../shared/calculator.service';
 
 @Component({
   selector: 'app-calculator',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculatorComponent implements OnInit {
 
-  constructor() { }
+  constructor(public calculator_service: CalculatorService) { }
 
   ngOnInit() {
   }

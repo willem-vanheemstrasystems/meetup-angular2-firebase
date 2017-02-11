@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalculatorService } from '../shared/calculator.service';
 
 @Component({
   selector: 'app-result-list',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public calculator_service: CalculatorService) { }
+
+	// result-list component items
+	result_list = this.calculator_service.result_list;
 
   ngOnInit() {
   }

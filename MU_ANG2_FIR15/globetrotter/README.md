@@ -1061,7 +1061,282 @@ export class ButtonsList {
 }
 ```
 
+##Adding to the calculator service
 
+Import the following into src/app/shared/calculator.service.ts, create an interface, and add a public reference to the result list:
 
+```javascript
+...
+import { CalculatorComponent } from '../calculator/calculator.component';
+import { ResultListComponent } from '../result-list/result-list.component';
+import { ButtonsComponent } from '../buttons/buttons.component';
+...
+interface ResultsList{
+	id: number;
+	value: number;
+	equation: string;
+}
+...
+@Injectable()
+export class CalculatorService {
+  ...
+	// list of ids for result list
+	public result_list_ids: number[] = [0];
+	public result_list: ResultsList[] = [];  
+  ...
+}
+...
+```
 
+##Adding to the buttons component
+
+Adjust the HTML inside src/app/buttons/buttons.component.html to the following:
+
+```javascript
+<button *ngFor="let button of buttons"  (click)="(button.action != undefined)? button.action(): null" class="{{button.class}}">{{button.value}}</button>
+```
+
+Adjust the css inside src/app/buttons/buttons.component.css to the following:
+
+```javascript
+:host{
+	display: block;
+	height: 60%;
+}
+
+:host button, :host button:focus {
+	width: 20%;
+	height: 20%;
+	vertical-align: top;
+	margin:0;
+	border:0;
+	padding:0;
+	display:inline-block;
+	vertical-align:middle;
+	white-space:normal;
+	line-height:1;
+	color: white;
+	font-size: 19px;
+	cursor: pointer;
+	font-weight: 100;
+	outline: 0;
+	font-family: Roboto;
+}
+
+:host .button-number{
+	background-color: #212121;
+}
+
+:host .button-operator{
+	background-color: #424242;
+}
+
+:host .button-memory{
+	background-color: #00C853;
+	color: #212121!important;
+}
+```
+
+Import the following into src/app/buttons/buttons.component.ts:
+
+```javascript
+...
+import { CalculatorComponent } from '../calculator/calculator.component';
+import { CalculatorService } from '../shared/calculator.service';
+import { ResultListComponent } from '../result-list/result-list.component';
+import { ButtonsList } from './buttons-list';
+...
+```
+
+Then in the same file as above inject the calculator service in the buttons constructor and make a public reference to the buttons list:
+
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+
+	constructor(public calculator_service: CalculatorService) { }
+  ...
+  // list of buttons
+  public buttons = new ButtonsList(this).buttons;
+  ...
+}  
+```
+
+##Adding to the calculator component
+
+Adjust the HTML inside src/app/calculator/calculator.component.html to the following:
+
+```javascript
+...
+<app-result-list></app-result-list>
+...
+<app-buttons></app-buttons>
+...
+```
+
+Adjust the css inside src/app/calculator/calculator.component.css to the following:
+
+```javascript
+:host{
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-family: Roboto;
+}
+
+:host calculator-display{
+	display: block;
+	height: 10%;
+	text-align: right;
+	font-size: 10vh;
+	line-height: 100%;
+	overflow: hidden;
+	overflow-x: auto;
+}
+```
+
+Import the following into src/app/calculator/calculator.component.ts:
+
+```javascript
+...
+import { ResultListComponent } from '../result-list/result-list.component';
+import { ButtonsComponent } from '../buttons/buttons.component';
+import { CalculatorService } from '../shared/calculator.service';
+...
+```
+
+Then in the same file as above inject the calculator service in the calculator constructor:
+
+```javascript
+...
+export class CalculatorComponent implements OnInit {
+
+	constructor(public calculator_service: CalculatorService) { }
+  ...
+}  
+```
+
+##Adding to the result-list component
+
+Adjust the HTML inside src/app/result-list/result-list.component.html to the following:
+
+```javascript
+<ul class='saved-results-list'>
+	<li class='saved-results-item' *ngFor="let item of result_list">
+		<div class='saved-results-item-wrapper'>
+			<div class='saved-results-item-text'>
+				<div class='saved-results-item-value'>{{item.value}}</div>
+				<div class='saved-results-item-equation'>{{item.equation}} = </div>
+			</div>
+			<div class='saved-results-item-delete' (click)="calc_service.removeFromResultList(item.id)"></div>
+		</div>
+		<div class='saved-results-item-divider'></div>
+	</li>
+</ul>
+```
+
+Adjust the css inside src/app/result-list/result-list.component.css to the following:
+
+```javascript
+:host{
+	display: block;
+	width: 100%;
+	height: 30%;
+	background-color: #FAFAFA;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+:host ul{
+	padding: 0;
+	padding-top: 4px;
+	margin: 0;
+}
+
+:host li{
+	width: 100%;
+	list-style: none;
+}
+
+:host .saved-results-item-text{
+	display:inline-block;
+}
+
+:host .saved-results-list{
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+}
+
+:host .saved-results-item{
+	width: 100%;
+	padding: 2px;
+}
+
+:host .saved-results-item-wrapper{
+	padding: 5px 16px 8px 16px;
+}
+
+:host .saved-results-item-divider{
+	width: 100%;
+	height: 1px;
+	background-color: #E0E0E0;
+	display: block;
+}
+
+:host .saved-results-item-value{
+	font-size: 28px;
+	color: #212121;
+}
+
+:host .saved-results-item-equation{
+	font-size: 12px;
+	color: #757575;
+}
+
+:host .saved-results-item-delete{
+	float: right;
+	width: 49px;
+	height: 49px;
+	background-image: url('cancel.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 32px 32px;
+	display:inline-block;
+	cursor: pointer;
+}
+```
+
+Import the following into src/app/result-list/result-list.component.ts:
+
+```javascript
+...
+import { CalculatorService } from '../shared/calculator.service';
+...
+```
+
+Then in the same file as above inject the calculator service in the result list constructor and make a reference to the result list of the calculator service:
+
+```javascript
+...
+export class ResultListComponent implements OnInit {
+
+	constructor(public calculator_service: CalculatorService) { }
+  ...
+  // result-list component items
+	result_list = this.calculator_service.result_list;
+  ...
+}  
+```
+
+##Adding the Calculator element
+
+In src/app/tools/tools.component.html add the following:
+
+```javascript
+<app-calculator></app-calculator>
+```
+
+When browsing to localhost:4200/tools you should see a gray bar across the page, which is to become our calculator.
 
