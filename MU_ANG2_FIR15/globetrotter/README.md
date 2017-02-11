@@ -1195,7 +1195,7 @@ Adjust the css inside src/app/calculator/calculator.component.css to the followi
 }
 ```
 
-Import the following into src/app/calculator/calculator.component.ts:
+Import the following into src/app/calculator/calculator.component.ts, and add the calculator service as a provider:
 
 ```javascript
 ...
@@ -1203,6 +1203,10 @@ import { ResultListComponent } from '../result-list/result-list.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
 import { CalculatorService } from '../shared/calculator.service';
 ...
+@Component({
+  ...
+  providers: [CalculatorService]
+})
 ```
 
 Then in the same file as above inject the calculator service in the calculator constructor:
@@ -1338,5 +1342,15 @@ In src/app/tools/tools.component.html add the following:
 <app-calculator></app-calculator>
 ```
 
-When browsing to localhost:4200/tools you should see a gray bar across the page, which is to become our calculator.
+##Adding the Calculator component to the Tools component
+
+In src/app/tools/tools.component.ts add the following:
+
+```javascript
+...
+import {CalculatorComponent} from '../calculator/calculator.component';
+...
+```
+
+When browsing to localhost:4200/tools you should see ...
 
