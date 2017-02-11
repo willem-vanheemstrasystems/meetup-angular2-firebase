@@ -976,4 +976,92 @@ After cicking on the 'tools' link, or by following the URL 'http://localhost:420
 tools works!
 ```
 
+#Adding a Calculator to the Tools section
+
+For a calculator we need to generate the following components:
+
+- buttons
+
+```javascript
+ng generate component buttons
+```
+
+- calculator
+
+```javascript
+ng generate component calculator
+```
+
+- result-list
+
+```javascript
+ng generate component result-list
+```
+
+and a Calculator service, for which we need to create a folder 'shared' first:
+
+```javascript
+cd globetrotter
+cd src/app
+mkdir shared
+```
+
+NOTE: Above is the ***mkdir*** command, used by Windows to create a new directory. On Mac OS and Unix the command would be the same.
+
+Now generate a new service called 'calculator' inside the 'shared' folder as follows:
+
+```javascript
+ng generate service shared/calculator
+```
+
+Lastly, without using the ng command, create a file called '***buttons-list.ts***' inside src/app/buttons with the following content:
+
+```javascript
+interface Button{
+	class: string;
+	value: string;
+	action?: ()=> void;
+}
+
+export class ButtonsList {
+
+	constructor(private cl) {};
+
+	public buttons: Button[] = [
+		{class:'button-memory',value:'MC',action:()=>this.cl.deleteMemory()},
+		{class:'button-memory',value:'MR',action:()=>this.cl.writeMemory()},
+		{class:'button-memory',value:'M+',action:()=>this.cl.memoryPlus()},
+		{class:'button-memory',value:'M-',action:()=>this.cl.memoryMinus()},
+		{class:'button-memory',value:'MS',action:()=>this.cl.saveMemory()},
+
+		{class:'button-number',value:'7',action:()=>this.cl.addNumber(7)},
+		{class:'button-number',value:'8',action:()=>this.cl.addNumber(8)},
+		{class:'button-number',value:'9',action:()=>this.cl.addNumber(9)},
+		{class:'button-operator',value:'/',action:()=>this.cl.addOperator('/')},
+		{class:'button-operator',value:'DEL',action:()=>this.cl.deleteLastChar()},
+
+		{class:'button-number',value:'4',action:()=>this.cl.addNumber(4)},
+		{class:'button-number',value:'5',action:()=>this.cl.addNumber(5)},
+		{class:'button-number',value:'6',action:()=>this.cl.addNumber(6)},
+		{class:'button-operator',value:'*',action:()=>this.cl.addOperator('*')},
+		{class:'button-operator',value:'C',action:()=>this.cl.reset()},
+
+		{class:'button-number',value:'1',action:()=>this.cl.addNumber(1)},
+		{class:'button-number',value:'2',action:()=>this.cl.addNumber(2)},
+		{class:'button-number',value:'3',action:()=>this.cl.addNumber(3)},
+		{class:'button-operator',value:'-',action:()=>this.cl.addOperator('-')},
+		{class:'button-operator',value:''},
+		
+		{class:'button-number',value:'.',action:()=>this.cl.addOperator('.')},
+		{class:'button-number',value:'0',action:()=>this.cl.addNumber(0)},
+		{class:'button-number',value:''},
+		{class:'button-operator',value:'+',action:()=>this.cl.addOperator('+')},
+		{class:'button-operator',value:'=',action:()=>this.cl.equal()},
+	];
+}
+```
+
+
+
+
 

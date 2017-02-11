@@ -10,6 +10,9 @@ import { AboutComponent } from './about/about.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { ToolsComponent } from './tools/tools.component';
+import { ButtonsComponent } from './buttons/buttons.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { ResultListComponent } from './result-list/result-list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ToolsComponent } from './tools/tools.component';
     HomeComponent,
     DialogContent,
     AboutComponent,
-    ToolsComponent
+    ToolsComponent,
+    ButtonsComponent,
+    CalculatorComponent,
+    ResultListComponent
   ],
   entryComponents: [DialogContent],
   imports: [
