@@ -928,3 +928,5 @@ Starts the TypeScript compiler and compiles all sources files (watches also for 
 Starts a local web server to serve the Angular 2 application. It refreshes the page when served files change.
 
 When everything works as expected, you should see your first Google Map created with angular2-google-maps!
+
+

@@ -928,3 +928,52 @@ Starts the TypeScript compiler and compiles all sources files (watches also for 
 Starts a local web server to serve the Angular 2 application. It refreshes the page when served files change.
 
 When everything works as expected, you should see your first Google Map created with angular2-google-maps!
+
+#Adding 'Tools' section
+
+In order to add a page for tools in our app 'globetrotter' start by generating a tools component.
+
+```javascript
+cd globetrotter
+ng generate component tools
+```
+
+Add the tools component to the routing file at src/app/app-routing.component.ts;
+
+```javascript
+...
+import { ToolsComponent } from './tools/tools.component';
+...
+const routes: Routes = [
+    ...
+    { path: 'tools', component: ToolsComponent }   
+];
+...
+```
+
+Add the 'tools' option to the sidebar menu in src/app/app.component.html:
+
+```javascript
+...
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    Sidenav
+    ...
+    <a href="tools">Tools</a>
+  </md-sidenav>
+...  
+```
+
+Check if the link in the sidebar works by starting the app with
+
+```javascript
+cd globetrotter
+ng serve
+```
+
+After cicking on the 'tools' link, or by following the URL 'http://localhost:4200/tools, you should see on the tools page :
+
+```javascript
+tools works!
+```
+
+

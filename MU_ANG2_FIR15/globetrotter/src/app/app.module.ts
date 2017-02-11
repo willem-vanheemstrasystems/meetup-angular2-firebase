@@ -9,13 +9,15 @@ import { HomeComponent, DialogContent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { ToolsComponent } from './tools/tools.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DialogContent,
-    AboutComponent
+    AboutComponent,
+    ToolsComponent
   ],
   entryComponents: [DialogContent],
   imports: [
