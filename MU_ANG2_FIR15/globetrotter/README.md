@@ -1202,7 +1202,7 @@ Adjust the css inside src/app/calculator/calculator.component.css to the followi
 	font-family: Roboto;
 }
 
-:host calculator-display{
+:host app-display{
 	display: block;
 	height: 10%;
 	text-align: right;
@@ -1461,4 +1461,65 @@ export class CalculatorService {
    ...
 }  
 ```
+
+Before we start pushing the buttons, lets first create the functions that underlay these buttons!
+
+Start with the ***reset()*** function and two more private properties in src/app/buttons/buttons.component.ts:
+
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+  ...
+	// defines if the last pressed button was MemoryRecall
+	private wrote_memory: boolean = false;
+	// defines if the calculator will be resetted on the next button press 
+	private reset_on_click: boolean = false;
+  ...
+  /*
+	 * resets calculator
+	 * sets equation string to "0"
+	*/
+	reset(): void {
+		this.calculator_service.equation = "0";
+		this.calculator_service.can_add_operator = false;
+		this.calculator_service.is_reseted = true;
+	}
+  ...
+}
+```
+
+Next, we create the ***addNumber()*** function in src/app/buttons/buttons.component.ts as follows:
+
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+  ...
+	/*
+	 * adds a number to equation.
+	 * @param num - number to be added
+	*/
+	addNumber(num: number): void{
+		// if characters can't be added, returns false and does nothing
+		if(this.calculator_service.getEquationLength() >= this.calculator_service.digit_limit){
+			return;
+		}
+		// if the last pushed button was the equal button, resets the calculator
+		if(this.reset_on_click){
+			this.reset();
+		}
+		if(!this.calculator_service.is_reseted && num != 0){
+			this.calculator_service.equation += num;
+		}else{
+			this.calculator_service.equation = num.toString();
+			this.calculator_service.is_reseted = false;
+			this.wrote_memory = false;
+		}
+		this.calculator_service.can_add_operator = true;
+		this.reset_on_click = false;
+	}  
+  ...
+}  
+```
+
+We will now see numbers show up in the display of our calculator app when we click on the numeric buttons (e.g. 1).
 
