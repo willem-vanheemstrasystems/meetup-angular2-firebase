@@ -1851,7 +1851,7 @@ Open the following URL in your browser:
 http://material.io/resizer
 ```
 
-Then, on the resizer page, set our address in the address box:
+Then, on the resizer page, set our address in the address box and hit your ENTER key:
 
 ```javascript
 http://localhost:4200/tools
