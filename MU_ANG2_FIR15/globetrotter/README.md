@@ -1250,7 +1250,7 @@ Adjust the HTML inside src/app/result-list/result-list.component.html to the fol
 				<div class='saved-results-item-value'>{{item.value}}</div>
 				<div class='saved-results-item-equation'>{{item.equation}} = </div>
 			</div>
-			<div class='saved-results-item-delete' (click)="calc_service.removeFromResultList(item.id)"></div>
+			<div class='saved-results-item-delete' (click)="calculator_service.removeFromResultList(item.id)"></div>
 		</div>
 		<div class='saved-results-item-divider'></div>
 	</li>
@@ -1344,7 +1344,7 @@ Then in the same file as above inject the calculator service in the result list 
 ...
 export class ResultListComponent implements OnInit {
 
-	constructor(public calculator_service: CalculatorService) { }
+	constructor(private calculator_service: CalculatorService) { }
   ...
   // result-list component items
 	result_list = this.calculator_service.result_list;
@@ -1522,4 +1522,173 @@ export class ButtonsComponent implements OnInit {
 ```
 
 We will now see numbers show up in the display of our calculator app when we click on the numeric buttons (e.g. 1).
+
+To remove an entered number, we now add the ***deleteLastChar()*** function to src/app/buttons/buttons.component.ts:
+
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+  ...
+	/*
+	 * deletes the last character of equation string if it isn't resetted
+	*/
+	deleteLastChar(): void {
+		// if the last pushed button was equal, resets calculator instead
+		if(this.reset_on_click){
+			this.reset();
+			return;
+		}
+		if(this.calculator_service.getEquationLength() != 1){
+			this.calculator_service.equation = this.calculator_service.equation.slice(0,-1);
+			this.calculator_service.can_add_operator = true;
+		// if the character to be resetted is the only one in equation, resets calculator
+		}else{
+			this.reset();
+			this.calculator_service.can_add_operator = false;
+		}
+	}
+  ...
+}  
+```
+
+Hooray, after entering some numbers on the calculator you can now remove them by pushing the DEL button.
+
+So now we'll add the ***addOperator()*** function to src/app/buttons/buttons.component.ts:
+
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+  ...
+	/*
+	 * adds an operator to equation string
+	 * @param operator - operator to be added
+	*/
+	addOperator(operator: string): void {
+		// if characters can't be added, returns and does nothing
+		if(this.calculator_service.getEquationLength() >= this.calculator_service.digit_limit){
+			return;
+		}
+		// if the last pushed button was the equal button, resets the calculator
+		if(this.reset_on_click){
+			this.reset_on_click = false;
+		}
+		if(this.calculator_service.equation == "0" && operator == "-"){
+			this.calculator_service.equation = operator;
+			this.calculator_service.can_add_operator = false;
+			this.wrote_memory = false;
+			this.calculator_service.is_reseted = false;
+		}
+		if(this.calculator_service.can_add_operator){
+			this.calculator_service.equation += operator;
+			this.calculator_service.can_add_operator = false;
+			this.wrote_memory = false;
+		}
+	}
+  ...
+}  
+```
+
+All is well, you can now enter long calculations such as 1+2-6/9*5 on the calculator app. But without it doing the calculation of the outcome (e.g. =), it is not good enough.
+
+Hence, we add the ***solve()*** and ***equal()*** function to src/app/buttons/buttons.component.ts:
+
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+  ...
+	/*
+	 * solves a given string
+	 * @param eq - string to solve
+	 * @returns {number} solved value; or {null} if can't be solved
+	*/
+	solve(eq: string): number {
+		try{
+			return eval(eq);
+		}catch(Exception){
+			return null;
+		}
+	}
+  ...
+	/*
+	 * updates the result variable and equation string
+	 * adds the result to the result list
+	*/
+	equal(): void {
+		let eq:string = this.calculator_service.equation;
+		// replaces the M characters by memory value
+		if(eq.indexOf('M') != -1 && this.calculator_service.memory != null){
+			eq = this.calculator_service.equation.split('M').join(this.calculator_service.memory.toString());
+		}
+		// saves result
+		this.calculator_service.result = this.solve(eq);
+		// if result is valid, saves result to result-list
+		if(this.calculator_service.result != null && eq != '0'){
+			this.calculator_service.equation = this.calculator_service.result.toString();
+			this.calculator_service.addToResultList(this.calculator_service.result, eq);
+			this.wrote_memory = false;
+			this.reset_on_click = true;
+		}
+	}  
+  ...
+} 
+```
+
+Before we do some real calculation, place a file with the svg image of a cancel button, called '***cancel.svg***', in src/ directory with the follwoing content:
+
+```javascript
+<svg fill="#9E9E9E" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+```
+
+So try typing  1+2-6/9*5 on the calculator app again followed by =. Does it give you an outcome? It should (i.e. -0.33333333333333304).
+
+Also, you will see that the resultb has been added to the result list!
+
+By clicking the cancel icon (circle with a cross), you should be able to remove results off the result list.
+
+So let's add that now to src/shared/calculator.service.ts:
+
+```javascript
+...
+export class CalculatorService {
+  ...
+	/*
+	 * adds record to the result-list component
+	 * @param value - numeric value to be added
+	 * @param equation - the equation string from which the result was calculated
+	*/
+	public addToResultList(value: number, equation: string): void{
+		let id = this.result_list_ids[this.result_list_ids.length - 1]+1;
+		this.result_list_ids.push(id);
+		this.result_list.unshift({
+			id: id,
+			value: value,
+			equation: equation
+		});
+	}
+
+	/*
+	 * removes record from the result-list component
+	 * @param id - the id of result item to be deleted
+	*/
+	public removeFromResultList(id: number): void{
+		// iterates over result-list items until id matches; then deletes
+		for(var i = 0; i < this.result_list.length; i++) {
+		    if(this.result_list[i].id == id) {
+		        this.result_list.splice(i, 1);
+		        break;
+		    }
+		}
+	}
+  ...
+}
+```
+
+Now, by clicking the cancel icon (i.e. circle with cross), you can remove results from the results list in the caculator app.
+
+
+
+// more ..
 
