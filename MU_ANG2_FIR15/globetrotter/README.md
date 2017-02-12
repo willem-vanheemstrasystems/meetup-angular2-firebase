@@ -1832,13 +1832,13 @@ Change to the following in src/app/tools/tools.component.html (see also https://
   * 1170px (≥ 1200px)
   -->    
   <div class="mui-row">
-    <div class="mui-col-md-6">
+    <div class="mui-col-xs-8">
         <div class="mui-panel">
             <h1>Calculator</h1>
             <app-calculator></app-calculator>
         </div>
     </div>
-    <div class="mui-col-md-6">more tools...</div>
+    <div class="mui-col-xs-4">more tools...</div>
   </div>
 </div>
 ```
