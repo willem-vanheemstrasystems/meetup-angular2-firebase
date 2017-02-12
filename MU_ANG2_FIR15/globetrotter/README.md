@@ -1688,7 +1688,174 @@ export class CalculatorService {
 
 Now, by clicking the cancel icon (i.e. circle with cross), you can remove results from the results list in the caculator app.
 
+To make use of the memory functions, we add the ***saveMemory()***, ***deleteMemory()***, ***memoryPlus()***, ***memoryMinus()***, and ***writeMemory()*** functions to src/app/buttons/buttons.component.ts:
 
+```javascript
+...
+export class ButtonsComponent implements OnInit {
+  ...
+	/*
+	 * saves a number to the memory
+	 * @param num - number to save
+	*/
+	saveMemory(num: number = this.solve(this.calculator_service.equation)): void {
+		if(num != null && !this.calculator_service.is_reseted){
+			this.calculator_service.memory = num;
+		}
+	}
 
-// more ..
+	/*
+	 * deletes the memory
+	*/
+	deleteMemory(): void {
+		this.calculator_service.memory = null;
+	}
+
+	/*
+	 * takes the value from display and adds it to the memory variable (M + D)
+	 * if the value of equation string is valid
+	*/
+	memoryPlus(): void {
+		let res:number = this.solve(this.calculator_service.equation);
+		if(res != null){
+			this.saveMemory(this.calculator_service.memory + res);
+		}
+	}
+
+	/*
+	 * takes the value from display and makes a difference from the memory variable (M - D)
+	 * if the value of equation string is valid
+	*/
+	memoryMinus(): void {
+		let res:number = this.solve(this.calculator_service.equation);
+		if(res != null){
+			this.saveMemory(this.calculator_service.memory - res);
+		}
+	}
+
+	/*
+	 * adds M to equation string, which will be replaced by the memory variable
+	*/
+	writeMemory(): void {
+		// if memory can't be written, returns false and does nothing
+		if(this.calculator_service.getEquationLength() >= this.calculator_service.digit_limit || this.wrote_memory || this.calculator_service.memory == null){
+			return;
+		}
+		if(this.calculator_service.is_reseted){	
+			this.calculator_service.equation = "M";
+			this.calculator_service.is_reseted = false;
+		}else{
+			this.calculator_service.equation += "M";
+		}
+		this.wrote_memory = true;
+		this.calculator_service.can_add_operator = true;
+	}
+  ...
+}
+```
+
+When looking at the calculator again (http://localhost:4200/tools), you will now find that the following buttons are connected to their respective functions:
+
+- ***MC***: deleteMemory() - clears/deletes the memory (M).
+
+- ***MR***: writeMemory() - writes/adds memory (M) to equation string, which will be replaced by the memory variable.
+
+- ***M+***: memoryPlus() - takes the value from display (D) and adds it to the memory (M) variable (M + D) if the value of equation string is valid.
+
+- ***M-***: memoryMinus() - takes the value from display (D) and makes a difference from the memory (M) variable (M - D), if the value of equation string is valid.
+
+- ***MS***: saveMemory() - saves a number to the memory (M).
+
+Try them as follows:
+
+Enter 5 and save it to memory: ***5 MS***
+
+Empty/clear the display: ***C***
+
+Enter 12 and write/add memory to equation string: ***12 MR***
+
+Display shows: ***12M***
+
+Calculate the current result: ***=***
+
+Display shows: ***125***
+
+Add what is in memory still to the result: ***MR***
+
+Display shows: ***125M***
+
+Calculate the current result: ***=***
+
+Display shows: ***1255***
+
+Etcetera ...
+
+Good luck!
+
+## Styling the calculator
+
+To make the calculator less wide and for it to have a little drop shadow, we style it with css at 'tools' level.
+
+As our styling framework is Material Design, we can make us eof its grid system (See also https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-grid).
+
+On top of Google's Material Design framework we'll use ***MUI (Material Design User Interface)***, see https://www.muicss.com
+
+Add the MUI javascript and css references in the index.html page (see also https://www.muicss.com/):
+
+```javascript
+...
+<head>
+    ...
+     <!-- load MUI -->
+    <link href="//cdn.muicss.com/mui-0.9.9-rc2/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.9-rc2/js/mui.min.js"></script>
+    ...
+</head>
+...
+```
+
+***NOTE***: We are NOT using the angular version of MUI, as this refers to AngularJS (not Angular 2, which we use).
+
+Change to the following in src/app/tools/tools.component.html (see also https://www.muicss.com/docs/v1/css-js/container):
+
+```javascript
+<!-- using MUI - Material Design Lightweight User Interface Framework -->
+<div class="mui-container">
+  <!--
+  Container is centered on page with 15px of
+  padding on either side. The inner width is
+  fluid for small viewports and has a max
+  width for larger dimensions:
+  * 570px (≥ 544px)
+  * 740px (≥ 768px)
+  * 960px (≥ 992px)
+  * 1170px (≥ 1200px)
+  -->    
+  <div class="mui-row">
+    <div class="mui-col-md-6">
+        <div class="mui-panel">
+            <h1>Calculator</h1>
+            <app-calculator></app-calculator>
+        </div>
+    </div>
+    <div class="mui-col-md-6">more tools...</div>
+  </div>
+</div>
+```
+
+Now using Material Design's ***Resizer*** online tool we can see how the page behaves on different screen widths.
+
+Open the following URL in your browser:
+
+```javascript
+http://material.io/resizer
+```
+
+Then, on the resizer page, set our address in the address box:
+
+```javascript
+http://localhost:4200/tools
+```
+
+You can now choose to see the pages in desktop, tablet, and/or mobile phone screen sizes!
 

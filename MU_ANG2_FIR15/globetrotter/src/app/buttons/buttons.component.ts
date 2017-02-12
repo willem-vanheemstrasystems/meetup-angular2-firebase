@@ -137,5 +137,61 @@ export class ButtonsComponent implements OnInit {
 		this.calculator_service.is_reseted = true;
 	}
 
+	/*
+	 * saves a number to the memory
+	 * @param num - number to save
+	*/
+	saveMemory(num: number = this.solve(this.calculator_service.equation)): void {
+		if(num != null && !this.calculator_service.is_reseted){
+			this.calculator_service.memory = num;
+		}
+	}
+
+	/*
+	 * deletes the memory
+	*/
+	deleteMemory(): void {
+		this.calculator_service.memory = null;
+	}
+
+	/*
+	 * takes the value from display and adds it to the memory variable (M + D)
+	 * if the value of equation string is valid
+	*/
+	memoryPlus(): void {
+		let res:number = this.solve(this.calculator_service.equation);
+		if(res != null){
+			this.saveMemory(this.calculator_service.memory + res);
+		}
+	}
+
+	/*
+	 * takes the value from display and makes a difference from the memory variable (M - D)
+	 * if the value of equation string is valid
+	*/
+	memoryMinus(): void {
+		let res:number = this.solve(this.calculator_service.equation);
+		if(res != null){
+			this.saveMemory(this.calculator_service.memory - res);
+		}
+	}
+
+	/*
+	 * adds M to equation string, which will be replaced by the memory variable
+	*/
+	writeMemory(): void {
+		// if memory can't be written, returns false and does nothing
+		if(this.calculator_service.getEquationLength() >= this.calculator_service.digit_limit || this.wrote_memory || this.calculator_service.memory == null){
+			return;
+		}
+		if(this.calculator_service.is_reseted){	
+			this.calculator_service.equation = "M";
+			this.calculator_service.is_reseted = false;
+		}else{
+			this.calculator_service.equation += "M";
+		}
+		this.wrote_memory = true;
+		this.calculator_service.can_add_operator = true;
+	}
 
 }
