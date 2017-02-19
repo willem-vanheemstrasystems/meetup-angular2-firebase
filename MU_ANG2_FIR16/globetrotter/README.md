@@ -1926,7 +1926,8 @@ npm install -g json-server --save
 ###Create a database file in JSON format inside the 'globetrotter' directory, called '***todos.json***':
 
 ```javascript
-[
+{
+  "todos": [
   {
     "userId": 1,
     "id": 1,
@@ -3128,6 +3129,7 @@ npm install -g json-server --save
     "completed": false
   }
 ]
+}
 ```
 
 ###Start JSON Server
@@ -3143,6 +3145,13 @@ You can start JSON Server on other ports with the --port flag:
 ```javascript
 $ json-server --watch todos.json --port 3004
 ```
+
+If prompted that there is a newer version of json-server, follow the instructions:
+
+```javascript
+ Update available 0.8.23 → 0.9.4
+ Run npm i -g json-server --save to update
+``` 
 
 Now if you go in POSTman to GET http://localhost:3004/todos/1, you'll get
 
@@ -3172,4 +3181,190 @@ When you have time, read about all the (extra functionality)[https://github.com/
 Now that we have a REST Server, we'll create a REST Client.
 
 Based on 'Angular2 HTTP client to consume RESTful services' at https://github.com/Paldom/angular2-rest
+
+Using 'ng2-http' at https://github.com/hboylan/ng2-http
+
+See documentation at https://hboylan.github.io/ng2-http/docs/
+
+To install the required node module, execute the followi8ng command:
+
+```javascript
+npm install ng2-http --save 
+```
+
+Our component is going to be a ***blog***.
+
+Hence, generate the following to create our blog:
+
+For easy reference of ng commands, see https://cli.angular.io/reference.pdf
+
+```javascript
+ng generate component blog
+```
+
+and an accompanying blog service:
+
+```javascript
+ng generate service shared/blog
+```
+
+As you saw when you generated the service it warned us:
+
+```javascript
+installing service
+  create src\app\shared\blog.service.spec.ts
+  create src\app\shared\blog.service.ts
+  WARNING Service is generated but not provided, it must be provided to be used
+```
+
+Hence, we will provide the service.
+
+Add the following to src/app/app.module.ts:
+
+```javascript
+...
+import { RESTModule } from 'ng2-http';
+import { BlogComponent } from './blog/blog.component';
+import { BlogService } from './shared/blog.service';
+...
+@NgModule({
+  declarations: [
+    ...
+    BlogComponent,
+		...
+	]		
+	...
+  imports: [
+		...
+    RESTModule,
+		...
+	],
+  ...
+	providers: [
+		...
+		BlogService,
+		...
+	],
+	...
+})
+...
+```
+
+Create a new file manually, src/app/models/post.model.ts:
+
+```javascript
+export class Post {
+
+  constructor(
+    public userId: number,
+    public title: string,
+    public body: string,
+    public id?: number
+  ) {}
+}
+```
+
+Now modify the auto-generated files as follows:
+
+Add the following to the file src/app/blog/blog.component.ts
+
+```javascript
+import {Component, OnInit, Input} from '@angular/core';
+import { BlogService } from '../shared/blog.service';
+import { Post } from '../models/post.model';
+...
+export class BlogComponent implements OnInit {
+
+  @Input() public blogPost: Post = new Post(1, 'Blog Title', 'Blog Body');
+  @Input() public blogList: Post[] = [];
+
+  constructor(public blogService: BlogService) { 
+    this.getPosts();
+  }
+
+  ngOnInit() {
+  }
+
+  createPost() {
+    this.blogService.createPost(this.blogPost);
+  }
+
+  getPosts() {
+    this.blogService.getPosts().subscribe(posts => {
+      this.blogList = posts;
+    });
+  }
+
+}
+...
+```
+
+Add the following to the file src/app/shared/blog.service.ts
+
+```javascript
+...
+import { Http, Request, Response } from '@angular/http';
+import { RESTClient, BaseUrl, DefaultHeaders, GET, POST, Body, Query, Produces } from 'ng2-http';
+import { Observable } from 'rxjs/Observable';
+import { Post } from '../models/post.model';
+...
+@Injectable()
+@BaseUrl('https://jsonplaceholder.typicode.com')
+@DefaultHeaders({
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+})
+...
+export class BlogService extends RESTClient {
+  ...
+  constructor(protected http: Http) {super(http)}
+
+  protected requestInterceptor(req: Request) {}
+
+  protected responseInterceptor(res: Observable<Response>): Observable<Response> {
+    return res;
+  }
+
+  @POST('/posts')
+  @Produces<Post>()
+  public createPost(@Body post: Post): Observable<Post> {
+    return null;
+  }
+
+  @GET('/posts')
+  @Produces<Post[]>()
+  public getPosts(@Query('userId') userId?: number): Observable<Post[]> {
+    return null;
+  }   
+	...
+}
+...
+```
+
+In addition, we need to have the complete database file (which includes posts) in JSON format, for when we test the REST server locally with our Blog component:
+
+See the readily created file 'src/data.json' in the project directory of globetrotter:
+
+```javascript
+{
+  "posts": [
+   ...
+  ],
+  "users": [	 
+	 ...
+	]
+}	
+```
+
+Serve the local data.json file with rest-server as follows:
+
+```javascript
+$ json-server --watch data.json --port 3000
+```
+
+Test the working of the json-server, with POSTman:
+
+```javascript
+GET http://localhost:3000/posts
+```
 
