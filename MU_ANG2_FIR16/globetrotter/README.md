@@ -3269,61 +3269,119 @@ Now modify the auto-generated files as follows:
 Add the following to the file src/app/blog/blog.component.ts
 
 ```javascript
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BlogService } from '../shared/blog.service';
 import { Post } from '../models/post.model';
-...
+
+@Component({
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.css']
+})
 export class BlogComponent implements OnInit {
-
+  @Input() public posts: Post[] = [];
   @Input() public blogPost: Post = new Post(1, 'Blog Title', 'Blog Body');
-  @Input() public blogList: Post[] = [];
+  @Input() isLoading: boolean;
 
-  constructor(public blogService: BlogService) { 
-    this.getPosts();
-  }
+  constructor(private blogService: BlogService) {}
 
   ngOnInit() {
-  }
-
-  createPost() {
-    this.blogService.createPost(this.blogPost);
-  }
-
-  getPosts() {
     this.blogService.getPosts().subscribe(posts => {
-      this.blogList = posts;
+      this.posts = posts;
     });
   }
 
+  onSubmit() {
+    this.isLoading = true;
+    this.blogService.createPost(this.blogPost).subscribe(post => {
+      this.isLoading = false
+      this.posts.push(post)
+      this.blogPost = new Post(1, 'Demo Post', 'Lorem Ipsum');
+    })    
+  }
+
+  onGetUserPosts() {
+    this.isLoading = true
+    this.blogService.getPosts(this.blogPost.userId).subscribe(posts => {
+      this.isLoading = false
+      this.posts = posts
+    })
+  }
 }
 ...
 ```
 
-Add the following to the file src/app/shared/blog.service.ts
+Add the following to the file src/app/blog/blog.component.html
 
 ```javascript
-...
+<h3>Sample Posts</h3>
+<form (ngSubmit)="onSubmit()" *ngIf="!isLoading" style="margin-bottom: 10px">
+  <div class="form-group">
+    <label for="userId">User ID</label>
+    <input type="text" class="form-control" id="userId" name="userId" placeholder="User ID" [(ngModel)]="blogPost.userId">
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Title" [(ngModel)]="blogPost.title">
+  </div>
+  <div class="form-group">
+    <label for="body">Body</label>
+    <input type="text" class="form-control" id="body" name="body" placeholder="Body" [(ngModel)]="blogPost.body">
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+<button class="btn btn-info" (click)="onGetUserPosts()">Get User {{blogPost.userId}} posts</button>
+<table class="table table-hover">
+  <thead>
+    <tr><th>#</th><th>User</th><th>Title</th><th>Body</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <th>{{post.id}}</th>
+      <td>{{post.userId}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.body}}</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+Make the following file src/app/shared/blog.service.ts like so:
+
+```javascript
+import { Injectable } from '@angular/core';
 import { Http, Request, Response } from '@angular/http';
 import { RESTClient, BaseUrl, DefaultHeaders, GET, POST, Body, Query, Produces } from 'ng2-http';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../models/post.model';
-...
+
 @Injectable()
 @BaseUrl('https://jsonplaceholder.typicode.com')
 @DefaultHeaders({
   'Accept': 'application/json',
   'Content-Type': 'application/json'
 })
-...
 export class BlogService extends RESTClient {
-  ...
+
   constructor(protected http: Http) {super(http)}
 
-  protected requestInterceptor(req: Request) {}
+  protected requestInterceptor(req: Request): Request {
+    return req;
+  }
 
   protected responseInterceptor(res: Observable<Response>): Observable<Response> {
     return res;
   }
+
+  @GET('/posts')
+  @Produces<Post[]>((res: Response) => {
+    res.headers.forEach((values: string[], name: string) => {
+      console.log(name, '=', values)
+    })
+  })
+  public getPosts(@Query('userId') userId?: number): Observable<Post[]> {
+    return null;
+  } 
 
   @POST('/posts')
   @Produces<Post>()
@@ -3331,14 +3389,7 @@ export class BlogService extends RESTClient {
     return null;
   }
 
-  @GET('/posts')
-  @Produces<Post[]>()
-  public getPosts(@Query('userId') userId?: number): Observable<Post[]> {
-    return null;
-  }   
-	...
 }
-...
 ```
 
 In addition, we need to have the complete database file (which includes posts) in JSON format, for when we test the REST server locally with our Blog component:
@@ -3368,3 +3419,77 @@ Test the working of the json-server, with POSTman:
 GET http://localhost:3000/posts
 ```
 
+#Add a news component
+
+In order to position our newly created blog component on the existing web site, we'll create a new component / page, as follows:
+
+```javascript
+ng generate component news
+```
+
+Inside src/app/news/news.component.html place:
+
+```javascript
+<div class="container-fluid" id="blog">
+	<app-blog>Loading blog...</app-blog>
+</div>
+```
+
+Add the following to src/app/news/news.component.ts:
+
+```javascript
+...
+import { BlogComponent } from '../blog/blog.component';
+...
+```
+
+Once generated, add the news component to the src/app/app-routing.module.ts:
+
+```javascript
+...
+import { NewsComponent } from './news/news.component';
+
+const routes: Routes = [
+    ...
+    { path: 'news', component: ToolsComponent },
+		...      
+];
+...
+```
+
+Make sure the news component has been added to src/app/app.module.ts:
+
+```javascript
+...
+import { NewsComponent } from './news/news.component';
+...
+@NgModule({
+  declarations: [
+    ...
+    NewsComponent,
+		...
+  ],
+	...
+)};
+...
+```
+
+Finally, add the hyperlink to the news page in the sidebar of our app, by adding the following to src/app/app.component.html:
+
+```javascript
+...
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    Sidenav
+    <a href="home">Home</a>
+    <a href="news">News</a>		
+    <a href="about">About</a>
+    <a href="tools">Tools</a>
+  </md-sidenav>
+...
+```
+
+Now, run the server and browse on http://localhost:4200/ to the news page from the sidebar:
+
+```javascript
+ng serve
+```

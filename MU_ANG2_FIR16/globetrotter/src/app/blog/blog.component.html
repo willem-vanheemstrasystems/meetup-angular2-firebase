@@ -1,3 +1,30 @@
-<p>
-  blog works!
-</p>
+<h3>Sample Posts</h3>
+<form (ngSubmit)="onSubmit()" *ngIf="!isLoading" style="margin-bottom: 10px">
+  <div class="form-group">
+    <label for="userId">User ID</label>
+    <input type="text" class="form-control" id="userId" name="userId" placeholder="User ID" [(ngModel)]="blogPost.userId">
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Title" [(ngModel)]="blogPost.title">
+  </div>
+  <div class="form-group">
+    <label for="body">Body</label>
+    <input type="text" class="form-control" id="body" name="body" placeholder="Body" [(ngModel)]="blogPost.body">
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+<button class="btn btn-info" (click)="onGetUserPosts()">Get User {{blogPost.userId}} posts</button>
+<table class="table table-hover">
+  <thead>
+    <tr><th>#</th><th>User</th><th>Title</th><th>Body</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <th>{{post.id}}</th>
+      <td>{{post.userId}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.body}}</td>
+    </tr>
+  </tbody>
+</table>

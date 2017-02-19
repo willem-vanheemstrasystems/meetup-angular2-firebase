@@ -8,25 +8,32 @@ import { Post } from '../models/post.model';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-
+  @Input() public posts: Post[] = [];
   @Input() public blogPost: Post = new Post(1, 'Blog Title', 'Blog Body');
-  @Input() public blogList: Post[] = [];
+  @Input() isLoading: boolean;
 
-  constructor(public blogService: BlogService) { 
-    this.getPosts();
-  }
+  constructor(private blogService: BlogService) {}
 
   ngOnInit() {
-  }
-
-  createPost() {
-    this.blogService.createPost(this.blogPost);
-  }
-
-  getPosts() {
     this.blogService.getPosts().subscribe(posts => {
-      this.blogList = posts;
+      this.posts = posts;
     });
   }
 
+  onSubmit() {
+    this.isLoading = true;
+    this.blogService.createPost(this.blogPost).subscribe(post => {
+      this.isLoading = false
+      this.posts.push(post)
+      this.blogPost = new Post(1, 'Demo Post', 'Lorem Ipsum');
+    })    
+  }
+
+  onGetUserPosts() {
+    this.isLoading = true
+    this.blogService.getPosts(this.blogPost.userId).subscribe(posts => {
+      this.isLoading = false
+      this.posts = posts
+    })
+  }
 }

@@ -14,22 +14,28 @@ export class BlogService extends RESTClient {
 
   constructor(protected http: Http) {super(http)}
 
-  protected requestInterceptor(req: Request) {}
+  protected requestInterceptor(req: Request): Request {
+    return req;
+  }
 
   protected responseInterceptor(res: Observable<Response>): Observable<Response> {
     return res;
   }
+
+  @GET('/posts')
+  @Produces<Post[]>((res: Response) => {
+    res.headers.forEach((values: string[], name: string) => {
+      console.log(name, '=', values)
+    })
+  })
+  public getPosts(@Query('userId') userId?: number): Observable<Post[]> {
+    return null;
+  } 
 
   @POST('/posts')
   @Produces<Post>()
   public createPost(@Body post: Post): Observable<Post> {
     return null;
   }
-
-  @GET('/posts')
-  @Produces<Post[]>()
-  public getPosts(@Query('userId') userId?: number): Observable<Post[]> {
-    return null;
-  } 
 
 }

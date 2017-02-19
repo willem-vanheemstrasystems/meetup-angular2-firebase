@@ -16,6 +16,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { ResultListComponent } from './result-list/result-list.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogService } from './shared/blog.service';
+import { NewsComponent } from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BlogService } from './shared/blog.service';
     ButtonsComponent,
     CalculatorComponent,
     ResultListComponent,
-    BlogComponent
+    BlogComponent,
+    NewsComponent
   ],
   entryComponents: [DialogContent],
   imports: [
