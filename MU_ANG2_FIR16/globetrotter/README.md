@@ -1861,7 +1861,9 @@ You can now choose to see the pages in desktop, tablet, and/or mobile phone scre
 
 #RESTful
 
-In this section we'll explore the concept of REST ().
+In this section we'll explore the concept of REST (Representational state transfer).
+
+To learn what REST is, you can watch a video here http://www.restapitutorial.com/lessons/whatisrest.html
 
 ##Postman
 
@@ -3164,4 +3166,10 @@ Also when doing requests, it's good to know that:
 - A POST, PUT or PATCH request should include a Content-Type: application/json header to use the JSON in the request body. Otherwise it will result in a 200 OK but without changes being made to the data.
 
 When you have time, read about all the (extra functionality)[https://github.com/typicode/json-server] that JSON-server offers!
+
+#REST Client
+
+Now that we have a REST Server, we'll create a REST Client.
+
+Based on 'Angular2 HTTP client to consume RESTful services' at https://github.com/Paldom/angular2-rest
 
