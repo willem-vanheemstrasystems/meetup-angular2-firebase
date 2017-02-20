@@ -3500,3 +3500,24 @@ Now, run the server and browse on http://localhost:4200/ to the news page from t
 ng serve
 ```
 
+When browsing for the 'News' page (i.e. http://localhost:4200/news) you will see a complete list of all posts and their users.
+
+Try the button called 'Get User 1 posts', it filters the complete list to show only posts that belong to user 1.
+
+Try the button called 'Create', it will create a new post to the list.
+
+Once you prefer to manipulate the local data.json file, rather than the online service 'https://jsonplaceholder.typicode.com', make the following change to src/app/shared/blog.service.ts:
+
+```javascript
+...
+@BaseUrl('http://localhost:3000')
+...
+```
+
+Make sure to run the following before reloading the page:
+
+```javascript
+json-server --watch data.json --port 3000
+```
+
+Next, improve the styling of the blog component!
