@@ -3488,8 +3488,15 @@ Finally, add the hyperlink to the news page in the sidebar of our app, by adding
 ...
 ```
 
+Replace 'md-' with 'mat-' for the stylesheets, as 'md-' is nowadays reserved for AngularJS applications, whereas Angular2 uses 'mat-' in its stylesheets. This is so one can use both AngularJS and Angular2 in one application without style conflicts.
+
+The following files need to be changed for above reason:
+
+- src/themes/unicorn-app-theme.scss
+
 Now, run the server and browse on http://localhost:4200/ to the news page from the sidebar:
 
 ```javascript
 ng serve
 ```
+
