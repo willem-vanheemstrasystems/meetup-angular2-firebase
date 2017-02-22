@@ -26,11 +26,11 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     // With pagination
-    let observable = this.route.params
-      .map(params => params['nr'])
-      .map(pageNr => (pageNr - 1) * this.limit);
-    observable.subscribe(offset => this.offset = offset);
-    observable.share().subscribe(offset => this.findAll(offset, this.limit));
+    // let observable = this.route.params
+    //   .map(params => params['nr'])
+    //   .map(pageNr => (pageNr - 1) * this.limit);
+    // observable.subscribe(offset => this.offset = offset);
+    // observable.share().subscribe(offset => this.findAll(offset, this.limit));
   }  
 
   findAll(offset: number, limit: number) {
