@@ -16,13 +16,14 @@ export class BlogService extends RESTClient {
 
   constructor(protected http: Http) {super(http)}
 
-  //   // Used with pagination
-	// findAll(offset: number = 0, limit: number = 2): Observable<Posts> {
+  // Used with pagination
+  findAll(offset: number = 0, limit: number = 2): Observable<Post[]> {
+    return null; // TEMP
   //     return this.http
 	//     .get(`${this.baseUrl}/reports/?offset=${offset}&limit=${limit}`)
 	// 	.map(response => response.json())
 	// 	.map(results => this.getList(results));
-	// }
+	}
 
   // getList(data): Posts {
 	// 	// room for additional filtering

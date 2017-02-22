@@ -3796,6 +3796,19 @@ export class NewsComponent implements OnInit {
 ...
 ```
 
+To style the pagination and posts, add the following to src/index.html:
+
+```javascript
+...
+<head>
+  ...
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.css">
+  ...
+</head>
+...
+```
+
 In order to route to the right page, update the file src/app/app-routing.module.ts:
 
 ```javascript

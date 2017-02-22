@@ -38,8 +38,8 @@ export class NewsComponent implements OnInit {
     this.loading = true;
     this.failed = false;
     this.blogService.findAll(offset, limit).subscribe(result => {
-      this.posts = result.posts;
-      this.count = result.count; // You can fake a count here, there is currently no count on the result
+      //this.posts = result.posts;
+      //this.count = result.count; // You can fake a count here, there is currently no count on the result
       this.loading = false;
     }, () => {
       this.loading = false;
