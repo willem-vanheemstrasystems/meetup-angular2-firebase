@@ -12,7 +12,22 @@ import { Post } from '../models/post.model';
 })
 export class BlogService extends RESTClient {
 
+//  private baseUrl: string = 'http://localhost/cakephp/my_angular2_map_006_project/reports_maps/api';
+
   constructor(protected http: Http) {super(http)}
+
+  //   // Used with pagination
+	// findAll(offset: number = 0, limit: number = 2): Observable<Posts> {
+  //     return this.http
+	//     .get(`${this.baseUrl}/reports/?offset=${offset}&limit=${limit}`)
+	// 	.map(response => response.json())
+	// 	.map(results => this.getList(results));
+	// }
+
+  // getList(data): Posts {
+	// 	// room for additional filtering
+	// 	return data;
+	// }
 
   protected requestInterceptor(req: Request): Request {
     return req;

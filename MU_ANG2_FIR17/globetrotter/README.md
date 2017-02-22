@@ -3740,3 +3740,78 @@ Modify the file src/app/blog/blog.component.html as follows:
 <app-pagination [offset]="offset" [limit]="limit" [size]="count" (pageChange)="onPageChange($event)"></app-pagination>
 ```
 
+Prepare the file src/app/news/news.component.ts further as follows:
+
+```javascript
+...
+import { Router, ActivatedRoute } from '@angular/router';
+import { BlogComponent } from '../blog/blog.component';
+import { BlogService } from '../shared/blog.service';
+import { Post } from '../models/post.model';
+...
+export class NewsComponent implements OnInit {
+    ... 
+    // Used for pagination
+    count: number = 0;
+    offset: number = 0;
+    limit: number = 10; // choose an appropriate number
+	  posts: Post[];
+    loading: boolean = false;
+    failed: boolean = false;
+    ...
+    constructor(		
+      private router: Router,
+		  private route: ActivatedRoute,
+		  private blogService: BlogService) { }
+    ...
+    ngOnInit() {
+      // With pagination
+      let observable = this.route.params
+        .map(params => params['nr'])
+        .map(pageNr => (pageNr - 1) * this.limit);
+      observable.subscribe(offset => this.offset = offset);
+      observable.share().subscribe(offset => this.findAll(offset, this.limit));
+    }    
+    ...
+    findAll(offset: number, limit: number) {
+      this.posts = [];
+      this.loading = true;
+      this.failed = false;
+      this.blogService.findAll(offset, limit).subscribe(result => {
+        this.posts = result.posts;
+        this.count = result.count; // You can fake a count here, there is currently no count on the result
+        this.loading = false;
+      }, () => {
+        this.loading = false;
+        this.failed = true;
+      });
+    }
+    ...
+    onPageChange(offset) {
+      this.offset = offset;
+      this.router.navigate(['/page', (offset / this.limit) + 1]);
+    }
+    ...
+}
+...
+```
+
+In order to route to the right page, update the file src/app/app-routing.module.ts:
+
+```javascript
+...
+const routes: Routes = [  
+  ...
+	{ path: 'news', redirectTo: 'news/page/1', pathMatch: 'full' },
+	{ path: 'news/page/:nr', component: NewsComponent }
+  ...
+]
+...
+```
+
+Complete the src/app/shared/blog.service.ts;
+
+```javascript
+// to do
+```
+more ...
