@@ -1619,3 +1619,11 @@ Starts a local web server to serve the Angular 2 application. It refreshes the p
 
 When everything works as expected, you should see your first Google Map created with angular2-google-maps!
 
+#REST
+
+Based on 'Angular2 and Rxjs : a simple paginated list with search field' at https://blog.bouzekri.net/2016-05-15-angular2-rxjs-simple-paginated-list-with-search-field
+
+See updated version at https://jbouzekri.github.io/angular-search-list/
+
+with the code at https://github.com/jbouzekri/angular-search-list
+
