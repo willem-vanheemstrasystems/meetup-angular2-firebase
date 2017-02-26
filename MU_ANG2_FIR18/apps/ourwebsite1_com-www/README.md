@@ -1491,5 +1491,131 @@ node server
 
 We will create a Google Map on the About page.
 
-more ...
+#Install angular2-google-maps
+
+angular2-google-maps gets shipped via the Node Package Manager (NPM). Run the following command to add it to your new project:
+
+```javascript
+npm install angular2-google-maps --save
+```
+
+##Setup @NgModule
+
+Open src/app/app.module.ts and import the AgmCoreModule.
+
+NOTE: You need to provide a ***Google Maps API key*** to be able to see a Map. Get an API key (here)[https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key].
+
+```javascript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent, DialogContent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+
+import { AgmCoreModule } from 'angular2-google-maps/core';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    DialogContent,
+    AboutComponent
+  ],
+  entryComponents: [DialogContent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    MaterialModule.forRoot(),
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'Your API Key'
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+##Extending the app component
+
+Angular CLI already created an app component that we'll now use to create our first google map.
+
+Open the file src/app/about/about.component.ts and modify it like below:
+
+```javascript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-about',
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.css']
+})
+export class AboutComponent implements OnInit {
+
+  title: string = 'About: My Google Map';
+  lat: number = 52.258107; // center of Holland
+  lng: number = 5.600592;  // center of Holland
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+}
+```
+
+##Setup the template
+
+Open the file src/app/about/about.component.html and paste the following content:
+
+```javascript
+<md-card class="_md">
+  <md-card-header>
+    <span class="md-title">{{ title }}</span>
+  </md-card-header>
+  <!-- this creates a google map on the page with the given lat/lng from -->
+  <!-- the component as the initial center of the map: -->
+  <sebm-google-map [latitude]="lat" [longitude]="lng">
+    <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+  </sebm-google-map>
+</md-card>
+```
+
+##Setup the CSS file
+
+Open the file src/app/about/about.component.css and paste the following content:
+
+```javascript
+.sebm-google-map-container {
+  height: 500px;
+}
+```
+
+***CSS styling is required!***
+
+It is really important that you define a height for the css class .sebm-google-map-container. Otherwise, you won't see a map on the page!
+
+#Build and run your application
+
+Great! So we have created all the needed source files, so everything should be ready to build an run the application.
+
+Run the following command in the project root folder:
+
+```javascript
+ng serve
+```
+
+Then, open the following URL in your browser: http://localhost:4200/
+
+The command starts the following things:
+
+Starts the TypeScript compiler and compiles all sources files (watches also for file changes in the source files and recompiles all files if something has changed)
+Starts a local web server to serve the Angular 2 application. It refreshes the page when served files change.
+
+When everything works as expected, you should see your first Google Map created with angular2-google-maps!
 

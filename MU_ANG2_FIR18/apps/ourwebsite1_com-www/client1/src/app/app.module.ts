@@ -9,6 +9,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { HomeComponent, DialogContent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,10 @@ import { AboutComponent } from './about/about.component';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBJa7gl2Qf4grJI2--AXdptakh_6YwOTmw'
+    })    
   ],
   providers: [],
   bootstrap: [AppComponent]
