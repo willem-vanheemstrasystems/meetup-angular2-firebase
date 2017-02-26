@@ -1,1 +1,60 @@
-<router-outlet></router-outlet>
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+
+
+    <md-toolbar class="sidenav-toolbar md-elevation-z2 md-accent" color="accent">
+      <div class="md-toolbar-layout">
+        <md-toolbar-row>
+          Menu
+        </md-toolbar-row>
+      </div>
+    </md-toolbar>
+
+    <md-nav-list class="sidenav-list sidenav-toplevel" fxlayout="column" role="list" style="display: flex; box-sizing: border-box; flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal;">
+<!--      <ms-sidenav-item class="sidenav-item"> -->
+        <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="/">
+          <div class="md-list-item">
+            <div class="md-list-text"></div>
+            <md-icon role="img" class="material-icons" aria-label="home">home</md-icon>
+            <span class="sidenav-item-name fade-in-on-icon-sidenav">Home</span>
+            <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+          </div>
+          <div class="md-ripple-background"></div>
+        </a>
+<!--      </ms-sidenav-item>-->
+<!--      <ms-sidenav-item class="sidenav-item"> -->
+        <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="/about">
+          <div class="md-list-item">
+            <div class="md-list-text"></div>
+            <md-icon role="img" class="material-icons" aria-label="map">map</md-icon>
+            <span class="sidenav-item-name fade-in-on-icon-sidenav">About</span>
+            <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+          </div>
+          <div class="md-ripple-background"></div>
+        </a>
+<!--      </ms-sidenav-item>-->
+    </md-nav-list>  
+
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+
+    {{title}}
+
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+  </md-toolbar>
+
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+  
+</md-sidenav-container>
+
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button md-fab><md-icon>check circle</md-icon></button>
+</span>

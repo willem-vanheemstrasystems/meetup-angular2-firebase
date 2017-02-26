@@ -1,0 +1,60 @@
+md-sidenav-container.m2app-dark {
+  background: black;
+}
+
+/*
+ * The /deep/ selector is simply to overcome view encapsulation
+ * and be able to select the div.md-sidenav-content generated at runtime
+*/
+md-sidenav-container /deep/ .md-sidenav-content {
+  overflow: hidden;
+}
+
+.app-content {
+  padding: 20px;
+  height: calc(100% - 64px);
+  overflow: auto;  
+}
+
+.app-sidenav {
+  padding: 0px;
+  min-width: 100px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.mat-nav-list {
+  padding-top: 0px;
+  display: block;
+}

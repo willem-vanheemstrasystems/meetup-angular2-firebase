@@ -946,7 +946,7 @@ md-sidenav-layout.m2app-dark {
 }
 
 .app-sidenav {
-  padding: 10px;
+  padding: 0px;
   min-width: 100px;
 }
 
@@ -1124,6 +1124,372 @@ The website will automatically open the Home page, as the route of http://localh
 
 You should see a page full of Material 2 Design elements (i.e. buttons and form elements such as input fields and checkboxes), in our custom themed colors.
 
+##Refactor HTML
 
+Instead of having both headings & navigation and content all in the home component html, it is preferred to move the headings & navigation to the app component html, as follows:
 
+app.component.html:
+
+```javascript
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    Sidenav
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+
+    {{title}}
+
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+  </md-toolbar>
+  
+</md-sidenav-container>
+
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button md-fab><md-icon>check circle</md-icon></button>
+</span>
+```
+
+Leave the following part of html in home.component.html:
+
+```javascript
+<div class="app-content">
+
+  <md-card>
+    <button md-button>FLAT</button>
+    <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
+    <button md-raised-button color="primary">PRIMARY RAISED</button>
+    <button md-raised-button color="accent">ACCENT RAISED</button>
+  </md-card>
+
+  <md-card>
+    <md-checkbox>Unchecked</md-checkbox>
+    <md-checkbox [checked]="true">Checked</md-checkbox>
+    <md-checkbox [indeterminate]="true">Indeterminate</md-checkbox>
+    <md-checkbox [disabled]="true">Disabled</md-checkbox>
+  </md-card>
+
+  <md-card>
+    <md-radio-button name="symbol">Alpha</md-radio-button>
+    <md-radio-button name="symbol">Beta</md-radio-button>
+    <md-radio-button name="symbol" disabled>Gamma</md-radio-button>
+  </md-card>
+
+  <md-card class="app-input-section">
+    <input mdInput placeholder="First name" />
+
+    <input mdInput #nickname placeholder="Nickname" maxlength="50" />
+      <md-hint align="end">
+        {{nickname.characterCount}} / 50
+      </md-hint>
+
+    <input mdInput />
+      <md-placeholder>
+        <i class="material-icons app-input-icon">android</i> Favorite phone
+      </md-placeholder>
+
+    <input mdInput placeholder="Motorcycle model" />
+      <span md-prefix>
+        <i class="material-icons app-input-icon">motorcycle</i>
+        &nbsp;
+      </span>
+
+  </md-card>
+
+  <md-card>
+    <md-list class="app-list">
+      <md-list-item *ngFor="let food of foods">
+        <h3 md-line>{{food.name}}</h3>
+        <p md-line class="demo-secondary-text">{{food.rating}}</p>
+      </md-list-item>
+    </md-list>
+  </md-card>
+
+  <md-card>
+    <md-spinner class="app-spinner"></md-spinner>
+    <md-spinner color="accent" class="app-spinner"></md-spinner>
+  </md-card>
+
+  <md-card>
+    <label>
+      Indeterminate progress-bar
+      <md-progress-bar
+          class="app-progress"
+          mode="indeterminate"
+          aria-label="Indeterminate progress-bar example"></md-progress-bar>
+    </label>
+
+    <label>
+      Determinate progress bar - {{progress}}%
+      <md-progress-bar
+          class="app-progress"
+          color="accent"
+          mode="determinate"
+          [value]="progress"
+          aria-label="Determinate progress-bar example"></md-progress-bar>
+    </label>
+  </md-card>
+
+  <md-card>
+    <md-tab-group>
+      <md-tab label="Earth">
+        <p>EARTH</p>
+      </md-tab>
+      <md-tab label="Fire">
+        <p>FIRE</p>
+      </md-tab>
+    </md-tab-group>
+  </md-card>
+
+  <md-card>
+    <md-icon>build</md-icon>
+  </md-card>
+
+  <md-card>
+    <button md-button [md-menu-trigger-for]="menu">
+      MENU
+    </button>
+  </md-card>
+
+  <md-menu #menu="mdMenu">
+    <button md-menu-item>Lemon</button>
+    <button md-menu-item>Lime</button>
+    <button md-menu-item>Banana</button>
+  </md-menu>
+
+  <md-card>
+    <p>Last dialog result: {{lastDialogResult}}</p>
+    <button md-raised-button (click)="openDialog()">DIALOG</button>
+    <button md-raised-button (click)="showSnackbar()">SNACKBAR</button>
+  </md-card>
+
+</div>
+```
+
+The styling will have changed badly, as there is no css in app.component.scss. So, move the following css from home.component.scss to app.component.scss.
+
+```javascript
+md-sidenav-container.m2app-dark {
+  background: black;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.app-sidenav {
+  padding: 0px;
+  min-width: 100px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+```
+
+That leaves home.component.scss with the following:
+
+```javascript
+md-card {
+  margin: 20px;
+}
+
+md-checkbox {
+  margin: 10px;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+.app-input-icon {
+  font-size: 16px;
+}
+
+.app-list {
+  border: 1px solid rgba(0,0,0,0.12);
+  width: 350px;
+  margin: 20px;
+}
+
+.app-progress {
+  margin: 20px;
+}
+```
+
+Lastly, change the value of the variable 'title' inside the apps/ourwebsite1_com-www/client1/src/app/app.component.ts:
+
+```javascript
+...
+export class AppComponent {
+  title = 'Our Website';
+}
+...
+```
+
+By moving some of the HTML and css to the app component, the top menu bar will now stick to the application. Whereas the content of the page will be part of the home component. As such, if we create more components (e.g. About component), we will be able to re-use the top menu and fill the rest of the page with page specific content (e.g. information About our company coming from the About component).
+
+When you build the application again and browse to the web site, you should see not changes. However, the header is now nicely separated from the home page, and will re-occur on every following page.
+
+#About page
+
+To do: generate a new component called 'about' using ng command, inside directory apps/ourwebsite1_com-www/client1:
+
+```javascript
+ng generate component about
+```
+
+Add 'about' to the routing. 
+
+Inside apps/ourwebsite1_com-www/client1/src/app/app-routing.module.ts add the following:
+
+```javascript
+...
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+
+const routes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'about', component: AboutComponent }   
+];
+...
+```
+
+Add both Home and About as sidenav menu items to route to their respective pages.
+
+***NOTE***: Look at https://material.angular.io/components for details of Material 2 components for Angular2
+
+In apps/ourwebsite1_com-www/client1/src/app/app.component.html add:
+
+```javascript
+...
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+
+    <md-toolbar class="sidenav-toolbar md-elevation-z2 md-accent" color="accent">
+      <div class="md-toolbar-layout">
+        <md-toolbar-row>
+          Menu
+        </md-toolbar-row>
+      </div>
+    </md-toolbar>
+
+    <md-nav-list class="sidenav-list sidenav-toplevel" fxlayout="column" role="list" style="display: flex; box-sizing: border-box; flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal;">
+<!--      <ms-sidenav-item class="sidenav-item"> -->
+        <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="/">
+          <div class="md-list-item">
+            <div class="md-list-text"></div>
+            <md-icon role="img" class="material-icons" aria-label="home">home</md-icon>
+            <span class="sidenav-item-name fade-in-on-icon-sidenav">Home</span>
+            <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+          </div>
+          <div class="md-ripple-background"></div>
+        </a>
+<!--      </ms-sidenav-item>-->
+<!--      <ms-sidenav-item class="sidenav-item"> -->
+        <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="/about">
+          <div class="md-list-item">
+            <div class="md-list-text"></div>
+            <md-icon role="img" class="material-icons" aria-label="map">map</md-icon>
+            <span class="sidenav-item-name fade-in-on-icon-sidenav">About</span>
+            <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+          </div>
+          <div class="md-ripple-background"></div>
+        </a>
+<!--      </ms-sidenav-item>-->
+    </md-nav-list>  
+
+  </md-sidenav>
+  ...
+</md-sidenav-container>
+...
+```
+
+Update the styles in apps/ourwebsite1_com-www/client1/app/app.component.scss:
+
+```javascript
+...
+/*
+ * The /deep/ selector is simply to overcome view encapsulation
+ * and be able to select the div.md-sidenav-content generated at runtime
+*/
+md-sidenav-container /deep/ .md-sidenav-content {
+  overflow: hidden;
+}
+
+.app-content {
+  padding: 20px;
+  height: calc(100% - 64px);
+  overflow: auto;  
+}
+
+.mat-nav-list {
+  padding-top: 0px;
+  display: block;
+}
+...
+```
+
+Check it out! Build the application from apps/ourwebsite1_com-www/client as follows:
+
+```javascript
+ng build
+```
+
+Then browse to the web site at http://localhost:8000, or start the server first from apps/ourwebsite1_com-www with:
+
+```javascript
+node server
+```
+
+#Angular2 Google Map
+
+We will create a Google Map on the About page.
+
+more ...
 

@@ -8,12 +8,14 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent, DialogContent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DialogContent
+    DialogContent,
+    AboutComponent
   ],
   entryComponents: [DialogContent],
   imports: [

@@ -5,6 +5,41 @@ webpackJsonp([0,3],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AboutComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AboutComponent = (function () {
+    function AboutComponent() {
+    }
+    AboutComponent.prototype.ngOnInit = function () {
+    };
+    AboutComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
+            selector: 'app-about',
+            template: __webpack_require__(809),
+            styles: [__webpack_require__(806)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AboutComponent);
+    return AboutComponent;
+}());
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR18/apps/ourwebsite1_com-www/client1/src/about.component.js.map
+
+/***/ },
+
+/***/ 441:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__(396);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HomeComponent; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return DialogContent; });
@@ -54,8 +89,8 @@ var HomeComponent = (function () {
     HomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
             selector: 'app-home',
-            template: __webpack_require__(808),
-            styles: [__webpack_require__(805)]
+            template: __webpack_require__(811),
+            styles: [__webpack_require__(808)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MdDialog */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MdDialog */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MdSnackBar */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MdSnackBar */]) === 'function' && _b) || Object])
     ], HomeComponent);
@@ -80,7 +115,7 @@ var DialogContent = (function () {
 
 /***/ },
 
-/***/ 491:
+/***/ 492:
 /***/ function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -89,21 +124,21 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 491;
+webpackEmptyContext.id = 492;
 
 
 /***/ },
 
-/***/ 492:
+/***/ 493:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(652);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__polyfills_ts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(616);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(617);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(650);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_app_module__ = __webpack_require__(649);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_app_module__ = __webpack_require__(650);
 
 
 
@@ -117,13 +152,14 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ },
 
-/***/ 647:
+/***/ 648:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(636);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home_component__ = __webpack_require__(440);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(637);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home_component__ = __webpack_require__(441);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__about_about_component__ = __webpack_require__(440);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -137,8 +173,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var routes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" /* HomeComponent */] }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" /* HomeComponent */] },
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_2__home_home_component__["a" /* HomeComponent */] },
+    { path: 'about', component: __WEBPACK_IMPORTED_MODULE_3__about_about_component__["a" /* AboutComponent */] }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -157,7 +196,7 @@ var AppRoutingModule = (function () {
 
 /***/ },
 
-/***/ 648:
+/***/ 649:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -175,13 +214,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'app works!';
+        this.title = 'Our Website';
     }
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(807),
-            styles: [__webpack_require__(806)]
+            template: __webpack_require__(810),
+            styles: [__webpack_require__(807)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -191,7 +230,7 @@ var AppComponent = (function () {
 
 /***/ },
 
-/***/ 649:
+/***/ 650:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -199,12 +238,13 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__(647);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__(648);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__(396);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_hammerjs__ = __webpack_require__(803);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_hammerjs__ = __webpack_require__(804);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_hammerjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(648);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_component__ = __webpack_require__(440);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(649);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_home_component__ = __webpack_require__(441);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__about_about_component__ = __webpack_require__(440);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -224,6 +264,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -232,7 +273,8 @@ var AppModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__home_home_component__["b" /* DialogContent */]
+                __WEBPACK_IMPORTED_MODULE_8__home_home_component__["b" /* DialogContent */],
+                __WEBPACK_IMPORTED_MODULE_9__about_about_component__["a" /* AboutComponent */]
             ],
             entryComponents: [__WEBPACK_IMPORTED_MODULE_8__home_home_component__["b" /* DialogContent */]],
             imports: [
@@ -253,7 +295,7 @@ var AppModule = (function () {
 
 /***/ },
 
-/***/ 650:
+/***/ 651:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -269,41 +311,41 @@ var environment = {
 
 /***/ },
 
-/***/ 651:
+/***/ 652:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(665);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(666);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(658);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(659);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(654);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(655);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(660);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(661);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(659);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(660);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(657);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(658);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(656);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(657);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(664);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(665);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(654);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(653);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(662);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(663);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(655);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(656);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(663);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(664);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(661);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(662);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(666);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(667);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(851);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(854);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 
 
@@ -325,13 +367,6 @@ var environment = {
 
 /***/ },
 
-/***/ 805:
-/***/ function(module, exports) {
-
-module.exports = "md-sidenav-layout.m2app-dark {\n  background: black; }\n\n.app-content {\n  padding: 20px; }\n\n.app-content md-card {\n  margin: 20px; }\n\n.app-sidenav {\n  padding: 10px;\n  min-width: 100px; }\n\n.app-content md-checkbox {\n  margin: 10px; }\n\n.app-toolbar-filler {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.app-toolbar-menu {\n  padding: 0 14px 0 14px;\n  color: white; }\n\n.app-icon-button {\n  box-shadow: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background: none;\n  border: none;\n  cursor: pointer;\n  -webkit-filter: none;\n          filter: none;\n  font-weight: normal;\n  height: auto;\n  line-height: inherit;\n  margin: 0;\n  min-width: 0;\n  padding: 0;\n  text-align: left;\n  text-decoration: none; }\n\n.app-action {\n  display: inline-block;\n  position: fixed;\n  bottom: 20px;\n  right: 20px; }\n\n.app-spinner {\n  height: 30px;\n  width: 30px;\n  display: inline-block; }\n\n.app-input-icon {\n  font-size: 16px; }\n\n.app-list {\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  width: 350px;\n  margin: 20px; }\n\n.app-progress {\n  margin: 20px; }\n"
-
-/***/ },
-
 /***/ 806:
 /***/ function(module, exports) {
 
@@ -342,24 +377,45 @@ module.exports = ""
 /***/ 807:
 /***/ function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>"
+module.exports = "md-sidenav-container.m2app-dark {\n  background: black; }\n\n/*\r\n * The /deep/ selector is simply to overcome view encapsulation\r\n * and be able to select the div.md-sidenav-content generated at runtime\r\n*/\nmd-sidenav-container /deep/ .md-sidenav-content {\n  overflow: hidden; }\n\n.app-content {\n  padding: 20px;\n  height: calc(100% - 64px);\n  overflow: auto; }\n\n.app-sidenav {\n  padding: 0px;\n  min-width: 100px; }\n\n.app-toolbar-filler {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.app-toolbar-menu {\n  padding: 0 14px 0 14px;\n  color: white; }\n\n.app-icon-button {\n  box-shadow: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background: none;\n  border: none;\n  cursor: pointer;\n  -webkit-filter: none;\n          filter: none;\n  font-weight: normal;\n  height: auto;\n  line-height: inherit;\n  margin: 0;\n  min-width: 0;\n  padding: 0;\n  text-align: left;\n  text-decoration: none; }\n\n.app-action {\n  display: inline-block;\n  position: fixed;\n  bottom: 20px;\n  right: 20px; }\n\n.mat-nav-list {\n  padding-top: 0px;\n  display: block; }\n"
 
 /***/ },
 
 /***/ 808:
 /***/ function(module, exports) {
 
-module.exports = "<md-sidenav-container [class.m2app-dark]=\"isDarkTheme\">\n\n  <md-sidenav #sidenav mode=\"side\" class=\"app-sidenav\">\n    Sidenav\n  </md-sidenav>\n\n  <md-toolbar color=\"primary\">\n    <button class=\"app-icon-button\" (click)=\"sidenav.toggle()\">\n      <i class=\"material-icons app-toolbar-menu\">menu</i>\n    </button>\n\n    {{title}}\n\n    <span class=\"app-toolbar-filler\"></span>\n    <button md-button (click)=\"isDarkTheme = !isDarkTheme\">TOGGLE DARK THEME</button>\n  </md-toolbar>\n\n  <div class=\"app-content\">\n\n    <md-card>\n      <button md-button>FLAT</button>\n      <button md-raised-button md-tooltip=\"This is a tooltip!\">RAISED</button>\n      <button md-raised-button color=\"primary\">PRIMARY RAISED</button>\n      <button md-raised-button color=\"accent\">ACCENT RAISED</button>\n    </md-card>\n\n    <md-card>\n      <md-checkbox>Unchecked</md-checkbox>\n      <md-checkbox [checked]=\"true\">Checked</md-checkbox>\n      <md-checkbox [indeterminate]=\"true\">Indeterminate</md-checkbox>\n      <md-checkbox [disabled]=\"true\">Disabled</md-checkbox>\n    </md-card>\n\n    <md-card>\n      <md-radio-button name=\"symbol\">Alpha</md-radio-button>\n      <md-radio-button name=\"symbol\">Beta</md-radio-button>\n      <md-radio-button name=\"symbol\" disabled>Gamma</md-radio-button>\n    </md-card>\n\n    <md-card class=\"app-input-section\">\n      <input mdInput placeholder=\"First name\" />\n\n      <input mdInput #nickname placeholder=\"Nickname\" maxlength=\"50\" />\n        <md-hint align=\"end\">\n          {{nickname.characterCount}} / 50\n        </md-hint>\n\n      <input mdInput />\n        <md-placeholder>\n          <i class=\"material-icons app-input-icon\">android</i> Favorite phone\n        </md-placeholder>\n\n      <input mdInput placeholder=\"Motorcycle model\" />\n        <span md-prefix>\n          <i class=\"material-icons app-input-icon\">motorcycle</i>\n          &nbsp;\n        </span>\n\n    </md-card>\n\n    <md-card>\n      <md-list class=\"app-list\">\n        <md-list-item *ngFor=\"let food of foods\">\n          <h3 md-line>{{food.name}}</h3>\n          <p md-line class=\"demo-secondary-text\">{{food.rating}}</p>\n        </md-list-item>\n      </md-list>\n    </md-card>\n\n    <md-card>\n      <md-spinner class=\"app-spinner\"></md-spinner>\n      <md-spinner color=\"accent\" class=\"app-spinner\"></md-spinner>\n    </md-card>\n\n    <md-card>\n      <label>\n        Indeterminate progress-bar\n        <md-progress-bar\n            class=\"app-progress\"\n            mode=\"indeterminate\"\n            aria-label=\"Indeterminate progress-bar example\"></md-progress-bar>\n      </label>\n\n      <label>\n        Determinate progress bar - {{progress}}%\n        <md-progress-bar\n            class=\"app-progress\"\n            color=\"accent\"\n            mode=\"determinate\"\n            [value]=\"progress\"\n            aria-label=\"Determinate progress-bar example\"></md-progress-bar>\n      </label>\n    </md-card>\n\n    <md-card>\n      <md-tab-group>\n        <md-tab label=\"Earth\">\n          <p>EARTH</p>\n        </md-tab>\n        <md-tab label=\"Fire\">\n          <p>FIRE</p>\n        </md-tab>\n      </md-tab-group>\n    </md-card>\n\n    <md-card>\n      <md-icon>build</md-icon>\n    </md-card>\n\n    <md-card>\n      <button md-button [md-menu-trigger-for]=\"menu\">\n        MENU\n      </button>\n    </md-card>\n\n    <md-menu #menu=\"mdMenu\">\n      <button md-menu-item>Lemon</button>\n      <button md-menu-item>Lime</button>\n      <button md-menu-item>Banana</button>\n    </md-menu>\n\n    <md-card>\n      <p>Last dialog result: {{lastDialogResult}}</p>\n      <button md-raised-button (click)=\"openDialog()\">DIALOG</button>\n      <button md-raised-button (click)=\"showSnackbar()\">SNACKBAR</button>\n    </md-card>\n\n  </div>\n\n</md-sidenav-container>\n\n<span class=\"app-action\" [class.m2app-dark]=\"isDarkTheme\">\n  <button md-fab><md-icon>check circle</md-icon></button>\n</span>"
+module.exports = "md-card {\n  margin: 20px; }\n\nmd-checkbox {\n  margin: 10px; }\n\n.app-action {\n  display: inline-block;\n  position: fixed;\n  bottom: 20px;\n  right: 20px; }\n\n.app-spinner {\n  height: 30px;\n  width: 30px;\n  display: inline-block; }\n\n.app-input-icon {\n  font-size: 16px; }\n\n.app-list {\n  border: 1px solid rgba(0, 0, 0, 0.12);\n  width: 350px;\n  margin: 20px; }\n\n.app-progress {\n  margin: 20px; }\n"
 
 /***/ },
 
-/***/ 852:
+/***/ 809:
+/***/ function(module, exports) {
+
+module.exports = "<p>\n  about works!\n</p>\n"
+
+/***/ },
+
+/***/ 810:
+/***/ function(module, exports) {
+
+module.exports = "<md-sidenav-container [class.m2app-dark]=\"isDarkTheme\">\n\n  <md-sidenav #sidenav mode=\"side\" class=\"app-sidenav\">\n\n\n    <md-toolbar class=\"sidenav-toolbar md-elevation-z2 md-accent\" color=\"accent\">\n      <div class=\"md-toolbar-layout\">\n        <md-toolbar-row>\n          Menu\n        </md-toolbar-row>\n      </div>\n    </md-toolbar>\n\n    <md-nav-list class=\"sidenav-list sidenav-toplevel\" fxlayout=\"column\" role=\"list\" style=\"display: flex; box-sizing: border-box; flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal;\">\n<!--      <ms-sidenav-item class=\"sidenav-item\"> -->\n        <a class=\"sidenav-anchor\" md-list-item=\"\" md-ripple=\"\" role=\"listitem\" routerlinkactive=\"active\" href=\"/\">\n          <div class=\"md-list-item\">\n            <div class=\"md-list-text\"></div>\n            <md-icon role=\"img\" class=\"material-icons\" aria-label=\"home\">home</md-icon>\n            <span class=\"sidenav-item-name fade-in-on-icon-sidenav\">Home</span>\n            <span fxflex=\"\" style=\"flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;\"></span>\n          </div>\n          <div class=\"md-ripple-background\"></div>\n        </a>\n<!--      </ms-sidenav-item>-->\n<!--      <ms-sidenav-item class=\"sidenav-item\"> -->\n        <a class=\"sidenav-anchor\" md-list-item=\"\" md-ripple=\"\" role=\"listitem\" routerlinkactive=\"active\" href=\"/about\">\n          <div class=\"md-list-item\">\n            <div class=\"md-list-text\"></div>\n            <md-icon role=\"img\" class=\"material-icons\" aria-label=\"map\">map</md-icon>\n            <span class=\"sidenav-item-name fade-in-on-icon-sidenav\">About</span>\n            <span fxflex=\"\" style=\"flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;\"></span>\n          </div>\n          <div class=\"md-ripple-background\"></div>\n        </a>\n<!--      </ms-sidenav-item>-->\n    </md-nav-list>  \n\n  </md-sidenav>\n\n  <md-toolbar color=\"primary\">\n    <button class=\"app-icon-button\" (click)=\"sidenav.toggle()\">\n      <i class=\"material-icons app-toolbar-menu\">menu</i>\n    </button>\n\n    {{title}}\n\n    <span class=\"app-toolbar-filler\"></span>\n    <button md-button (click)=\"isDarkTheme = !isDarkTheme\">TOGGLE DARK THEME</button>\n  </md-toolbar>\n\n  <div class=\"app-content\">\n    <router-outlet></router-outlet>\n  </div>\n  \n</md-sidenav-container>\n\n<span class=\"app-action\" [class.m2app-dark]=\"isDarkTheme\">\n  <button md-fab><md-icon>check circle</md-icon></button>\n</span>"
+
+/***/ },
+
+/***/ 811:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"app-content\">\n\n  <md-card>\n    <button md-button>FLAT</button>\n    <button md-raised-button md-tooltip=\"This is a tooltip!\">RAISED</button>\n    <button md-raised-button color=\"primary\">PRIMARY RAISED</button>\n    <button md-raised-button color=\"accent\">ACCENT RAISED</button>\n  </md-card>\n\n  <md-card>\n    <md-checkbox>Unchecked</md-checkbox>\n    <md-checkbox [checked]=\"true\">Checked</md-checkbox>\n    <md-checkbox [indeterminate]=\"true\">Indeterminate</md-checkbox>\n    <md-checkbox [disabled]=\"true\">Disabled</md-checkbox>\n  </md-card>\n\n  <md-card>\n    <md-radio-button name=\"symbol\">Alpha</md-radio-button>\n    <md-radio-button name=\"symbol\">Beta</md-radio-button>\n    <md-radio-button name=\"symbol\" disabled>Gamma</md-radio-button>\n  </md-card>\n\n  <md-card class=\"app-input-section\">\n    <input mdInput placeholder=\"First name\" />\n\n    <input mdInput #nickname placeholder=\"Nickname\" maxlength=\"50\" />\n      <md-hint align=\"end\">\n        {{nickname.characterCount}} / 50\n      </md-hint>\n\n    <input mdInput />\n      <md-placeholder>\n        <i class=\"material-icons app-input-icon\">android</i> Favorite phone\n      </md-placeholder>\n\n    <input mdInput placeholder=\"Motorcycle model\" />\n      <span md-prefix>\n        <i class=\"material-icons app-input-icon\">motorcycle</i>\n        &nbsp;\n      </span>\n\n  </md-card>\n\n  <md-card>\n    <md-list class=\"app-list\">\n      <md-list-item *ngFor=\"let food of foods\">\n        <h3 md-line>{{food.name}}</h3>\n        <p md-line class=\"demo-secondary-text\">{{food.rating}}</p>\n      </md-list-item>\n    </md-list>\n  </md-card>\n\n  <md-card>\n    <md-spinner class=\"app-spinner\"></md-spinner>\n    <md-spinner color=\"accent\" class=\"app-spinner\"></md-spinner>\n  </md-card>\n\n  <md-card>\n    <label>\n      Indeterminate progress-bar\n      <md-progress-bar\n          class=\"app-progress\"\n          mode=\"indeterminate\"\n          aria-label=\"Indeterminate progress-bar example\"></md-progress-bar>\n    </label>\n\n    <label>\n      Determinate progress bar - {{progress}}%\n      <md-progress-bar\n          class=\"app-progress\"\n          color=\"accent\"\n          mode=\"determinate\"\n          [value]=\"progress\"\n          aria-label=\"Determinate progress-bar example\"></md-progress-bar>\n    </label>\n  </md-card>\n\n  <md-card>\n    <md-tab-group>\n      <md-tab label=\"Earth\">\n        <p>EARTH</p>\n      </md-tab>\n      <md-tab label=\"Fire\">\n        <p>FIRE</p>\n      </md-tab>\n    </md-tab-group>\n  </md-card>\n\n  <md-card>\n    <md-icon>build</md-icon>\n  </md-card>\n\n  <md-card>\n    <button md-button [md-menu-trigger-for]=\"menu\">\n      MENU\n    </button>\n  </md-card>\n\n  <md-menu #menu=\"mdMenu\">\n    <button md-menu-item>Lemon</button>\n    <button md-menu-item>Lime</button>\n    <button md-menu-item>Banana</button>\n  </md-menu>\n\n  <md-card>\n    <p>Last dialog result: {{lastDialogResult}}</p>\n    <button md-raised-button (click)=\"openDialog()\">DIALOG</button>\n    <button md-raised-button (click)=\"showSnackbar()\">SNACKBAR</button>\n  </md-card>\n\n</div>\n"
+
+/***/ },
+
+/***/ 855:
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(492);
+module.exports = __webpack_require__(493);
 
 
 /***/ }
 
-},[852]);
+},[855]);
 //# sourceMappingURL=main.bundle.map
