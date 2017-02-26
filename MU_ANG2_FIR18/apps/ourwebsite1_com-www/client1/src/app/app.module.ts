@@ -2,17 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
+import { HomeComponent, DialogContent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    DialogContent
   ],
+  entryComponents: [DialogContent],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

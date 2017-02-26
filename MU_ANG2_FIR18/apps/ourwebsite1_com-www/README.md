@@ -118,6 +118,7 @@ In case of configuration Total.js:
 
 ```javascript
 ...
+directory-public-virtual: /client1/dist/
 ...
 ```
 
@@ -133,7 +134,6 @@ allow-compile-script: false
 
 ```javascript
 ...
-directory-public-virtual: /client1/dist/
 directory-public: /client1/dist/
 ...
 ```
@@ -253,16 +253,16 @@ exports.install = function() {
 </html>
 ```
 
-8. Start the server from the root directory of project
+9. Start the server from the root directory of project
 
 ```javascript
 cd /apps/ourwebsite1_com-www
 node server
 ```
 
-9. Visit http://localhost:8000
+10. Visit http://localhost:8000
 
-That’s all – Now You can create Amazing and Professional SPA applications!
+That’s all – Now you can create Amazing and Professional SPA applications!
 
 #Create a REST API
 
@@ -546,3 +546,584 @@ Authorization        Bearer d88ad6cd-1112-4fc9-a20a-6ff75ed4d2da
 Now, click Send again.
 
 You should be returned the user data. [THIS IS CURRENTLY NOT WORKING, PERHAPS WE NEED TO LOGIN WITH username AND password FIRST TO RECEIVE THE TOKEN]
+
+#Building more of the Angular2 app
+
+So far our Angular2 app ('client1') does not have much to show, other than 'App works!'. We will now expand on it.
+
+##Including Google's User Interface design library called 'Material (Design) 2'
+
+Based on 'Working with Angular 2 Material' at https://coursetro.com/posts/code/29/Working-with-Angular-2-Material
+
+Install Angular Material from inside the apps/ourwebsite1_com-www/client1 directory, as follows:
+
+```javascript
+cd apps/ourwebsite1_com-www/client1
+npm install --save @angular/material
+```
+
+This will install Angular Material and save it to our package.json as a dependency.
+
+Next, add the reference to angular material in the file client1/src/app/app.module.ts:
+
+```javascript
+...
+import { MaterialModule } from '@angular/material';
+...
+@NgModule({
+  ...
+  imports: [
+    ...
+    MaterialModule,
+    ...
+  ],
+  ...
+})
+...
+```
+
+#Include HammerJS
+
+Certain components in Angular Material (slide-toggle and slider) require HammerJS in order to work correctly.
+
+Hence, we need to install HammerJS as follows, again from inside the apps/ourwebsite1_com-www/client1 directory:
+
+```javascript
+npm install --save hammerjs
+```
+
+```javascript
+npm install --save-dev @types/hammerjs
+```
+
+And HammerJS needs also to be imported in client1/src/app/app.module.ts:
+
+```javascript
+...
+import 'hammerjs';
+...
+```
+
+...and add HammerJS to the types section of the client1/src/tsconfig.json file:
+
+```javascript
+...
+{
+  "compilerOptions": {
+    ...
+    "types": [
+      "hammerjs"
+    ]
+  }
+}
+...
+```
+
+
+
+##Including Material Design Icons & Roboto Font
+
+Add the following links inside apps/ourwebsite1_com-www/views/index.html AND apps/ourwebsite1_com-www/client1/src/index.html:
+
+```javascript
+...
+<head>
+  ...
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  ...
+</head>
+...
+```
+
+***WARNING***: There have been some breaking changes made by the Material 2 team, see https://github.com/angular/material2/blob/master/CHANGELOG.md
+
+- Styling is no longer prefixed by 'md-'. All styling is now prefixed by 'mat-' so that apps can upgrade from AngularJS Material to Angular Material without styling conflicts between the two library components.
+
+As a temporary test to see what the Angular 2 app ('client1') now looks like, from the directory apps/ourwebsite1_com-www/client1/ run:
+
+```javascript
+ng build
+```
+
+This will create a compiled version of our client1 inside the 'dist' folder.
+
+Now change directory to apps/ourwebsite1_com-www/ and run the following command:
+
+```javascript
+node server
+```
+
+Voila! ... app works!
+
+No noticable changes in styling other than that the font used is now Roboto. We will have to introduce more elements to show the impact of the styling.
+
+##Creating a custom Material Design Theme
+
+Angular Material offers several pre-built themes from which you can declare in the styles.css via the import tag.
+
+The available themes are:
+
+- indigo-pink
+
+- deeppurple-amber
+
+- purple-green
+
+- pink-bluegrey
+
+Instead we will create a custom material design theme.
+
+A theme file is a simple Sass file that defines your palettes and passes them to mixins that output the corresponding styles. 
+
+SEE ALSO: 'Angular-Material 2 Theme Tutorial' at https://medium.com/covalent-ui/angular-material-2-theme-tutorial-2f7e6c344006#.p1ub34gjj
+
+If you are using the Angular CLI, support for compiling Sass to css is built-in; you only have to change the entry to the "styles" list in ***apps/ourwebsite1_com-www/client1/angular-cli.json*** pointing to the style file (e.g., style.scss). NOTE the file should end with .scss, not .css
+
+```javascript
+...
+  "styles": [
+    "styles.scss"
+  ],  
+...
+```
+
+If it does not already exist, create a file 'src/themes/unicorn-app-theme.scss' with the following content:
+
+```javascript
+@import '~@angular/material/core/theming/all-theme';
+/* Plus imports for other components in your app. */
+
+/* Include the base styles for Angular Material core. We include this here so that you only */
+/* have to load a single css file for Angular Material in your app.*/
+@include mat-core();
+
+/* Define the palettes for your theme using the Material Design palettes available in palette.scss */
+/* (imported above). For each palette, you can optionally specify a default, lighter, and darker */
+/* hue. */
+$unicorn-app-primary: mat-palette($mat-blue-grey);
+$unicorn-app-accent:  mat-palette($mat-amber, A200, A100, A400);
+
+/* The warn palette is optional (defaults to red).*/
+$unicorn-app-warn: mat-palette($mat-deep-orange);
+
+/* Create the theme object (a Sass map containing all of the palettes).*/
+$unicorn-app-theme: mat-light-theme($unicorn-app-primary, $unicorn-app-accent, $unicorn-app-warn);
+
+/* Include theme styles for core and each component used in your app.*/
+/* Alternatively, you can import and @include the theme mixins for each component */
+/* that you are using. */
+@include angular-material-theme($unicorn-app-theme);
+
+.m2app-dark {
+  $dark-primary: mat-palette($mat-pink, 700, 500, 900);
+  $dark-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+  $dark-warn:    mat-palette($mat-deep-orange);
+
+  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+  @include angular-material-theme($dark-theme);
+}
+```
+
+Now import the Material fonts and icons as well as the unicorn-app-theme in apps/ourwebsite1_com-www/client1/src/styles.scss and set the body margin and font family:
+
+```javascript
+@import 'themes/unicorn-app-theme';
+//@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css'; // Alternatively, used a prebuilt theme
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+...
+```
+
+###Routing
+
+See also 'Refactor Routes to a Routing Module' at https://angular.io/docs/ts/latest/tutorial/toh-pt5.html
+
+If the file does not yet exist, create apps/ourwebsite1_com-www/client1/src/app/app-routing.module.ts with the following content:
+
+```javascript
+import { NgModule }             from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ],
+  providers: []
+})
+
+export class AppRoutingModule {}
+```
+
+Import the AppRoutingModule in apps/ourwebsite1_com-www/client1/src/app/app.module.ts:
+
+```javascript
+...
+import { AppRoutingModule } from './app-routing.module';
+...
+@NgModule({
+  ...
+  imports: [
+           ...
+           AppRoutingModule
+         ]
+  ...
+})
+...
+```
+
+Serving the application will fail, as we have not defined a default route.
+
+***NOTE:***
+First we set the default extension of our stylesheets from css to scss, by running the following command from apps/ourwebsite1_com-www/client1:
+
+```javascript
+ng set defaults.styleExt scss
+```
+
+Let's generate a Home component as our default route, from within the project directory apps/ourwebsite1_com-www/client1.
+
+```javascript
+ng generate component home
+```
+
+Change the content of apps/ourwebsite1_com-www/client1/home/home.component.html to:
+
+```javascript
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    Sidenav
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+
+    {{title}}
+
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+  </md-toolbar>
+
+  <div class="app-content">
+
+    <md-card>
+      <button md-button>FLAT</button>
+      <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
+      <button md-raised-button color="primary">PRIMARY RAISED</button>
+      <button md-raised-button color="accent">ACCENT RAISED</button>
+    </md-card>
+
+    <md-card>
+      <md-checkbox>Unchecked</md-checkbox>
+      <md-checkbox [checked]="true">Checked</md-checkbox>
+      <md-checkbox [indeterminate]="true">Indeterminate</md-checkbox>
+      <md-checkbox [disabled]="true">Disabled</md-checkbox>
+    </md-card>
+
+    <md-card>
+      <md-radio-button name="symbol">Alpha</md-radio-button>
+      <md-radio-button name="symbol">Beta</md-radio-button>
+      <md-radio-button name="symbol" disabled>Gamma</md-radio-button>
+    </md-card>
+
+    <md-card class="app-input-section">
+      <input mdInput placeholder="First name" />
+
+      <input mdInput #nickname placeholder="Nickname" maxlength="50" />
+        <md-hint align="end">
+          {{nickname.characterCount}} / 50
+        </md-hint>
+
+      <input mdInput />
+        <md-placeholder>
+          <i class="material-icons app-input-icon">android</i> Favorite phone
+        </md-placeholder>
+
+      <input mdInput placeholder="Motorcycle model" />
+        <span md-prefix>
+          <i class="material-icons app-input-icon">motorcycle</i>
+          &nbsp;
+        </span>
+
+    </md-card>
+
+    <md-card>
+      <md-list class="app-list">
+        <md-list-item *ngFor="let food of foods">
+          <h3 md-line>{{food.name}}</h3>
+          <p md-line class="demo-secondary-text">{{food.rating}}</p>
+        </md-list-item>
+      </md-list>
+    </md-card>
+
+    <md-card>
+      <md-spinner class="app-spinner"></md-spinner>
+      <md-spinner color="accent" class="app-spinner"></md-spinner>
+    </md-card>
+
+    <md-card>
+      <label>
+        Indeterminate progress-bar
+        <md-progress-bar
+            class="app-progress"
+            mode="indeterminate"
+            aria-label="Indeterminate progress-bar example"></md-progress-bar>
+      </label>
+
+      <label>
+        Determinate progress bar - {{progress}}%
+        <md-progress-bar
+            class="app-progress"
+            color="accent"
+            mode="determinate"
+            [value]="progress"
+            aria-label="Determinate progress-bar example"></md-progress-bar>
+      </label>
+    </md-card>
+
+    <md-card>
+      <md-tab-group>
+        <md-tab label="Earth">
+          <p>EARTH</p>
+        </md-tab>
+        <md-tab label="Fire">
+          <p>FIRE</p>
+        </md-tab>
+      </md-tab-group>
+    </md-card>
+
+    <md-card>
+      <md-icon>build</md-icon>
+    </md-card>
+
+    <md-card>
+      <button md-button [md-menu-trigger-for]="menu">
+        MENU
+      </button>
+    </md-card>
+
+    <md-menu #menu="mdMenu">
+      <button md-menu-item>Lemon</button>
+      <button md-menu-item>Lime</button>
+      <button md-menu-item>Banana</button>
+    </md-menu>
+
+    <md-card>
+      <p>Last dialog result: {{lastDialogResult}}</p>
+      <button md-raised-button (click)="openDialog()">DIALOG</button>
+      <button md-raised-button (click)="showSnackbar()">SNACKBAR</button>
+    </md-card>
+
+  </div>
+
+</md-sidenav-container>
+
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button md-fab><md-icon>check circle</md-icon></button>
+</span>
+```
+
+And also change the content of apps/ourwebsite1_com-www/client1/home/home.component.scss to:
+
+```javascript
+md-sidenav-layout.m2app-dark {
+  background: black;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.app-content md-card {
+  margin: 20px;
+}
+
+.app-sidenav {
+  padding: 10px;
+  min-width: 100px;
+}
+
+.app-content md-checkbox {
+  margin: 10px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+.app-input-icon {
+  font-size: 16px;
+}
+
+.app-list {
+  border: 1px solid rgba(0,0,0,0.12);
+  width: 350px;
+  margin: 20px;
+}
+
+.app-progress {
+  margin: 20px;
+}
+```
+
+Type the following parts into apps/ourwebsite1_com-www/client1/src/app/home/home.component.ts
+
+```javascript
+import { Component, OnInit, Optional } from '@angular/core';
+import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
+...
+export class HomeComponent implements OnInit {
+  isDarkTheme: boolean = false;
+  lastDialogResult: string;
+
+  foods: any[] = [
+    {name: 'Pizza', rating: 'Excellent'},
+    {name: 'Burritos', rating: 'Great'},
+    {name: 'French fries', rating: 'Pretty good'},
+  ];
+
+  progress: number = 0;
+
+  constructor(private _dialog: MdDialog, private _snackbar: MdSnackBar) {
+    // Update the value for the progress-bar on an interval.
+    setInterval(() => {
+      this.progress = (this.progress + Math.floor(Math.random() * 4) + 1) % 100;
+    }, 200);
+  }
+
+  ngOnInit() {
+  }
+
+  openDialog() {
+    let dialogRef = this._dialog.open(DialogContent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.lastDialogResult = result;
+    })
+  }
+
+  showSnackbar() {
+    this._snackbar.open('YUM SNACKS', 'CHEW');
+  }
+
+}
+
+@Component({
+  template: `
+    <p>This is a dialog</p>
+    <p>
+      <label>
+        This is a text box inside of a dialog.
+        <input #dialogInput>
+      </label>
+    </p>
+    <p> <button md-button (click)="dialogRef.close(dialogInput.value)">CLOSE</button> </p>
+  `,
+})
+export class DialogContent {
+  constructor(@Optional() public dialogRef: MdDialogRef<DialogContent>) { }
+}
+```
+
+Finally, update apps/ourwebsite1_com-www/client1/src/app/app.module.ts as follows:
+
+```javascript
+...
+import { HomeComponent, DialogContent } from './home/home.component';
+...
+@NgModule({
+  ...
+  declarations: [
+    AppComponent,
+    HomeComponent, 
+    DialogContent
+  ],
+  entryComponents: [DialogContent],
+  ...
+})
+...
+```
+
+NOTE: Placing components into the entryComponents portion of the NgModule declaration will allow Angular to compile those components into component factories and therefore allow the component resolver to add them to the internal map used for component resolution.
+
+SEE ALSO: https://github.com/angular/material2 FOR MORE MATERIAL 2 ANGULAR COMPONENTS
+
+Replace the default HTML in apps/ourwebsite1_com-www/client1/src/app/app.component.html to now the router outlet:
+
+```javascript
+<router-outlet></router-outlet>
+```
+
+Now in src/app/app-routing.module.ts define one route:
+
+```javascript
+...
+import { HomeComponent } from './home/home.component';
+...
+const routes: Routes = [
+  { path: '', component: HomeComponent }
+];
+...
+```
+
+Build the application, from apps/ourwebsite1_com-www/client1/ run:
+
+```javascript
+ng build
+```
+
+Now you should be able to serve the website, go to apps/ourwebsite1_com-www/ and run:
+
+```javascript
+node server
+```
+
+The website will automatically open the Home page, as the route of http://localhost:8000 is ''.
+
+You should see a page full of Material 2 Design elements (i.e. buttons and form elements such as input fields and checkboxes), in our custom themed colors.
+
+
+
+
