@@ -10,13 +10,20 @@ import { AppComponent } from './app.component';
 import { HomeComponent, DialogContent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { SearchListComponent } from './search-list/search-list.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
+import { DataService } from './services/data.service';
+import { StoreComponent } from './store/store.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DialogContent,
-    AboutComponent
+    AboutComponent,
+    SearchListComponent,
+    PaginationComponent,
+    StoreComponent
   ],
   entryComponents: [DialogContent],
   imports: [
@@ -29,7 +36,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
       apiKey: 'AIzaSyBJa7gl2Qf4grJI2--AXdptakh_6YwOTmw'
     })    
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

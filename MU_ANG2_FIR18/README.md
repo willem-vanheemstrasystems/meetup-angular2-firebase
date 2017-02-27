@@ -1619,7 +1619,7 @@ Starts a local web server to serve the Angular 2 application. It refreshes the p
 
 When everything works as expected, you should see your first Google Map created with angular2-google-maps!
 
-#REST
+#Search List
 
 Based on 'Angular2 and Rxjs : a simple paginated list with search field' at https://blog.bouzekri.net/2016-05-15-angular2-rxjs-simple-paginated-list-with-search-field
 
@@ -1627,3 +1627,388 @@ See updated version at https://jbouzekri.github.io/angular-search-list/
 
 with the code at https://github.com/jbouzekri/angular-search-list
 
+Lets start by generating a component called search-list in apps/ourwebsite1_com-www/client1:
+
+```javascript
+ng generate component search-list
+```
+Create a new folder 'services' in apps/ourwebsite1_com-www/client1:
+
+```javascript
+cd apps/ourwebsite1_com-www/client1/src/app
+mkdir services
+```
+
+Next generate a service called data in apps/ourwebsite1_com-www/client1:
+
+```javascript
+ng generate service services/data
+```
+
+Create a new folder 'models' in apps/ourwebsite1_com-www/client1/src/app:
+
+```javascript
+cd apps/ourwebsite1_com-www/client1/src/app
+mkdir models
+```
+
+Inside the folder apps/ourwebsite1_com-www/client1/src/app/models create a new file called ***data.model.ts*** with the following content:
+
+```javascript
+export class Data {
+  constructor(public id: number, public title: string) {};
+}
+```
+
+Inside the folder apps/ourwebsite1_com-www/client1/src/app/services create a file called ***data.base.ts***, with the following content:
+
+```javascript
+import { DataModel } from "../models/data.model";
+
+// Extract from imdb
+export const DataBase: DataModel[] = [
+  new DataModel(1, "She Made Them Do It"),
+  new DataModel(2, "Poka stanitsa spit"),
+  new DataModel(3, "Memory Lane"),
+  new DataModel(4, "No Through Road"),
+  new DataModel(5, "Malcolm & Eddie"),
+  new DataModel(6, "Violet"),
+  new DataModel(7, "Last Call with Carson Daly"),
+  new DataModel(8, "The Yellow Badge of Courage"),
+  new DataModel(9, "Doctor Who: The Companion Chronicles"),
+  new DataModel(10, "The Feed"),
+  new DataModel(11, "Emmerdale Farm"),
+  new DataModel(12, "The Jeselnik Offensive"),
+  new DataModel(13, "Zero Minute"),
+  new DataModel(14, "Nina and the Neurons Go Inventing"),
+  new DataModel(15, "Dynamo"),
+  new DataModel(16, "Ammattimies"),
+  new DataModel(17, "Happening Now"),
+  new DataModel(18, "The O'Reilly Factor"),
+  new DataModel(19, "How Do I Look?"),
+  new DataModel(20, "Electric Playground"),
+  new DataModel(21, "Commissaire Laviolette"),
+  new DataModel(22, "The Young Doctors"),
+  new DataModel(23, "Married with Children"),
+  new DataModel(24, "Le clan Pasquier"),
+  new DataModel(25, "The Gale Storm Show: Oh! Susanna"),
+  new DataModel(26, "Serangoon Road"),
+  new DataModel(27, "The Young Doctors"),
+  new DataModel(28, "Family Matters"),
+  new DataModel(29, "Motormouth"),
+  new DataModel(30, "Antiques Roadshow"),
+  new DataModel(31, "Wasak"),
+  new DataModel(32, "Prime News"),
+  new DataModel(33, "May bukas pa"),
+  new DataModel(34, "The Hollywood Squares"),
+  new DataModel(35, "Els matins a TV3"),
+  new DataModel(36, "Your Favorite Story"),
+  new DataModel(37, "Los desayunos de TVE"),
+  new DataModel(38, "The Small House at Allington"),
+  new DataModel(39, "Minute to Win It"),
+  new DataModel(40, "El ministerio del tiempo"),
+  new DataModel(41, "The Fabulous Picture Show"),
+  new DataModel(42, "Black Jack"),
+  new DataModel(43, "Cutting Edge"),
+  new DataModel(44, "Judge Joe Brown"),
+  new DataModel(45, "All Saints"),
+  new DataModel(46, "Quincy M.E."),
+  new DataModel(47, "Neighbours"),
+  new DataModel(48, "Chistoserdechnoe priznanie"),
+  new DataModel(49, "John Halifax, Gentleman"),
+  new DataModel(50, "Paul Flynn"),
+  new DataModel(51, "Texas Monthly Talks"),
+  new DataModel(52, "David Copperfield"),
+  new DataModel(53, "Obruchalnoe koltso"),
+  new DataModel(54, "Rock Macabre"),
+  new DataModel(55, "The Tonight Show Starring Johnny Carson"),
+  new DataModel(56, "Daesh molodezh"),
+  new DataModel(57, "Wicked Wicked Games"),
+  new DataModel(58, "Music Fair"),
+  new DataModel(59, "Flip My Food with Chef Jeff"),
+  new DataModel(60, "Un hombre solo"),
+  new DataModel(61, "My S Rostova"),
+  new DataModel(62, "Zwei bei Kallwass"),
+  new DataModel(63, "Last Call with Carson Daly"),
+  new DataModel(64, "Jimmy Kimmel Live!"),
+  new DataModel(65, "Plebs"),
+  new DataModel(66, "Lonelygirl15"),
+  new DataModel(67, "Plus belle la vie"),
+  new DataModel(68, "Watch What Happens: Live"),
+  new DataModel(69, "WRAL Murder Trials"),
+  new DataModel(70, "Secrets of the Bible"),
+  new DataModel(71, "Six O'Clock News"),
+  new DataModel(72, "Jackie Gleason: American Scene Magazine"),
+];
+```
+
+Create a file in apps/ourwebsite1_com-www/client1/src/app/services called ***list-result.interface.ts*** with the following content:
+
+```javascript
+export interface ListResult<T> {
+  items: T[]
+
+  total: number
+}
+```
+
+Now change the content of the file apps/ourwebsite1_com-www/client1/src/app/services/data.service.ts to the following:
+
+```javascript
+import { ListResult } from "./list-result.interface";
+import { DataBase } from "./data.base";
+
+@Injectable()
+export class DataService {
+  data: DataModel[] = DataBase;
+
+  constructor() { }
+
+  list(search: string = null, page: number = 1, limit: number = 10): Observable<ListResult<DataModel>> {
+    let dataResult = this.data.filter(function(data: DataModel) {
+        return (search) ? data.title.toLowerCase().indexOf(search) !== -1 : true;
+    });
+
+    let dataResultPage = dataResult.slice((page - 1) * limit, page * limit);
+    return Observable.of({total: dataResult.length, items: dataResultPage}).delay(100);
+  }
+
+}
+```
+
+The content of the file apps/ourwebsite1_com-www/client1/src/app/search-list/search-list.component.ts should be:
+
+```javascript
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Subject, Observable } from "rxjs";
+
+import { DataService } from "../services/data.service";
+import { DataModel } from "../models/data.model";
+
+@Component({
+  selector: 'app-search-list',
+  templateUrl: './search-list.component.html',
+  styleUrls: ['./search-list.component.scss']
+})
+export class SearchListComponent implements OnInit {
+
+  total$: Observable<number>;
+  items$: Observable<DataModel[]>;
+
+  terms: string = "";
+  private searchTermStream = new Subject<string>();
+
+  page: number = 1;
+  private pageStream = new Subject<number>();
+
+  constructor(protected dataService: DataService) { }
+
+  ngOnInit() {
+    const searchSource = this.searchTermStream
+      .debounceTime(1000)
+      .distinctUntilChanged()
+      .map(searchTerm => {
+        this.terms = searchTerm;
+        return {search: searchTerm, page: 1}
+      });
+
+    const pageSource = this.pageStream.map(pageNumber => {
+      this.page = pageNumber;
+      return {search: this.terms, page: pageNumber}
+    });
+
+    const source = pageSource
+      .merge(searchSource)
+      .startWith({search: this.terms, page: this.page})
+      .switchMap((params: {search: string, page: number}) => {
+        return this.dataService.list(params.search, params.page)
+      })
+      .share();
+
+    this.total$ = source.pluck('total');
+    this.items$ = source.pluck('items');
+  }
+
+  search(terms: string) {
+    this.searchTermStream.next(terms)
+  }
+
+  goToPage(page: number) {
+    this.pageStream.next(page)
+  }
+
+}
+```
+
+And search-list.component.html should be as follows:
+
+```javascript
+<form (submit)="search(term.value)">
+  <div class="input-group input-group-sm" style="margin-bottom: 10px;">
+    <input #term (keyup)="search(term.value)" [value]="terms" class="form-control" placeholder="Search" autofocus>
+    <div class="input-group-btn">
+      <button type="submit" class="btn btn btn-default btn-flat"><i class="fa fa-search"></i></button>
+    </div>
+  </div>
+</form>
+
+<p>Results: {{ total$ | async }}</p>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items$ | async">
+      <td>{{ item.id }}</td>
+      <td>{{ item.title }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pagination [total]="total$ | async" [page]="page" (goTo)="goToPage($event)"></app-pagination>
+```
+
+As you can see from the above HTML, we are in need ofr a pagination component, so let's generate one now.
+
+In apps/ourwebsite1_com-www/client1 generate a component called pagination:
+
+```javascript
+cd apps/ourwebsite1_com-www/client1/src/app
+mkdir shared
+cd ../../
+ng generate component shared/pagination
+```
+
+Change the content of apps/ourwebsite1_com-www/client1/src/app/pagination/pagination.component.ts to:
+
+```javascript
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-pagination',
+  templateUrl: './pagination.component.html',
+  styleUrls: ['./pagination.component.scss']
+})
+export class PaginationComponent implements OnInit {
+
+  @Input()
+  total: number = 0;
+
+  @Input()
+  page: number = 1;
+
+  @Output()
+  goTo: EventEmitter<number> = new EventEmitter<number>();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  totalPages() {
+    return Math.ceil(this.total / 10);
+  }
+
+  pagesRange() {
+    return this.range(1, this.totalPages() + 1);
+  }
+
+  prevPage() {
+    return Math.max(1, this.page - 1);
+  }
+
+  nextPage() {
+    return Math.min(this.totalPages(), this.page + 1);
+  }
+
+  pageClicked(page: number) {
+    this.goTo.next(page);
+  }
+
+  range(start, stop, step=1){
+    if (!stop) { start=0;stop=start; }
+    return Array.from(new Array(Number((stop-start)/step)), (x,i) => start+ i*step)
+  }
+
+}
+```
+
+And pagination.component.html should be:
+
+```javascript
+<ul *ngIf="totalPages() > 1" class="pagination pagination-sm no-margin pull-right">
+  <li *ngIf="page != 1"><a (click)="pageClicked(prevPage())">«</a></li>
+  <li *ngFor="let p of pagesRange()"><a (click)="pageClicked(p)">{{p}}</a></li>
+  <li *ngIf="totalPages() > page"><a (click)="pageClicked(nextPage())">»</a></li>
+</ul>
+```
+
+Make sure the file apps/ourwebsite1_com-www/client1/src/app/app.module.ts contains this:
+
+```javascript
+...
+import { SearchListComponent } from './search-list/search-list.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
+import { DataService } from './services/data.service';
+...
+@NgModule({
+  declarations: [
+    ...
+    SearchListComponent,
+    PaginationComponent
+  ],
+  ...
+  providers: [DataService],
+  ...
+})
+...
+```
+
+Lastly we'll add a ***store*** page to our web site to show our search list:
+
+Inside apps/ourwebsite1_com-www/client1 run:
+
+```javascript
+ng generate component store
+```
+
+Add the store page to the file apps/ourwebsite1_com-www/client1/src/app/app-routing.module.ts:
+
+```javascript
+...
+import { StoreComponent } from './store/store.component';
+...
+const routes: Routes = [
+  ...
+  { path: 'store', component: StoreComponent } 
+];
+...
+```
+
+Add the reference to the search-list component in apps/ourwebsite1_com-www/client1/src/app/store/store.comonent.html:
+
+```javascript
+<app-search-list></app-search-list>
+```
+
+Now build the application with:
+
+```javascript
+ng build
+```
+
+Then serve the website:
+
+```javascript
+ng serve
+```
+
+And navigate to the store page at http://localhost:4200/store
+
+You should be able to search a list of items an page through them.
+
+TO DO: Style the Store page...
