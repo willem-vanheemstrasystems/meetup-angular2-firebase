@@ -1995,6 +1995,28 @@ Add the reference to the search-list component in apps/ourwebsite1_com-www/clien
 <app-search-list></app-search-list>
 ```
 
+Create a menu item for the store page in apps/ourwebsite1_com-www/client1/app/app.component.html:
+
+```javascript
+...
+    </md-nav-list> 
+       ...
+<!--      <ms-sidenav-item class="sidenav-item"> -->
+        <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="/store">
+          <div class="md-list-item">
+            <div class="md-list-text"></div>
+            <md-icon role="img" class="material-icons" aria-label="store">store</md-icon>
+            <span class="sidenav-item-name fade-in-on-icon-sidenav">Store</span>
+            <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+          </div>
+          <div class="md-ripple-background"></div>
+        </a>
+<!--      </ms-sidenav-item>-->
+        ...
+    </md-nav-list> 
+...
+```
+
 Now build the application with:
 
 ```javascript
