@@ -5,7 +5,7 @@ exports.install = function() {
 
 	// Creates routes
 	F.restful('/api/users/', ['*User'], json_query, json_read, json_save, json_delete);
-
+	F.restful('/api/products/', ['*Product'], json_query, json_read, json_save, json_delete);
 	// Is same as:
 	// F.route('/api/users/',      json_query,   ['*User']);
 	// F.route('/api/users/{id}/', json_read,    ['*User']);
