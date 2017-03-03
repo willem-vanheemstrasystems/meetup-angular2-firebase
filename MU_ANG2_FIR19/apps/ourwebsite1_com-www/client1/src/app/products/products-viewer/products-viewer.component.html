@@ -1,0 +1,7 @@
+<md-icon role="img" class="material-icons" aria-label="apps">apps</md-icon>
+<span class="display-1">Products</span><br/>
+<app-products-list
+  [products]="products"
+  (viewProduct)="viewProduct($event)"
+  (editProduct)="editProduct($event)">
+</app-products-list>
