@@ -2053,6 +2053,83 @@ cd apps/ourwebsite1_com-www/client1
 ng generate service services/products
 ```
 
+Change the content of the file apps/ourwebsite1_com-www/client1/src/app/services/products.service.ts to:
+
+```javascript
+import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+
+import "rxjs/add/operator/map";
+
+import { Product } from '../models/product.model';
+
+@Injectable()
+export class ProductsService {
+
+  private baseUrl: string = 'http://localhost:8001/api';
+
+	requestOptions: RequestOptions = new RequestOptions({
+		headers: new Headers({ 'Content-Type': 'application/json' })
+	});  
+
+  constructor(private http: Http) { }
+
+  getAll(offset: number = 0, limit: number = 2): Observable<ProductsService> {
+    return this.http
+      .get(`${this.baseUrl}/products/?offset=${offset}&limit=${limit}`)
+      .map(response => response.json())
+      .map(results => this.getList(results));
+  }
+
+  get(productId: number): Observable<Product> {
+    return this.http.get(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(this.extractData).catch(this.handleError);
+  }
+
+  insert(product: Product): Observable<Product> {
+    return this.http.post(`${this.baseUrl}/products/`, JSON.stringify(product), this.requestOptions).map(res => res.json()).catch(this.handleError);
+  }
+
+	update(product: Product): Observable<Product> {
+		return this.http.put(`${this.baseUrl}/products/` + encodeURIComponent(product.id.toString()),
+			JSON.stringify(product), this.requestOptions).map(res => res.json()).catch(this.handleError);	
+	}
+
+	delete(productId: number): Observable<Product> {
+		return this.http.delete(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(res => res.json()).catch(this.handleError);
+	}
+
+  getList(data): ProductsService {
+		// room for additional filtering
+		return data;
+	}
+
+	/**
+	 * Pick the array that belongs to the key 'products'
+	 * 
+	 * e.g. { products:[our data is in here] }
+	 */
+	private extractData(res: Response) {
+		let body = res.json();
+		//console.log(body.products);
+		return body.products || {};
+	}
+
+	/**
+	 * Handle error
+	 */
+	private handleError(error: any) {
+		// In a real world app, we might use a remote logging infrastructure
+    	// We'd also dig deeper into the error to get a better message
+    	let errMsg = (error.message) ? error.message :
+      	error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    	console.error(errMsg); // log to console instead
+    	return Observable.throw(errMsg);
+	}
+
+}
+```
+
 As our application needs to know the attributes of a product, create a model of a product as follows:
 
 ```javascript
@@ -2350,30 +2427,68 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 import { ProductsListComponent } from '../shared/products-list/products-list.component';
-..
+
 @Component({
-	...
-	providers: [ ProductsService ]
+  selector: 'app-products-viewer',
+  templateUrl: './products-viewer.component.html',
+  styleUrls: ['./products-viewer.component.scss'],
+	providers: [ ProductsService ]  
 })
-...
 export class ProductsViewerComponent implements OnInit {
-  ...
+
+  count: number = 0;
+  offset: number = 0;
+  limit: number = 2; // choose an appropriate number
 	products: Product[];
-  ...
+  loading: boolean = false;
+  failed: boolean = false;
+
   constructor(
 		private router: Router,
 		private route: ActivatedRoute,    
 		private productsService: ProductsService
   ) { }
-  ...
+
+  ngOnInit() {
+		let observable = this.route.params
+		  .map(params => params['nr'])
+			.map(pageNr => (pageNr - 1) * this.limit);
+		observable.subscribe(offset => this.offset = offset);
+		observable.share().subscribe(offset => this.getAll(offset, this.limit));
+  }
+
+	getAll(offset: number, limit: number) {
+	  console.log("getAll - offset = ", offset, " limit = ", limit);
+		this.products = [];
+		this.loading = true;
+		this.failed = false;
+		this.productsService.getAll(offset, limit).subscribe(result => {
+			//this.products = result.products;
+			//this.count = result.count;
+	    console.log("getAll - result = ", result);
+	    this.products = result['products'];
+	    this.count = result['count'];
+	    console.log("getAll - this.products = ", result['products']);
+			this.loading = false;
+		}, () => {
+			this.loading = false;
+			this.failed = true;
+		});
+	}
+
 	viewProduct(productId: number) {
 		this.router.navigate(['product', productId]);
 	}
-  ...
+
 	editProduct(productId: number) {
 		this.router.navigate(['product', productId, 'edit']);
 	}
-  ...
+
+  onPageChange(offset) {
+    this.offset = offset;
+    this.router.navigate(['/page', (offset / this.limit) + 1]);
+  }
+
 }
 ```
 
@@ -2420,3 +2535,37 @@ ng serve
 #Products List
 
 // to be continued...
+
+
+
+#TotalJS
+
+To start the TotalJS server first navigate to the website folder (e.g. ourwebsite1_com-www), then run the following command (you can use the default port 8000, or append a port of your choice as demonstrated here):
+
+```javascript
+node server.js 8001
+
+====================================================
+PID         : 7288
+Node.js     : v6.2.1
+Total.js    : v2.4.0
+OS          : win32 10.0.14393
+====================================================
+Name        : Total.js
+Version     : 1.0.0
+Author      : Your company name
+Date        : 2017-03-03 19:36:42
+Mode        : debug
+====================================================
+
+http://127.0.0.1:8001/
+```
+
+Now you can connect to the REST API with:
+
+```javascript
+http://localhost:8001/api/
+```
+
+NOTE: Do not forget to run ```ng build``` inside the /client1 directory to have the latest version of the Angular app.
+
