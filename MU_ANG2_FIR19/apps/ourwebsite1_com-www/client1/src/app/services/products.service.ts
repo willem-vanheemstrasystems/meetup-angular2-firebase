@@ -96,7 +96,7 @@ export class ProductsService {
     console.log("ProductsService - list, limit = ", limit);						
 
     let productsResult = products.filter(function(product: ProductModel) {
-       return (search) ? product.title.toLowerCase().indexOf(search) !== -1 : true;
+       return (search) ? product.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 : true;
     });
 
     let productsResultPage = productsResult.slice((page - 1) * limit, page * limit);
