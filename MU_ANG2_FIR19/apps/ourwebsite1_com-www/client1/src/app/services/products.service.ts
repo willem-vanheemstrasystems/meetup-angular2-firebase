@@ -14,7 +14,11 @@ import { ProductsBase } from "./products.base";
 export class ProductsService {
 
 //START: ADDED
-  products: ProductModel[] = ProductsBase;
+//ORIGINAL  products: ProductModel[] = ProductsBase;  // Takes the products from the static file products.base.ts
+
+// products: ProductModel[] = [
+//   new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")
+// ]; // Make this dynamic, so it get GET from a REST API
 //END: ADDED
 
   private baseUrl: string = 'http://localhost:8001/api';
@@ -24,6 +28,15 @@ export class ProductsService {
 	});  
 
   constructor(private http: Http) { }
+
+//START: ADDED
+  // getAllProducts(): Observable<ProductModel> {
+	// 	return this.http
+	// 	  .get(`${this.baseUrl}/products/?offset=${offset}&limit=${limit}`)
+	// 		.map(response => response.json())
+	// 		.map(results => this.getList(results));
+	// }
+//END: ADDED
 
   getAll(offset: number = 0, limit: number = 2): Observable<ProductsService> {
     return this.http
@@ -50,24 +63,39 @@ export class ProductsService {
 	}
 
   getList(data): ProductsService {
+		console.log("ProductsService - getList, data = ", data);
+		// turn the generic data Object into a productModel
+		// let products = new Array<ProductModel>();
+    // for(let i=0; i<data.length; i++) {
+		// 	console.log("ProductsService - getList, data[", i,"].id = ", data[i].id);
+    //   products[i] = new ProductModel(data[i].id, "She Made Them Do It", "http://www.imdb.com", "Completed");
+		// }
+
+    // data = new Array<ProductModel[]>();
+    // data[0] = [new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")];
+
 		// room for additional filtering
 		return data;
 	}
 
 //START: ADDED
-  list(search: string = null, page: number = 1, limit: number = 10): Observable<ProductsListResult<ProductModel>> {
-    let productsResult = this.products.filter(function(product: ProductModel) {
-        return (search) ? product.title.toLowerCase().indexOf(search) !== -1 : true;
-    });
+  // list(search: string = null, page: number = 1, limit: number = 10): Observable<ProductsListResult<ProductModel>> {
+  //   let productsResult = this.products.filter(function(product: ProductModel) {
+  //       return (search) ? product.title.toLowerCase().indexOf(search) !== -1 : true;
+  //   });
 
-    let productsResultPage = productsResult.slice((page - 1) * limit, page * limit);
-    return Observable.of({totalProducts: productsResult.length, products: productsResultPage}).delay(100);
-  }
+  //   let productsResultPage = productsResult.slice((page - 1) * limit, page * limit);
 
-  list2(search: string = null, page: number = 1, limit: number = 10): Observable<ProductsListResult<ProductModel>> {
-    console.log("ProductsService - list2, this.products = ", this.products);
+  //   return Observable.of({totalProducts: productsResult.length, products: productsResultPage}).delay(100);
+  // }
 
-    let productsResult = this.products.filter(function(product: ProductModel) {
+  list(products: ProductModel[], search: string = null, page: number = 1, limit: number = 10): Observable<ProductsListResult<ProductModel>> {
+    console.log("ProductsService - list, products = ", products);
+    console.log("ProductsService - list, search = ", search);
+    console.log("ProductsService - list, page = ", page);
+    console.log("ProductsService - list, limit = ", limit);						
+
+    let productsResult = products.filter(function(product: ProductModel) {
        return (search) ? product.title.toLowerCase().indexOf(search) !== -1 : true;
     });
 

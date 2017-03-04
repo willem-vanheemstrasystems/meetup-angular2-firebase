@@ -57,6 +57,7 @@ export class ProductsListComponent implements OnInit {
 		) { }
 
   ngOnInit() {
+		console.log("ProductsListComponent - ngOnInit(), this.products", this.products);
 //START: SEARCH-LIST		
 //    const searchSource = this.searchTermStream
 //      .debounceTime(1000)
@@ -67,12 +68,18 @@ export class ProductsListComponent implements OnInit {
 //      });
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
+
+    // ADDED TO TEMPORARILY OVERWRITE THE products
+		// this.products = [
+		//   new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")
+		// ];
+
     const searchSourceProducts = this.searchTermStream
       .debounceTime(1000)
       .distinctUntilChanged()
       .map(searchTerm => {
         this.terms = searchTerm;
-        return {search: searchTerm, page: 1}
+        return {products: this.products, search: searchTerm, page: 1}
       });
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
@@ -84,7 +91,7 @@ export class ProductsListComponent implements OnInit {
 //START: PRODUCTS-LIST
     const pageSourceProducts = this.pageStream.map(pageNumber => {
 			this.page = pageNumber;
-			return {search: this.terms, page: pageNumber}
+			return {products: this.products, search: this.terms, page: pageNumber}
 		});
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
@@ -99,9 +106,9 @@ export class ProductsListComponent implements OnInit {
 //START: PRODUCTS-LIST
     const sourceProducts = pageSourceProducts
 		  .merge(searchSourceProducts)
-      .startWith({search: this.terms, page: this.page})
-			.switchMap((params: {search: string, page: number}) => {
-				return this.productsService.list2()
+      .startWith({products: this.products, search: this.terms, page: this.page})
+			.switchMap((params: {products: ProductModel[], search: string, page: number}) => {
+				return this.productsService.list(params.products, params.search, params.page)
 			})
 			.share();
 //END : PRODUCTS-LIST

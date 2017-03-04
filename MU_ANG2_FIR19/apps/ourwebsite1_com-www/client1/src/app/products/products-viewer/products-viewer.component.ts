@@ -34,15 +34,20 @@ export class ProductsViewerComponent implements OnInit {
   }
 
 	getAll(offset: number, limit: number) {
-	  console.log("getAll - offset = ", offset, " limit = ", limit);
+	  console.log("ProductsViewerComponent - getAll, offset = ", offset, " limit = ", limit);
 		this.products = [];
 		this.loading = true;
 		this.failed = false;
 		this.productsService.getAll(offset, limit).subscribe(result => {
 			//this.products = result.products;
 			//this.count = result.count;
-	    console.log("getAll - result = ", result);
-	    this.products = result[0]; // ORIGINAL result['products'];
+	    console.log("ProductsViewerComponent - getAll - result = ", result);
+			// ADDED TO TEMPORARILY OVERWRITE THE products
+			this.products = [
+				new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")
+			];
+	    //ORIGINAL this.products = result[0]; // ORIGINAL result['products'];
+			console.log("ProductsViewerComponent - getAll - this.products = ", this.products);
 	    this.count = 70; // ORIGINAL result['count'];
 			this.loading = false;
 		}, () => {
