@@ -63,6 +63,19 @@ export class ProductsService {
     let productsResultPage = productsResult.slice((page - 1) * limit, page * limit);
     return Observable.of({totalProducts: productsResult.length, products: productsResultPage}).delay(100);
   }
+
+  list2(search: string = null, page: number = 1, limit: number = 10): Observable<ProductsListResult<ProductModel>> {
+    console.log("ProductsService - list2, this.products = ", this.products);
+
+    let productsResult = this.products.filter(function(product: ProductModel) {
+       return (search) ? product.title.toLowerCase().indexOf(search) !== -1 : true;
+    });
+
+    let productsResultPage = productsResult.slice((page - 1) * limit, page * limit);
+
+    return Observable.of({totalProducts: productsResult.length, products: productsResultPage}).delay(100);
+  }
+
 //END: ADDED
 
 	/**

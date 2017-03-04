@@ -1,6 +1,6 @@
 //START: PRODUCTS-LIST
 //import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import   {                    Input, Output, EventEmitter } from '@angular/core';
+import {                    Input, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from "../../../services/products.service";
 import { ProductModel } from '../../../models/product.model';
 //END: PRODUCTS-LIST
@@ -8,8 +8,8 @@ import { ProductModel } from '../../../models/product.model';
 //START: SEARCH-LIST
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Subject, Observable } from "rxjs";
-import { DataService } from "../../../services/data.service";
-import { DataModel } from "../../../models/data.model";
+//import { DataService } from "../../../services/data.service";
+//import { DataModel } from "../../../models/data.model";
 //END: SEARCH-LIST
 
 @Component({
@@ -35,8 +35,8 @@ export class ProductsListComponent implements OnInit {
 //END: PRODUCTS-LIST	
 
 //START: SEARCH-LIST
-  total$: Observable<number>;
-  items$: Observable<DataModel[]>;
+//  total$: Observable<number>;
+//  items$: Observable<DataModel[]>;
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
   totalProducts$: Observable<number>;
@@ -53,18 +53,18 @@ export class ProductsListComponent implements OnInit {
 
   constructor(
 		protected productsService: ProductsService,
-		protected dataService: DataService
+		//protected dataService: DataService
 		) { }
 
   ngOnInit() {
 //START: SEARCH-LIST		
-    const searchSource = this.searchTermStream
-      .debounceTime(1000)
-      .distinctUntilChanged()
-      .map(searchTerm => {
-        this.terms = searchTerm;
-        return {search: searchTerm, page: 1}
-      });
+//    const searchSource = this.searchTermStream
+//      .debounceTime(1000)
+//      .distinctUntilChanged()
+//      .map(searchTerm => {
+//        this.terms = searchTerm;
+//        return {search: searchTerm, page: 1}
+//      });
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
     const searchSourceProducts = this.searchTermStream
@@ -76,10 +76,10 @@ export class ProductsListComponent implements OnInit {
       });
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
-    const pageSource = this.pageStream.map(pageNumber => {
-      this.page = pageNumber;
-      return {search: this.terms, page: pageNumber}
-    });
+//    const pageSource = this.pageStream.map(pageNumber => {
+//      this.page = pageNumber;
+//      return {search: this.terms, page: pageNumber}
+//    });
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
     const pageSourceProducts = this.pageStream.map(pageNumber => {
@@ -88,26 +88,26 @@ export class ProductsListComponent implements OnInit {
 		});
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
-    const source = pageSource
-      .merge(searchSource)
-      .startWith({search: this.terms, page: this.page})
-      .switchMap((params: {search: string, page: number}) => {
-        return this.dataService.list(params.search, params.page)
-      })
-      .share();
+//    const source = pageSource
+//      .merge(searchSource)
+//      .startWith({search: this.terms, page: this.page})
+//      .switchMap((params: {search: string, page: number}) => {
+//        return this.dataService.list(params.search, params.page)
+//      })
+//      .share();
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
     const sourceProducts = pageSourceProducts
 		  .merge(searchSourceProducts)
       .startWith({search: this.terms, page: this.page})
 			.switchMap((params: {search: string, page: number}) => {
-				return this.productsService.list()
+				return this.productsService.list2()
 			})
 			.share();
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
-    this.total$ = source.pluck('total');
-    this.items$ = source.pluck('items');
+//    this.total$ = source.pluck('total');
+//    this.items$ = source.pluck('items');
 //END: SEARCH-LIST		
 //START: PRODUCTS-LIST
     this.totalProducts$ = sourceProducts.pluck('totalProducts');
