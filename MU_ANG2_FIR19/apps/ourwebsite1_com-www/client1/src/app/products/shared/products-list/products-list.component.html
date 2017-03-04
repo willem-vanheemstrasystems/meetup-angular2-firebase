@@ -21,6 +21,8 @@
           <th>Title</th>
           <th>Link</th>
           <th>Status</th>
+          <th>View</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +33,12 @@
             <a href="http://www.imdb.com" target="_blank">IMDB</a>
           </td>
           <td data-title="Status">Completed</td>
+          <td data-title="View">
+				    <button type="button" (click)="viewReportButton(report.id)">View</button>
+          </td>
+          <td data-title="Edit">
+				    <button type="button" (click)="editReportButton(report.id)">Edit</button>
+          </td>
         </tr>
       </tbody>
     </table>
