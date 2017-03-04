@@ -1,3 +1,37 @@
-<p>
-  products-list works!
-</p>
+  <form class="form-horizontal" role="form" (submit)="search(term.value)">
+    <div class="form-group">
+      <input type="text" #term (keyup)="search(term.value)" [value]="terms" class="form-control" id="searchInput1" required>
+      <span class="form-highlight"></span>
+      <span class="form-bar"></span>
+      <label class="search-label" for="searchInput1">Search</label>
+    </div>
+  </form>      
+
+  <p>Results: {{ totalProducts$ | async }}</p>
+
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+  <div class="table-responsive-vertical shadow-z-1">
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Link</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products$ | async ">
+          <td data-title="ID">{{ product.id }}</td>
+          <td data-title="Title">{{ product.title }}</td>
+          <td data-title="Link">
+            <a href="http://www.imdb.com" target="_blank">IMDB</a>
+          </td>
+          <td data-title="Status">Completed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

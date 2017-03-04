@@ -2062,7 +2062,7 @@ import { Observable } from 'rxjs/Rx';
 
 import "rxjs/add/operator/map";
 
-import { Product } from '../models/product.model';
+import { ProductModel } from '../models/product.model';
 
 @Injectable()
 export class ProductsService {
@@ -2143,7 +2143,7 @@ NOTE: The 'type NUL >> ' command creates a file on Windows, in this case the fil
 The content of the newly created file, apps/ourwebsite1_com-www/client1/src/app/models/product.model.ts, should be:
 
 ```javascript
-export class Product {
+export class ProductModel {
   constructor(
     public id: number,
     public title: string,
@@ -2167,7 +2167,7 @@ The content of the just created apps/ourwebsite1_com-www/client1/src/app/product
 
 ```javascript
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from '../../../models/product.model';
+import { ProductModel } from '../../../models/product.model';
 
 @Component({
   selector: 'app-products-list',
@@ -2424,7 +2424,7 @@ And add the code below to apps/ourwebsite1_com-www/client1/src/app/products/prod
 ...
 import { Component, OnInit, Renderer } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Product } from '../../models/product.model';
+import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 import { ProductsListComponent } from '../shared/products-list/products-list.component';
 

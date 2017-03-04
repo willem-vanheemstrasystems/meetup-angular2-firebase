@@ -4,10 +4,18 @@ import { Observable } from 'rxjs/Rx';
 
 import "rxjs/add/operator/map";
 
-import { Product } from '../models/product.model';
+import { ProductModel } from '../models/product.model';
+//START: ADDED
+import { ProductsListResult } from "./products-list-result.interface";
+import { ProductsBase } from "./products.base";
+//END: ADDED
 
 @Injectable()
 export class ProductsService {
+
+//START: ADDED
+  products: ProductModel[] = ProductsBase;
+//END: ADDED
 
   private baseUrl: string = 'http://localhost:8001/api';
 
@@ -24,20 +32,20 @@ export class ProductsService {
       .map(results => this.getList(results));
   }
 
-  get(productId: number): Observable<Product> {
+  get(productId: number): Observable<ProductModel> {
     return this.http.get(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(this.extractData).catch(this.handleError);
   }
 
-  insert(product: Product): Observable<Product> {
+  insert(product: ProductModel): Observable<ProductModel> {
     return this.http.post(`${this.baseUrl}/products/`, JSON.stringify(product), this.requestOptions).map(res => res.json()).catch(this.handleError);
   }
 
-	update(product: Product): Observable<Product> {
+	update(product: ProductModel): Observable<ProductModel> {
 		return this.http.put(`${this.baseUrl}/products/` + encodeURIComponent(product.id.toString()),
 			JSON.stringify(product), this.requestOptions).map(res => res.json()).catch(this.handleError);	
 	}
 
-	delete(productId: number): Observable<Product> {
+	delete(productId: number): Observable<ProductModel> {
 		return this.http.delete(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(res => res.json()).catch(this.handleError);
 	}
 
@@ -45,6 +53,17 @@ export class ProductsService {
 		// room for additional filtering
 		return data;
 	}
+
+//START: ADDED
+  list(search: string = null, page: number = 1, limit: number = 10): Observable<ProductsListResult<ProductModel>> {
+    let productsResult = this.products.filter(function(product: ProductModel) {
+        return (search) ? product.title.toLowerCase().indexOf(search) !== -1 : true;
+    });
+
+    let productsResultPage = productsResult.slice((page - 1) * limit, page * limit);
+    return Observable.of({totalProducts: productsResult.length, products: productsResultPage}).delay(100);
+  }
+//END: ADDED
 
 	/**
 	 * Pick the array that belongs to the key 'products'

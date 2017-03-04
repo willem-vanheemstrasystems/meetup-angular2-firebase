@@ -42,9 +42,8 @@ export class ProductsViewerComponent implements OnInit {
 			//this.products = result.products;
 			//this.count = result.count;
 	    console.log("getAll - result = ", result);
-	    this.products = result['products'];
-	    this.count = result['count'];
-	    console.log("getAll - this.products = ", result['products']);
+	    this.products = result[0]; // ORIGINAL result['products'];
+	    this.count = 70; // ORIGINAL result['count'];
 			this.loading = false;
 		}, () => {
 			this.loading = false;
