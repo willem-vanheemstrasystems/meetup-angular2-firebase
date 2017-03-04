@@ -1,0 +1,9 @@
+<div class="preloader-wrapper big active" *ngIf="loading">
+  <md-spinner class="app-spinner mat-spinner" mode="indeterminate" role="progressbar" _nghost-lsx-24="">
+      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100"><path _ngcontent-lsx-24="" d="M11.956013842547321,37.64463204709998A40,40 0 0,1 16.699923634951006,27.83911296716882"></path></svg>
+  </md-spinner>
+</div>
+<div class="center grey-text text-lighten-1" *ngIf="failed">
+  <i class="large material-icons">report_problem</i>
+  <p>Can't load info</p>
+</div>
