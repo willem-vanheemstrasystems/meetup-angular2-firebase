@@ -11,6 +11,7 @@ import { HomeComponent, DialogContent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { SearchListComponent } from './search-list/search-list.component';
+import { SearchListPaginationComponent } from './shared/search-list-pagination/search-list-pagination.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { DataService } from './services/data.service';
 import { StoreComponent } from './store/store.component';
@@ -26,7 +27,8 @@ import { ProductEditorComponent } from './products/product-editor/product-editor
     DialogContent,
     AboutComponent,
     SearchListComponent,
-    PaginationComponent,
+    PaginationComponent,    
+    SearchListPaginationComponent,
     StoreComponent,
     ProductsViewerComponent,
     ProductsListComponent,

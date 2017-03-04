@@ -1,49 +1,77 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import {Observable} from 'rxjs';
+
+// Based on 'Creating a pagination component with Angular 2' 
+// at https://g00glen00b.be/pagination-component-angular-2/
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
+  @Input() offset: number = 0;
+  @Input() limit: number = 1;
+  @Input() size: number = 1;
+  @Input() range: number = 3;
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
-  @Input()
-  total: number = 0;
-
-  @Input()
-  page: number = 1;
-
-  @Output()
-  goTo: EventEmitter<number> = new EventEmitter<number>();
+  pages: Observable<number[]>;
+  currentPage: number;
+  totalPages: number;
 
   constructor() { }
 
   ngOnInit() {
+     this.getPages(this.offset, this.limit, this.size);
+     console.log("Pagination ngOnInit, this.getPages, offset = ", this.offset, ", limit = ", this.limit);
   }
 
-  totalPages() {
-    return Math.ceil(this.total / 10);
+  ngOnChanges() {
+    this.getPages(this.offset, this.limit, this.size);
+    console.log("Pagination ngOnChanges, this.getPages, offset = ", this.offset, ", limit = ", this.limit);
   }
 
-  pagesRange() {
-    return this.range(1, this.totalPages() + 1);
+  getPages(offset: number, limit: number, size: number) {
+    console.log("Pagination getPages, offset = ", offset, ", limit = ", limit, ", size = ", size);
+    this.currentPage = this.getCurrentPage(offset, limit);
+    console.log("Pagination getPages, this.currentPage = ", this.currentPage);
+    this.totalPages = this.getTotalPages(limit, size);
+    console.log("Pagination getPages, this.totalPages = ", this.totalPages);
+    this.pages = Observable.range(-this.range, this.range * 2 + 1)
+      .map(offset => this.currentPage + offset)
+      .filter(page => this.isValidPageNumber(page, this.totalPages))
+      .toArray();
+    console.log("Pagination getPages, this.pages = ", this.pages);    
   }
 
-  prevPage() {
-    return Math.max(1, this.page - 1);
+  isValidPageNumber(page: number, totalPages: number): boolean {
+    console.log("Pagination isValidPageNumber, page = ", page, ", totalPages = ", totalPages); 
+    console.log("Pagination isValidPageNumber: ", page > 0 && page <= totalPages);
+    return page > 0 && page <= totalPages;
   }
 
-  nextPage() {
-    return Math.min(this.totalPages(), this.page + 1);
+  getCurrentPage(offset: number, limit: number): number {
+    console.log("Pagination getCurrentPage = ", Math.floor(offset / limit) + 1); 
+    return Math.floor(offset / limit) + 1;
   }
 
-  pageClicked(page: number) {
-    this.goTo.next(page);
+  getTotalPages(limit: number, size: number): number {
+    console.log("Pagination getTotalPages = ", Math.ceil(Math.max(size, 1) / Math.max(limit, 1)));   
+    return Math.ceil(Math.max(size, 1) / Math.max(limit, 1));
   }
 
-  range(start, stop, step=1){
-    if (!stop) { start=0;stop=start; }
-    return Array.from(new Array(Number((stop-start)/step)), (x,i) => start+ i*step)
+  selectPage(page: number, event) {
+    console.log("Pagination selectPage, page = ", page, ", event = ", event);  
+    this.cancelEvent(event);
+    if (this.isValidPageNumber(page, this.totalPages)) {
+      this.pageChange.emit((page - 1) * this.limit);
+    }
+  }
+
+  cancelEvent(event) {
+    console.log("Pagination cancelEvent, event = ", event);      
+    event.preventDefault();
   }
 
 }

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PaginationComponent } from './pagination.component';
+import { SearchListPaginationComponent } from './search-list-pagination.component';
 
-describe('PaginationComponent', () => {
-  let component: PaginationComponent;
-  let fixture: ComponentFixture<PaginationComponent>;
+describe('SearchListPaginationComponent', () => {
+  let component: SearchListPaginationComponent;
+  let fixture: ComponentFixture<SearchListPaginationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ]
+      declarations: [ SearchListPaginationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaginationComponent);
+    fixture = TestBed.createComponent(SearchListPaginationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
