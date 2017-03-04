@@ -32,7 +32,7 @@
           <td data-title="Link">
             <a href="{{ product.link }}" target="_blank">IMDB</a>
           </td>
-          <td data-title="Status">Completed</td>
+          <td data-title="Status">{{ product.status }}</td>
           <td data-title="View">
 				    <button type="button" class="btn btn-raised btn-default" (click)="viewProductButton(product.id)">View</button>
           </td>
