@@ -16,6 +16,8 @@ import { DataService } from './services/data.service';
 import { StoreComponent } from './store/store.component';
 import { ProductsViewerComponent } from './products/products-viewer/products-viewer.component';
 import { ProductsListComponent } from './products/shared/products-list/products-list.component';
+import { ProductViewerComponent } from './products/product-viewer/product-viewer.component';
+import { ProductEditorComponent } from './products/product-editor/product-editor.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ProductsListComponent } from './products/shared/products-list/products-
     PaginationComponent,
     StoreComponent,
     ProductsViewerComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    ProductViewerComponent,
+    ProductEditorComponent
   ],
   entryComponents: [DialogContent],
   imports: [
