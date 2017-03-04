@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Product } from '../../models/product.model';
+import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 import { ProductsListComponent } from '../shared/products-list/products-list.component';
 
@@ -15,7 +15,7 @@ export class ProductsViewerComponent implements OnInit {
   count: number = 0;
   offset: number = 0;
   limit: number = 2; // choose an appropriate number
-	products: Product[];
+	products: ProductModel[];
   loading: boolean = false;
   failed: boolean = false;
 
@@ -52,11 +52,13 @@ export class ProductsViewerComponent implements OnInit {
 	}
 
 	viewProduct(productId: number) {
-		this.router.navigate(['product', productId]);
+		console.log("ProductsViewerComponent - viewProduct called with productId = ", productId);
+// TEMP COMMENTED OUT		this.router.navigate(['product', productId]);
 	}
 
 	editProduct(productId: number) {
-		this.router.navigate(['product', productId, 'edit']);
+		console.log("ProductsViewerComponent - editProduct called with productId = ", productId);
+// TEMP COMMENTED OUT		this.router.navigate(['product', productId, 'edit']);
 	}
 
   onPageChange(offset) {

@@ -2177,7 +2177,7 @@ import { ProductModel } from '../../../models/product.model';
 export class ProductsListComponent implements OnInit {
 
 	@Input()
-	products: Product[];
+	products: ProductModel[];
 
 	@Output()
 	viewProduct: EventEmitter<number> = new EventEmitter<number>();
