@@ -29,9 +29,9 @@
     <button type="button" (click)="selectPage(1, $event)" [class.disabled]="currentPage == 1" class="btn btn-raised ripple-effect btn-default" title="Go to first page">&laquo;</button>
     <button type="button" (click)="selectPage(currentPage - 1, $event)" [class.disabled]="currentPage == 1" class="btn btn-raised ripple-effect btn-default" title="Go to previous page">&lsaquo;</button>
     <button type="button" (click)="cancelEvent($event)" [class.disabled]="currentPage == 1" *ngIf="(currentPage - range) > 1" class="disabled btn btn-raised ripple-effect btn-default" title="Go to previous page">...</button>
-    <div *ngFor="let page of pages | async" [class.active]="page == currentPage">
+    <span *ngFor="let page of pages | async" [class.active]="page == currentPage">
       <button type="button" (click)="selectPage(page, $event)" class="btn btn-raised ripple-effect btn-default" title="">{{page}}</button>
-    </div>
+    </span>
     <button type="button" (click)="cancelEvent($event)" *ngIf="(currentPage + range) < totalPages" class="btn btn-raised ripple-effect btn-default" title="">...</button>
     <button type="button" (click)="selectPage(currentPage + 1, $event)" [class.disabled]="currentPage == totalPages" class="btn btn-raised ripple-effect btn-default" title="Go to next page">&rsaquo;</button>
     <button type="button" (click)="selectPage(totalPages, $event)" [class.disabled]="currentPage == totalPages" class="btn btn-raised ripple-effect btn-default" title="Go to last page">&raquo;</button>
