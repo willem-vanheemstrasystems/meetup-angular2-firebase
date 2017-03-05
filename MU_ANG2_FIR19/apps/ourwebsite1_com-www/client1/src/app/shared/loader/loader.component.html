@@ -1,7 +1,10 @@
 <div class="preloader-wrapper big active" *ngIf="loading">
-  <md-spinner class="app-spinner mat-spinner" mode="indeterminate" role="progressbar" _nghost-lsx-24="">
-      <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100"><path _ngcontent-lsx-24="" d="M11.956013842547321,37.64463204709998A40,40 0 0,1 16.699923634951006,27.83911296716882"></path></svg>
-  </md-spinner>
+  <md-progress-bar _ngcontent-ece-43="" aria-label="Indeterminate progress-bar example" aria-valuemax="100" aria-valuemin="0" class="app-progress mat-primary mat-progress-bar" mode="indeterminate" role="progressbar" ng-reflect-mode="indeterminate" aria-valuenow="0">
+    <div class="mat-progress-bar-background mat-progress-bar-element"></div>
+    <div class="mat-progress-bar-buffer mat-progress-bar-element"></div>
+    <div class="mat-progress-bar-primary mat-progress-bar-fill mat-progress-bar-element" ng-reflect-ng-style="[object Object]" style="transform: scaleX(0);"></div>
+    <div class="mat-progress-bar-secondary mat-progress-bar-fill mat-progress-bar-element"></div>
+  </md-progress-bar>
 </div>
 <div class="center grey-text text-lighten-1" *ngIf="failed">
   <i class="large material-icons">report_problem</i>

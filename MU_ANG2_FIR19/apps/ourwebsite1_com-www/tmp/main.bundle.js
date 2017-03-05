@@ -1551,7 +1551,7 @@ module.exports = "<div id=\"demo\">\n  <md-icon role=\"img\" class=\"material-ic
 /***/ 912:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"preloader-wrapper big active\" *ngIf=\"loading\">\r\n  <md-spinner class=\"app-spinner mat-spinner\" mode=\"indeterminate\" role=\"progressbar\" _nghost-lsx-24=\"\">\r\n      <svg preserveAspectRatio=\"xMidYMid meet\" viewBox=\"0 0 100 100\"><path _ngcontent-lsx-24=\"\" d=\"M11.956013842547321,37.64463204709998A40,40 0 0,1 16.699923634951006,27.83911296716882\"></path></svg>\r\n  </md-spinner>\r\n</div>\r\n<div class=\"center grey-text text-lighten-1\" *ngIf=\"failed\">\r\n  <i class=\"large material-icons\">report_problem</i>\r\n  <p>Can't load info</p>\r\n</div>"
+module.exports = "<div class=\"preloader-wrapper big active\" *ngIf=\"loading\">\r\n  <md-progress-bar _ngcontent-ece-43=\"\" aria-label=\"Indeterminate progress-bar example\" aria-valuemax=\"100\" aria-valuemin=\"0\" class=\"app-progress mat-primary mat-progress-bar\" mode=\"indeterminate\" role=\"progressbar\" ng-reflect-mode=\"indeterminate\" aria-valuenow=\"0\">\r\n    <div class=\"mat-progress-bar-background mat-progress-bar-element\"></div>\r\n    <div class=\"mat-progress-bar-buffer mat-progress-bar-element\"></div>\r\n    <div class=\"mat-progress-bar-primary mat-progress-bar-fill mat-progress-bar-element\" ng-reflect-ng-style=\"[object Object]\" style=\"transform: scaleX(0);\"></div>\r\n    <div class=\"mat-progress-bar-secondary mat-progress-bar-fill mat-progress-bar-element\"></div>\r\n  </md-progress-bar>\r\n</div>\r\n<div class=\"center grey-text text-lighten-1\" *ngIf=\"failed\">\r\n  <i class=\"large material-icons\">report_problem</i>\r\n  <p>Can't load info</p>\r\n</div>"
 
 /***/ },
 
