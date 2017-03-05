@@ -44,8 +44,8 @@ export class ProductsListComponent implements OnInit {
 //  items$: Observable<DataModel[]>;
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
-  totalProducts$: Observable<number>;
-  products$: Observable<ProductModel[]>;
+//  totalProducts$: Observable<number>;
+//  products$: Observable<ProductModel[]>;
 //END: PRODUCTS-LIST
 
 //START: SEARCH-LIST
@@ -79,13 +79,13 @@ export class ProductsListComponent implements OnInit {
 		//   new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")
 		// ];
 
-    const searchSourceProducts = this.searchTermStream
-      .debounceTime(1000)
-      .distinctUntilChanged()
-      .map(searchTerm => {
-        this.terms = searchTerm;
-        return {products: this.products, search: searchTerm, page: 1}
-      });
+    // const searchSourceProducts = this.searchTermStream
+    //   .debounceTime(1000)
+    //   .distinctUntilChanged()
+    //   .map(searchTerm => {
+    //     this.terms = searchTerm;
+    //     return {products: this.products, search: searchTerm, page: 1}
+    //   });
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
 //    const pageSource = this.pageStream.map(pageNumber => {
@@ -94,10 +94,10 @@ export class ProductsListComponent implements OnInit {
 //    });
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
-    const pageSourceProducts = this.pageStream.map(pageNumber => {
-			this.page = pageNumber;
-			return {products: this.products, search: this.terms, page: pageNumber}
-		});
+    // const pageSourceProducts = this.pageStream.map(pageNumber => {
+		// 	this.page = pageNumber;
+		// 	return {products: this.products, search: this.terms, page: pageNumber}
+		// });
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
 //    const source = pageSource
@@ -109,21 +109,21 @@ export class ProductsListComponent implements OnInit {
 //      .share();
 //END: SEARCH-LIST
 //START: PRODUCTS-LIST
-    const sourceProducts = pageSourceProducts
-		  .merge(searchSourceProducts)
-      .startWith({products: this.products, search: this.terms, page: this.page})
-			.switchMap((params: {products: ProductModel[], search: string, page: number}) => {
-				return this.productsService.list(params.products, params.search, params.page)
-			})
-			.share();
+    // const sourceProducts = pageSourceProducts
+		//   .merge(searchSourceProducts)
+    //   .startWith({products: this.products, search: this.terms, page: this.page})
+		// 	.switchMap((params: {products: ProductModel[], search: string, page: number}) => {
+		// 		return this.productsService.list(params.products, params.search, params.page)
+		// 	})
+		// 	.share();
 //END : PRODUCTS-LIST
 //START: SEARCH-LIST
 //    this.total$ = source.pluck('total');
 //    this.items$ = source.pluck('items');
 //END: SEARCH-LIST		
 //START: PRODUCTS-LIST
-    this.totalProducts$ = sourceProducts.pluck('totalProducts');
-    this.products$ = sourceProducts.pluck('products');
+    // this.totalProducts$ = sourceProducts.pluck('totalProducts');
+    // this.products$ = sourceProducts.pluck('products');
 //END : PRODUCTS-LIST		
   }
 

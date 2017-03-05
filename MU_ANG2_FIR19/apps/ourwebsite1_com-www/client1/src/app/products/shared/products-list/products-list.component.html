@@ -7,7 +7,7 @@
     </div>
   </form>      
 
-  <p>Results: {{ totalProducts$ | async }}</p><p>{{ count }}</p>
+  <p>Results: {{ count }}</p>
 
   <!-- Responsive table starts here -->
   <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products$ | async ">
+        <tr *ngFor="let product of products">
           <td data-title="ID">{{ product.id }}</td>
           <td data-title="Title">{{ product.title }}</td>
           <td data-title="Link">
