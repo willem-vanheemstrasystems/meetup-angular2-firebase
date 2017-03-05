@@ -14,8 +14,8 @@ const routes: Routes = [
   { path: 'client1/store', component: StoreComponent },
 	{ path: 'client1/products', redirectTo: 'client1/products/page/1', pathMatch: 'full' },
 	{ path: 'client1/products/page/:nr', component: ProductsViewerComponent },
-  { path: 'client1/products/product/:id', component: ProductViewerComponent },
-	{ path: 'client1/products/product/:id/edit', component: ProductEditorComponent }
+  { path: 'client1/product/:id', component: ProductViewerComponent },
+	{ path: 'client1/product/:id/edit', component: ProductEditorComponent }
 ];
 
 export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash:true});

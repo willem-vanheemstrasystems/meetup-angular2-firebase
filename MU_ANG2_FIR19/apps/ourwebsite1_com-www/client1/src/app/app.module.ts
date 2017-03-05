@@ -21,6 +21,8 @@ import { ProductsViewerComponent } from './products/products-viewer/products-vie
 import { ProductsListComponent } from './products/shared/products-list/products-list.component';
 import { ProductViewerComponent } from './products/product-viewer/product-viewer.component';
 import { ProductEditorComponent } from './products/product-editor/product-editor.component';
+import { ProductDetailsComponent } from './products/shared/product-details/product-details.component';
+import { ProductFormComponent } from './products/shared/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProductEditorComponent } from './products/product-editor/product-editor
     ProductsViewerComponent,
     ProductsListComponent,
     ProductViewerComponent,
-    ProductEditorComponent
+    ProductEditorComponent,
+    ProductDetailsComponent,
+    ProductFormComponent
   ],
   entryComponents: [DialogContent],
   imports: [

@@ -54,12 +54,12 @@ export class ProductsViewerComponent implements OnInit {
 
 	viewProduct(productId: number) {
 		console.log("ProductsViewerComponent - viewProduct called with productId = ", productId);
-// TEMP COMMENTED OUT		this.router.navigate(['product', productId]);
+    this.router.navigate(['/client1/product', productId]);
 	}
 
 	editProduct(productId: number) {
 		console.log("ProductsViewerComponent - editProduct called with productId = ", productId);
-// TEMP COMMENTED OUT		this.router.navigate(['product', productId, 'edit']);
+    this.router.navigate(['/client1/product', productId, 'edit']);
 	}
 
   onPageChange(offset) {
