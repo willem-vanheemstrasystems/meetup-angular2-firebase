@@ -40,9 +40,9 @@ export class ProductsService {
 
   getAll(offset: number = 0, limit: number = 2): Observable<ProductsService> {
     return this.http
-      .get(`${this.baseUrl}/products/?offset=${offset}&limit=${limit}`)
+      .get(`${this.baseUrl}/products`) // ORIGINAL .get(`${this.baseUrl}/products/?offset=${offset}&limit=${limit}`)
       .map(response => response.json())
-      .map(results => this.getList(results));
+      .map(results => this.getList(results, offset, limit));  // ORIGINAL .map(results => this.getList(results));
   }
 
   get(productId: number): Observable<ProductModel> {
@@ -62,8 +62,8 @@ export class ProductsService {
 		return this.http.delete(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(res => res.json()).catch(this.handleError);
 	}
 
-  getList(data): ProductsService {
-		console.log("ProductsService - getList, data = ", data);
+  getList(data: any, offset: number = 0, limit: number = 2): ProductsService { // ORIGINAL   getList(data): ProductsService {
+		console.log("ProductsService - getList, data = ", data, ", offset = ", offset, ", limit = ", limit);
 		// turn the generic data Object into a productModel
 		// let products = new Array<ProductModel>();
     // for(let i=0; i<data.length; i++) {
@@ -74,8 +74,17 @@ export class ProductsService {
     // data = new Array<ProductModel[]>();
     // data[0] = [new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")];
 
+//START: ADDED
+    let result: any = [];
+    let count: number = data.length;
+		let products: any = data;
+		result['count']=count;
+		// ORIGINAL result['products'] = products;
+		result['products'] = products.slice(offset * limit, (offset + 1) * limit); // PAGINATION LOGIC
+//END: ADDED
+
 		// room for additional filtering
-		return data;
+		return result;  // ORIGINAL return data;
 	}
 
 //START: ADDED
