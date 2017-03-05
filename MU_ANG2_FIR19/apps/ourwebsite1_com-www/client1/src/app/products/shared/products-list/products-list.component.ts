@@ -25,6 +25,11 @@ export class ProductsListComponent implements OnInit {
 //END: PRODUCTS-LIST	
 
 //START: PRODUCTS-LIST
+	@Input()
+	count: number;
+//END: PRODUCTS-LIST
+
+//START: PRODUCTS-LIST
 	@Output()
 	viewProduct: EventEmitter<number> = new EventEmitter<number>();
 //END: PRODUCTS-LIST	
