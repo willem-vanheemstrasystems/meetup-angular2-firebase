@@ -223,7 +223,8 @@ var ProductsViewerComponent = (function () {
         this.productsService = productsService;
         this.count = 0;
         this.offset = 0;
-        this.limit = 2; // choose an appropriate number
+        this.limit = 10; // choose an appropriate number
+        this.range = 0; // not enough space for more
         this.loading = false;
         this.failed = false;
     }
@@ -242,85 +243,8 @@ var ProductsViewerComponent = (function () {
         this.loading = true;
         this.failed = false;
         this.productsService.getAll(offset, limit).subscribe(function (result) {
-            //this.products = result.products;
-            //this.count = result.count;
             console.log("ProductsViewerComponent - getAll - result = ", result);
-            // ADDED TO TEMPORARILY OVERWRITE THE products
-            // this.products = [
-            // 	new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(2, "Poka stanitsa spit", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(3, "Memory Lane", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(4, "No Through Road", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(5, "Malcolm & Eddie", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(6, "Violet", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(7, "Last Call with Carson Daly", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(8, "The Yellow Badge of Courage", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(9, "Doctor Who: The Companion Chronicles", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(10, "The Feed", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(11, "Emmerdale Farm", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(12, "The Jeselnik Offensive", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(13, "Zero Minute", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(14, "Nina and the Neurons Go Inventing", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(15, "Dynamo", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(16, "Ammattimies", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(17, "Happening Now", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(18, "The O'Reilly Factor", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(19, "How Do I Look?", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(20, "Electric Playground", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(21, "Commissaire Laviolette", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(22, "The Young Doctors", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(23, "Married with Children", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(24, "Le clan Pasquier", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(25, "The Gale Storm Show: Oh! Susanna", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(26, "Serangoon Road", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(27, "The Young Doctors", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(28, "Family Matters", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(29, "Motormouth", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(30, "Antiques Roadshow", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(31, "Wasak", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(32, "Prime News", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(33, "May bukas pa", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(34, "The Hollywood Squares", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(35, "Els matins a TV3", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(36, "Your Favorite Story", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(37, "Los desayunos de TVE", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(38, "The Small House at Allington", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(39, "Minute to Win It", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(40, "El ministerio del tiempo", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(41, "The Fabulous Picture Show", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(42, "Black Jack", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(43, "Cutting Edge", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(44, "Judge Joe Brown", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(45, "All Saints", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(46, "Quincy M.E.", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(47, "Neighbours", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(48, "Chistoserdechnoe priznanie", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(49, "John Halifax, Gentleman", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(50, "Paul Flynn", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(51, "Texas Monthly Talks", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(52, "David Copperfield", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(53, "Obruchalnoe koltso", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(54, "Rock Macabre", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(55, "The Tonight Show Starring Johnny Carson", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(56, "Daesh molodezh", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(57, "Wicked Wicked Games", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(58, "Music Fair", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(59, "Flip My Food with Chef Jeff", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(60, "Un hombre solo", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(61, "My S Rostova", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(62, "Zwei bei Kallwass", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(63, "Last Call with Carson Daly", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(64, "Jimmy Kimmel Live!", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(65, "Plebs", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(66, "Lonelygirl15", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(67, "Plus belle la vie", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(68, "Watch What Happens: Live", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(69, "WRAL Murder Trials", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(70, "Secrets of the Bible", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(71, "Six O'Clock News", "http://www.imdb.com", "Completed"),
-            // 	new ProductModel(72, "Jackie Gleason: American Scene Magazine", "http://www.imdb.com", "Completed")
-            // ];
-            _this.products = result['products']; // ORIGINAL result['products'];
+            _this.products = result['products'];
             console.log("ProductsViewerComponent - getAll - this.products = ", _this.products);
             _this.count = result['count'];
             console.log("ProductsViewerComponent - getAll - this.count = ", _this.count);
@@ -339,8 +263,9 @@ var ProductsViewerComponent = (function () {
         // TEMP COMMENTED OUT		this.router.navigate(['product', productId, 'edit']);
     };
     ProductsViewerComponent.prototype.onPageChange = function (offset) {
+        console.log("ProductsViewerComponent - onPageChange called with offset = ", offset);
         this.offset = offset;
-        this.router.navigate(['/page', (offset / this.limit) + 1]);
+        this.router.navigate(['/client1/products/page', (offset / this.limit) + 1]);
     };
     ProductsViewerComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -475,23 +400,20 @@ var ProductsService = (function () {
     ProductsService.prototype.getList = function (data, offset, limit) {
         if (offset === void 0) { offset = 0; }
         if (limit === void 0) { limit = 2; }
-        console.log("ProductsService - getList, data = ", data, ", offset = ", offset, ", limit = ", limit);
-        // turn the generic data Object into a productModel
-        // let products = new Array<ProductModel>();
-        // for(let i=0; i<data.length; i++) {
-        // 	console.log("ProductsService - getList, data[", i,"].id = ", data[i].id);
-        //   products[i] = new ProductModel(data[i].id, "She Made Them Do It", "http://www.imdb.com", "Completed");
-        // }
-        // data = new Array<ProductModel[]>();
-        // data[0] = [new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")];
-        //START: ADDED
+        //console.log("ProductsService - getList, data = ", data, ", offset = ", offset, ", limit = ", limit);
         var result = [];
         var count = data.length;
         var products = data;
         result['count'] = count;
-        // ORIGINAL result['products'] = products;
-        result['products'] = products.slice(offset * limit, (offset + 1) * limit); // PAGINATION LOGIC
-        //END: ADDED
+        var page;
+        if (offset == 0) {
+            page = 1;
+        }
+        else {
+            page = (offset / limit) + 1;
+        }
+        //console.log("ProductsService - getList, page = ", page, ", offset = ", offset, ", limit = ", limit);
+        result['products'] = products.slice((page - 1) * limit, page * limit); // PAGINATION LOGIC
         // room for additional filtering
         return result; // ORIGINAL return data;
     };
@@ -1193,7 +1115,7 @@ var PaginationComponent = (function () {
         this.offset = 0;
         this.limit = 1;
         this.size = 1;
-        this.range = 0; // Not enough space for more than 0 range
+        this.range = 3;
         this.pageChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     PaginationComponent.prototype.ngOnInit = function () {
@@ -1258,7 +1180,6 @@ var PaginationComponent = (function () {
         __metadata('design:type', Number)
     ], PaginationComponent.prototype, "range", void 0);
     __decorate([
-        // Not enough space for more than 0 range
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _a) || Object)
     ], PaginationComponent.prototype, "pageChange", void 0);
@@ -1538,7 +1459,7 @@ module.exports = "<p>\n  product-viewer works!\n</p>\n"
 /***/ 909:
 /***/ function(module, exports) {
 
-module.exports = "<div id=\"demo\">\n<md-icon role=\"img\" class=\"material-icons\" aria-label=\"apps\">apps</md-icon>\n<span class=\"display-1\">Products</span><br/>\n<div class=\"center\">\n  <app-loader [loading]=\"loading\" [failed]=\"failed\"></app-loader>\n</div>\n<app-products-list\n  [products]=\"products\"\n  [count]=\"count\"\n  (viewProduct)=\"viewProduct($event)\"\n  (editProduct)=\"editProduct($event)\">\n</app-products-list>\n<app-pagination [offset]=\"offset\" [limit]=\"limit\" [size]=\"count\" (pageChange)=\"onPageChange($event)\"></app-pagination>\n</div>"
+module.exports = "<div id=\"demo\">\n<md-icon role=\"img\" class=\"material-icons\" aria-label=\"apps\">apps</md-icon>\n<span class=\"display-1\">Products</span><br/>\n<div class=\"center\">\n  <app-loader [loading]=\"loading\" [failed]=\"failed\"></app-loader>\n</div>\n<app-products-list\n  [products]=\"products\"\n  [count]=\"count\"\n  (viewProduct)=\"viewProduct($event)\"\n  (editProduct)=\"editProduct($event)\">\n</app-products-list>\n<app-pagination [offset]=\"offset\" [limit]=\"limit\" [range]=\"range\" [size]=\"count\" (pageChange)=\"onPageChange($event)\"></app-pagination>\n</div>"
 
 /***/ },
 

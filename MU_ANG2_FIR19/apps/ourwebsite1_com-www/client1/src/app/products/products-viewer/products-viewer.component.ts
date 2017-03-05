@@ -63,8 +63,9 @@ export class ProductsViewerComponent implements OnInit {
 	}
 
   onPageChange(offset) {
+		console.log("ProductsViewerComponent - onPageChange called with offset = ", offset);
     this.offset = offset;
-    this.router.navigate(['/page', (offset / this.limit) + 1]);
+    this.router.navigate(['/client1/products/page', (offset / this.limit) + 1]);
   }
 
 }

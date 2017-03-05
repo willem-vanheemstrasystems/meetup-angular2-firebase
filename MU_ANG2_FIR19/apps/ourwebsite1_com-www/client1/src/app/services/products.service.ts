@@ -63,26 +63,20 @@ export class ProductsService {
 	}
 
   getList(data: any, offset: number = 0, limit: number = 2): ProductsService { // ORIGINAL   getList(data): ProductsService {
-		console.log("ProductsService - getList, data = ", data, ", offset = ", offset, ", limit = ", limit);
-		// turn the generic data Object into a productModel
-		// let products = new Array<ProductModel>();
-    // for(let i=0; i<data.length; i++) {
-		// 	console.log("ProductsService - getList, data[", i,"].id = ", data[i].id);
-    //   products[i] = new ProductModel(data[i].id, "She Made Them Do It", "http://www.imdb.com", "Completed");
-		// }
-
-    // data = new Array<ProductModel[]>();
-    // data[0] = [new ProductModel(1, "She Made Them Do It", "http://www.imdb.com", "Completed")];
-
-//START: ADDED
+		//console.log("ProductsService - getList, data = ", data, ", offset = ", offset, ", limit = ", limit);
     let result: any = [];
     let count: number = data.length;
 		let products: any = data;
 		result['count']=count;
-		// ORIGINAL result['products'] = products;
-		result['products'] = products.slice(offset * limit, (offset + 1) * limit); // PAGINATION LOGIC
-//END: ADDED
-
+    let page: number; 
+		if (offset == 0) {
+			 page = 1;
+		}	 
+		else { 
+			 page = (offset / limit) + 1; 
+		}
+    //console.log("ProductsService - getList, page = ", page, ", offset = ", offset, ", limit = ", limit);
+		result['products'] = products.slice((page - 1) * limit, page * limit); // PAGINATION LOGIC
 		// room for additional filtering
 		return result;  // ORIGINAL return data;
 	}
