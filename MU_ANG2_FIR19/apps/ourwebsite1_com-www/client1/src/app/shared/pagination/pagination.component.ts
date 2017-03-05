@@ -13,7 +13,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Input() offset: number = 0;
   @Input() limit: number = 1;
   @Input() size: number = 1;
-  @Input() range: number = 0; // Not enough space for more than 0 range
+  @Input() range: number = 3;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   pages: Observable<number[]>;
