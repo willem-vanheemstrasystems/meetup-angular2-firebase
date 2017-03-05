@@ -15,6 +15,7 @@ import { SearchListPaginationComponent } from './shared/search-list-pagination/s
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { DataService } from './services/data.service';
+import { FilterPipe } from './pipes/filter.pipe';
 import { StoreComponent } from './store/store.component';
 import { ProductsViewerComponent } from './products/products-viewer/products-viewer.component';
 import { ProductsListComponent } from './products/shared/products-list/products-list.component';
@@ -29,6 +30,7 @@ import { ProductEditorComponent } from './products/product-editor/product-editor
     AboutComponent,
     SearchListComponent,
     PaginationComponent,
+    FilterPipe,
     LoaderComponent,  
     SearchListPaginationComponent,
     StoreComponent,

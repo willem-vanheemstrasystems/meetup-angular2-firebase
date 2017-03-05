@@ -19,6 +19,8 @@ import { Subject, Observable } from "rxjs";
 })
 export class ProductsListComponent implements OnInit {
 
+  filterReports: string = '';
+
 //START: PRODUCTS-LIST
 	@Input()
 	products: ProductModel[];

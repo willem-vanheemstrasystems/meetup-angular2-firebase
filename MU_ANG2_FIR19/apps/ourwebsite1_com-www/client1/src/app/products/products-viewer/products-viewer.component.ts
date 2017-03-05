@@ -35,16 +35,16 @@ export class ProductsViewerComponent implements OnInit {
   }
 
 	getAll(offset: number, limit: number) {
-	  console.log("ProductsViewerComponent - getAll, offset = ", offset, " limit = ", limit);
+	  //console.log("ProductsViewerComponent - getAll, offset = ", offset, " limit = ", limit);
 		this.products = [];
 		this.loading = true;
 		this.failed = false;
 		this.productsService.getAll(offset, limit).subscribe(result => {
-	    console.log("ProductsViewerComponent - getAll - result = ", result);
+	    //console.log("ProductsViewerComponent - getAll - result = ", result);
 	    this.products = result['products'];
-			console.log("ProductsViewerComponent - getAll - this.products = ", this.products);
+			//console.log("ProductsViewerComponent - getAll - this.products = ", this.products);
 	    this.count = result['count'];
-			console.log("ProductsViewerComponent - getAll - this.count = ", this.count);		
+			//console.log("ProductsViewerComponent - getAll - this.count = ", this.count);		
 			this.loading = false;
 		}, () => {
 			this.loading = false;
@@ -63,7 +63,7 @@ export class ProductsViewerComponent implements OnInit {
 	}
 
   onPageChange(offset) {
-		console.log("ProductsViewerComponent - onPageChange called with offset = ", offset);
+		//console.log("ProductsViewerComponent - onPageChange called with offset = ", offset);
     this.offset = offset;
     this.router.navigate(['/client1/products/page', (offset / this.limit) + 1]);
   }
