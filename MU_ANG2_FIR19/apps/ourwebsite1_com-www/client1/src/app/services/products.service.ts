@@ -46,7 +46,11 @@ export class ProductsService {
   }
 
   get(productId: number): Observable<ProductModel> {
-    return this.http.get(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(this.extractData).catch(this.handleError);
+    // ORIGINAL return this.http.get(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())).map(this.extractData).catch(this.handleError);
+    return this.http
+		  .get(`${this.baseUrl}/products/` + encodeURIComponent(productId.toString())) //.map(this.extractData).catch(this.handleError);
+			.map(response => response.json())
+			.map(result => this.getListItem(result));
   }
 
   insert(product: ProductModel): Observable<ProductModel> {
@@ -77,6 +81,15 @@ export class ProductsService {
 		}
     //console.log("ProductsService - getList, page = ", page, ", offset = ", offset, ", limit = ", limit);
 		result['products'] = products.slice((page - 1) * limit, page * limit); // PAGINATION LOGIC
+		// room for additional filtering
+		return result;  // ORIGINAL return data;
+	}
+
+  getListItem(data: any): ProductModel { // ORIGINAL   getList(data): ProductsService {
+		console.log("ProductsService - getListItem, data = ", data);
+    let result: any = [];
+		result = data;
+		console.log("ProductsService - getListItem, result = ", result);
 		// room for additional filtering
 		return result;  // ORIGINAL return data;
 	}

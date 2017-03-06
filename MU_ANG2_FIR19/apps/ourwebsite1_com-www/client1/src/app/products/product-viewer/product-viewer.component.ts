@@ -28,7 +28,7 @@ export class ProductViewerComponent implements OnInit {
   }
 
 	editProduct(productId: number) {
-		this.router.navigate(["/client1/product", productId, "/edit"]);
+		this.router.navigate(["/client1/product", productId, "edit"]);
 	}
 
 	returnToList() {
