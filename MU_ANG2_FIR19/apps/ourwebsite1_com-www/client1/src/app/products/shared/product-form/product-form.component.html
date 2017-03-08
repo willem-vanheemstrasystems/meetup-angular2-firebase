@@ -1,5 +1,6 @@
 <div class="container">
   <form novalidate>
+	ID: {{product?.id}}
     <h1>{{product.title}}</h1>
     <div class="form-group">
       <input type="text" [(ngModel)]="product.title"  name="productTitle" required="required" #productTitle="ngModel"/>

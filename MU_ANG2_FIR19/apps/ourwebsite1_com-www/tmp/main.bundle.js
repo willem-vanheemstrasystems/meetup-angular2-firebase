@@ -1744,7 +1744,7 @@ module.exports = "<!--<div id=\"demo\">-->\n<md-icon role=\"img\" class=\"materi
 /***/ 914:
 /***/ function(module, exports) {
 
-module.exports = "<md-icon role=\"img\" class=\"material-icons\" aria-label=\"apps\">apps</md-icon>\n<span class=\"display-1\">Product</span><br/>\n<div class=\"container\">\n  <app-product-details [product]=\"product\"></app-product-details>\n  <div class=\"button-container\">\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"editProduct(product.id)\">Edit</button>\n    <button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"returnToList()\">Return to List</button>\n  </div><br/><br/>\n</div>"
+module.exports = "<md-icon role=\"img\" class=\"material-icons\" aria-label=\"apps\">apps</md-icon>\n<span class=\"display-1\">Product</span><br/>\n<div class=\"container\">\n  <app-product-details [product]=\"product\"></app-product-details>\n  <br/><br/>\n  <div class=\"button-container\">\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"editProduct(product.id)\">Edit</button>\n    <button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"returnToList()\">Return to List</button>\n  </div><br/><br/>\n</div>"
 
 /***/ },
 
@@ -1758,14 +1758,14 @@ module.exports = "<div id=\"demo\">\n<md-icon role=\"img\" class=\"material-icon
 /***/ 916:
 /***/ function(module, exports) {
 
-module.exports = "<div>\n  <div>\n\t\tID: {{product?.id}}\n\t</div>\n\t<div>\n\t\tTitle: {{product?.title}}\n\t</div>\n\t<div>\n\t\tLink: {{product?.link}}\n\t</div> \n  <div>\n\t\tStatus: {{product?.status}}\n\t</div> \n</div>"
+module.exports = "<div>\n  <div>\n\t\tID: {{product?.id}}\n\t</div>\n\t<div>\n\t\tTitle: <h1>{{product?.title}}</h1>\n\t</div>\n\t<div>\n\t\tLink: {{product?.link}}\n\t</div> \n  <div>\n\t\tStatus: {{product?.status}}\n\t</div> \n</div>"
 
 /***/ },
 
 /***/ 917:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <form novalidate>\n    <h1>{{product.title}}</h1>\n    <div class=\"form-group\">\n      <input type=\"text\" [(ngModel)]=\"product.title\"  name=\"productTitle\" required=\"required\" #productTitle=\"ngModel\"/>\n      <label for=\"input\" class=\"control-label\">Title</label><i class=\"bar\"></i>\n\t\t<span *ngIf=\"!productTitle.valid && (productTitle.touched || !!productTitle.id)\">\n\t\t\tPlease enter a Product title.\n\t\t</span>\t  \n    </div>\n  </form>\n  <div class=\"button-container\">\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"saveProductButton(product)\">Save</button>\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"cancelProductButton(product)\">Cancel</button>\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"deleteProductButton(product)\" *ngIf=\"!!product.id\">Delete</button>\n  </div><br/><br/>\n</div>"
+module.exports = "<div class=\"container\">\n  <form novalidate>\n\tID: {{product?.id}}\n    <h1>{{product.title}}</h1>\n    <div class=\"form-group\">\n      <input type=\"text\" [(ngModel)]=\"product.title\"  name=\"productTitle\" required=\"required\" #productTitle=\"ngModel\"/>\n      <label for=\"input\" class=\"control-label\">Title</label><i class=\"bar\"></i>\n\t\t<span *ngIf=\"!productTitle.valid && (productTitle.touched || !!productTitle.id)\">\n\t\t\tPlease enter a Product title.\n\t\t</span>\t  \n    </div>\n  </form>\n  <div class=\"button-container\">\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"saveProductButton(product)\">Save</button>\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"cancelProductButton(product)\">Cancel</button>\n\t<button type=\"button\" class=\"btn btn-raised btn-default\" (click)=\"deleteProductButton(product)\" *ngIf=\"!!product.id\">Delete</button>\n  </div><br/><br/>\n</div>"
 
 /***/ },
 
