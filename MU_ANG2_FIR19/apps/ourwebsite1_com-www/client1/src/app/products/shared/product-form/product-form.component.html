@@ -1,17 +1,17 @@
-<form novalidate>
-
-	<div>
-		<label>
-			Title:
-			<input type="text" [(ngModel)]="product.title" name="productTitle" required #productTitle="ngModel">
-		</label>
+<div class="container">
+  <form novalidate>
+    <h1>{{product.title}}</h1>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="product.title"  name="productTitle" required="required" #productTitle="ngModel"/>
+      <label for="input" class="control-label">Title</label><i class="bar"></i>
 		<span *ngIf="!productTitle.valid && (productTitle.touched || !!productTitle.id)">
 			Please enter a Product title.
-		</span>
-	</div>
-
-	<button type="button" (click)="saveProductButton(product)">Save</button>
-	<button type="button" (click)="cancelProductButton(product)">Cancel</button>
-	<button type="button" (click)="deleteProductButton(product)" *ngIf="!!product.id">Delete</button>
-
-</form>
+		</span>	  
+    </div>
+  </form>
+  <div class="button-container">
+	<button type="button" class="btn btn-raised btn-default" (click)="saveProductButton(product)">Save</button>
+	<button type="button" class="btn btn-raised btn-default" (click)="cancelProductButton(product)">Cancel</button>
+	<button type="button" class="btn btn-raised btn-default" (click)="deleteProductButton(product)" *ngIf="!!product.id">Delete</button>
+  </div><br/><br/>
+</div>
