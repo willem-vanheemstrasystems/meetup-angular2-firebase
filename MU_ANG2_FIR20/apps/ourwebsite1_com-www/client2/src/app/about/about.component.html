@@ -1,0 +1,10 @@
+<md-card class="_md">
+  <md-card-header>
+    <span class="md-title">{{ title }}</span>
+  </md-card-header>
+  <!-- this creates a google map on the page with the given lat/lng from -->
+  <!-- the component as the initial center of the map: -->
+  <sebm-google-map [latitude]="lat" [longitude]="lng">
+    <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+  </sebm-google-map>
+</md-card>

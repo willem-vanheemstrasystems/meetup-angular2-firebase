@@ -1,0 +1,70 @@
+<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    <md-toolbar class="sidenav-toolbar md-elevation-z2 md-accent" color="accent">
+      <div class="md-toolbar-layout">
+        <md-toolbar-row>
+          <button md-button [md-menu-trigger-for]="menu" style="font-size:20px;">
+            <i class="material-icons" style="margin:0 4px 0 -16px;">web</i>Client1
+          </button>
+          <md-menu #menu="mdMenu">
+            <button md-menu-item onclick="location.href='#/client1'">Client1</button>
+            <button md-menu-item onclick="location.href='#/client2'">Client2</button>
+            <button md-menu-item onclick="location.href='#/client3'">Client3</button>
+          </md-menu>
+        </md-toolbar-row>
+      </div>
+    </md-toolbar>
+    <md-nav-list class="sidenav-list sidenav-toplevel" fxlayout="column" role="list" style="display: flex; box-sizing: border-box; flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal;">
+      <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="#/client1/home">
+        <div class="md-list-item">
+          <div class="md-list-text"></div>
+          <md-icon role="img" class="material-icons" aria-label="home">home</md-icon>
+          <span class="sidenav-item-name fade-in-on-icon-sidenav">Home</span>
+          <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+        </div>
+        <div class="md-ripple-background"></div>
+      </a>
+      <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="#/client1/about">
+        <div class="md-list-item">
+          <div class="md-list-text"></div>
+          <md-icon role="img" class="material-icons" aria-label="map">map</md-icon>
+          <span class="sidenav-item-name fade-in-on-icon-sidenav">About</span>
+          <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+        </div>
+        <div class="md-ripple-background"></div>
+      </a>
+      <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="#/client1/store">
+        <div class="md-list-item">
+          <div class="md-list-text"></div>
+          <md-icon role="img" class="material-icons" aria-label="store">store</md-icon>
+          <span class="sidenav-item-name fade-in-on-icon-sidenav">Store</span>
+          <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+        </div>
+        <div class="md-ripple-background"></div>
+      </a>
+      <a class="sidenav-anchor" md-list-item="" md-ripple="" role="listitem" routerlinkactive="active" href="#/client1/products">
+        <div class="md-list-item">
+          <div class="md-list-text"></div>
+          <md-icon role="img" class="material-icons" aria-label="apps">apps</md-icon>
+          <span class="sidenav-item-name fade-in-on-icon-sidenav">Products</span>
+          <span fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box; -webkit-box-flex: 1;"></span>
+        </div>
+        <div class="md-ripple-background"></div>
+      </a>
+    </md-nav-list>  
+  </md-sidenav>
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+    {{title}}
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE THEME</button>
+  </md-toolbar>
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button md-fab><md-icon>check circle</md-icon></button>
+</span>

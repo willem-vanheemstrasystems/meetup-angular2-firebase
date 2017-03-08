@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+//@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+//@import '~https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic';
+@import 'themes/unicorn-app-theme';
+//@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+// This is just to center the spinner
+html, body { height: 100%; }
+
+body {
+   margin: 0;
+   font-family: Roboto, sans-serif;   
+}
+
+#app-root-spinner {
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+// Here is where the magic happens
+
+$offset: 187;
+$duration: 1.4s;
+
+.spinner {
+  animation: rotator $duration linear infinite;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+.path {
+  stroke-dasharray: $offset;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation:
+    dash $duration ease-in-out infinite, 
+    colors ($duration*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+	0% { stroke: #4285F4; }
+	25% { stroke: #DE3E35; }
+	50% { stroke: #F7C223; }
+	75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+ 0% { stroke-dashoffset: $offset; }
+ 50% {
+   stroke-dashoffset: $offset/4;
+   transform:rotate(135deg);
+ }
+ 100% {
+   stroke-dashoffset: $offset;
+   transform:rotate(450deg);
+ }
+}

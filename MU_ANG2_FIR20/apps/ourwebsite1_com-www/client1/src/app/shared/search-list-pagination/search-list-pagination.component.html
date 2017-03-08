@@ -1,0 +1,13 @@
+<!--<ul *ngIf="totalPages() > 1" class="pagination pagination-sm no-margin pull-right">
+  <li *ngIf="page != 1"><a (click)="pageClicked(prevPage())">«</a></li>
+  <li *ngFor="let p of pagesRange()"><a (click)="pageClicked(p)">{{p}}</a></li>
+  <li *ngIf="totalPages() > page"><a (click)="pageClicked(nextPage())">»</a></li>
+</ul>-->
+
+<div class="btn-toolbar" role="toolbar">
+  <div *ngIf="totalPages() > 1" class="btn-group">
+    <button type="button" *ngIf="page != 1" (click)="pageClicked(prevPage())" class="btn btn-raised ripple-effect btn-default">«</button>
+    <button type="button" *ngFor="let p of pagesRange()" (click)="pageClicked(p)" class="btn btn-raised ripple-effect btn-default">{{p}}</button>
+    <button type="button" *ngIf="totalPages() > page" (click)="pageClicked(nextPage())" class="btn btn-raised ripple-effect btn-default">»</button>
+  </div>
+</div>
