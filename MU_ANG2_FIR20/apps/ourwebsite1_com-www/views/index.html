@@ -1,18 +1,130 @@
- @{layout('')}
-  <meta charset="utf-8">
-  <title>Views | Our Website</title>
-  <base href="/">
+@{layout('')}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="styles.css" rel="stylesheet">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>@{config.name}</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=11" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+	@{import('meta', 'head', 'default.css', 'default.js', 'favicon.ico')}
 </head>
 <body>
-    <ul>
-      <li><a href="/client1">Client 1</a></li>
-      <li><a href="/client2">Client 2</a></li>
-    </ul>
+
+	<div data-component="message" data-button="@(Close)"></div>
+	<div data-component="confirm"></div>
+	<div data-component="audio" data-component-path="user.volume"></div>
+	<div data-component="loading" class="ui-loading"></div>
+	<div id="success"><span class="fa fa-check-circle"></span></div>
+
+	<header>
+		<div class="logo"><svg width="30px" height="30px" viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path d="M74.819,0l-74.819,43.266l0,86.532l74.819,43.265l75.181,-43.265l0,-86.532l-75.181,-43.266ZM74.318,54.683l27.682,15.924l0,32.049l-27.682,16.025l-27.818,-16.025l0,-32.049l27.818,-15.924Z" style="fill:#17A0CB;fill-rule:nonzero;"/><path d="M37.049,21.598l-37.049,21.552l0,86.532l37.103,21.578l22.147,-38.642l0,0.046l-29.934,0l14.953,-26.248l-14.953,-26.252l29.934,0l0,0.103l-22.201,-38.669Z" style="fill:#4FC1E9;fill-rule:nonzero;"/><path class="logo-animation-a" d="M33.633,63.164l12.697,23.005l-12.697,23.495l26.936,0l13.49,-23.453l-13.49,-23.047l-26.936,0Z" style="fill:#4FC1E9;fill-rule:nonzero;"/></svg></div>
+		<img src="/img/empty.png" class="user-photo" />
+		<div class="usermenu">
+			<a href="/logoff/"><i class="fa fa-power-off"></i></a>
+		</div>
+		<a href="/account/" class="user jR">@{user.alias}</a>
+		<nav class="menu">
+			<a href="/" class="jR">@(Dashboard)</a>
+			<a href="/account/" class="jR">@(My account)</a>
+			@{if user.superadmin}
+			<a href="/settings/applications/" class="jR">@(Applications)</a>
+			<a href="/settings/users/" class="jR">@(Users)</a>
+			<a href="/settings/" class="jR"><i class="fa fa-cogs"></i>@(Settings)</a>
+			@{fi}
+		</nav>
+	</header>
+
+	<div data-component="page" data-component-path="common.page" data-if="dashboard" class="hidden" data-template="/templates/dashboard.html"></div>
+	<div data-component="page" data-component-path="common.page" data-if="account" class="hidden" data-template="/templates/account.html" data-reload="account_refresh"></div>
+
+	@{if user.superadmin}
+	<div data-component="page" data-component-path="common.page" data-if="applications" class="hidden" data-template="/templates/applications.html"></div>
+	<div data-component="page" data-component-path="common.page" data-if="users" class="hidden" data-template="/templates/users.html"></div>
+	<div data-component="page" data-component-path="common.page" data-if="settings" class="hidden" data-template="/templates/settings.html" data-reload="settings_refresh"></div>
+	@{fi}
+
+	<div id="bottom"></div>
+
+	<script>
+
+		Chart.defaults.global.legend.display = false;
+
+		var common = {};
+		common.datetime = new Date();
+		common.name = '@{config.name}';
+		common.url = '@{config.url}';
+		common.version = '@{config.version}';
+		common.language = '@{language}';
+		common.languages = '@{config.languages}'.split(';');
+		common.forms = {};
+		common.page = '';
+		common.form = '';
+		common.isfocused = true;
+
+		$(window).on('focus blur', function(e) {
+			common.isfocused = e.type === 'focus';
+		});
+
+		var user = JSON.parse('@{json(user.readonly())}');
+		$('.user-photo').attr('src', user.photo);
+
+		// Routing
+		jR.route('/', function() {
+			SET('common.page', 'dashboard');
+		});
+
+		jR.route('/settings/applications/', function() {
+			SET('common.page', 'applications');
+		});
+
+		jR.route('/settings/users/', function() {
+			SET('common.page', 'users');
+		});
+
+		jR.route('/settings/', function() {
+			SET('common.page', 'settings');
+		});
+
+		jR.route('/account/', function() {
+			SET('common.page', 'account');
+		});
+
+		// Important: this helper is here for localization
+		// The JavaScript below contains bad code because the code contains Total.js localization elements (but it works when)
+		Tangular.register('time', function(value) {
+			var diff = Date.now() - value.parseDate().getTime();
+			var minutes = ((diff / 1000) / 60) >> 0;
+
+			if (minutes < 60) {
+				if (minutes < 3)
+					return '@(now)';
+				return @(minutes + ' minutes ago');
+			}
+
+			var hours = (minutes / 60) >> 0;
+			if (hours < 24)
+				return @(hours + ' ' + Tangular.helpers.pluralize(hours, 'hours', 'hour', 'hours', 'hours') + ' ago');
+
+			var days = (hours / 24) >> 0;
+			if (days < 30)
+				return @(days + ' ' + Tangular.helpers.pluralize(days, 'days', 'day', 'days', 'days') + ' ago');
+
+			var months = (days / 29) >> 0;
+			if (months < 12)
+				return @(months + ' ' + Tangular.helpers.pluralize(months, 'months', 'month', 'months', 'months') + ' ago');
+
+			var years = (month / 12) >> 0;
+			return @(years + ' ' + Tangular.helpers.pluralize(years, 'years', 'year', 'years', 'years') + ' ago');
+		});
+	</script>
+
+
 </body>
 </html>
