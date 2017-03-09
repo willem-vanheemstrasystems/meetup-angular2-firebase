@@ -10,6 +10,8 @@ mail.address.from               : your@yourwebsite.com
 mail.address.reply              : your@yourwebsite.com
 mail.address.bcc                :
 
-directory-public-virtual        : /public/ // /client1/dist/
-directory-public                : /public/ // /client1/dist/
+# directory-public-virtual        : /client1/dist/
+directory-public-virtual        : /public/
+# directory-public                : /client1/dist/
+directory-public                : /public/
 allow-compile-script            : false

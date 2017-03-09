@@ -54,18 +54,18 @@ export class ProductsViewerComponent implements OnInit {
 
 	viewProduct(productId: number) {
 		console.log("ProductsViewerComponent - viewProduct called with productId = ", productId);
-    this.router.navigate(['/client1/product', productId]);
+    this.router.navigate(['/product', productId]);
 	}
 
 	editProduct(productId: number) {
 		console.log("ProductsViewerComponent - editProduct called with productId = ", productId);
-    this.router.navigate(['/client1/product', productId, 'edit']);
+    this.router.navigate(['/product', productId, 'edit']);
 	}
 
   onPageChange(offset) {
 		console.log("ProductsViewerComponent - onPageChange called with offset = ", offset);
     this.offset = offset;
-    this.router.navigate(['/client1/products/page', (offset / this.limit) + 1]);
+    this.router.navigate(['/products/page', (offset / this.limit) + 1]);
   }
 
 }

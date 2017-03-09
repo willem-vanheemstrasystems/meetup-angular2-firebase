@@ -8,14 +8,14 @@ import { ProductViewerComponent } from './products/product-viewer/product-viewer
 import { ProductEditorComponent } from './products/product-editor/product-editor.component';
 
 const routes: Routes = [
-  { path: 'client2', component: HomeComponent },
-  { path: 'client2/home', component: HomeComponent },
-  { path: 'client2/about', component: AboutComponent },
-  { path: 'client2/store', component: StoreComponent },
-	{ path: 'client2/products', redirectTo: 'client1/products/page/1', pathMatch: 'full' },
-	{ path: 'client2/products/page/:nr', component: ProductsViewerComponent },
-  { path: 'client2/product/:id', component: ProductViewerComponent },
-	{ path: 'client2/product/:id/edit', component: ProductEditorComponent }
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'store', component: StoreComponent },
+	{ path: 'products', redirectTo: 'products/page/1', pathMatch: 'full' },
+	{ path: 'products/page/:nr', component: ProductsViewerComponent },
+  { path: 'product/:id', component: ProductViewerComponent },
+	{ path: 'product/:id/edit', component: ProductEditorComponent }
 ];
 
 export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash:true});

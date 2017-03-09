@@ -34,7 +34,7 @@ export class ProductEditorComponent implements OnInit {
 			? this.productsService.update(product)
 			: this.productsService.insert(product))
 			.subscribe(product => {
-				this.router.navigate(["/client1/products/"]);
+				this.router.navigate(["/products/"]);
 			});
 		
 	}
@@ -43,13 +43,13 @@ export class ProductEditorComponent implements OnInit {
 
 		if (confirm('Are you sure you want to delete this product?')) {
 			this.productsService.delete(product.id).subscribe(product =>
-				this.router.navigate(["/client1/products/"]));
+				this.router.navigate(["/products/"]));
 		}
 
 	}
 
 	cancelProduct(product: ProductModel) {
-		this.router.navigate(["/client1/products/"]);
+		this.router.navigate(["/products/"]);
 	}
 
 

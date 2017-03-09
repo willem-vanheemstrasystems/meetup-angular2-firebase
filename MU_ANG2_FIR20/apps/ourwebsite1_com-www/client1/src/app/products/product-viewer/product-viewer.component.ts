@@ -28,11 +28,11 @@ export class ProductViewerComponent implements OnInit {
   }
 
 	editProduct(productId: number) {
-		this.router.navigate(["/client1/product", productId, "edit"]);
+		this.router.navigate(["/product", productId, "edit"]);
 	}
 
 	returnToList() {
-		this.router.navigate(["/client1/products/"]);
+		this.router.navigate(["/products/"]);
 	}
 
 }
