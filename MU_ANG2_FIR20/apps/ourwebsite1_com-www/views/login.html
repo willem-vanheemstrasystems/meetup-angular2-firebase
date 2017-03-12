@@ -72,11 +72,15 @@
 	var common = { form: 'signin' };
 
 	function doLogin() {
+		console.log("login.html - doLogin called");
 		if (BLOCKED('login', 3000))
 			return;
 		RESET('signin.*');
 		SETTER('loading', 'show');
 		AJAX('POST /internal/login/', signin, function(response) {
+
+            console.log("login.html - doLogin, response  = ", response);
+
 			SETTER('loading', 'hide', 1000);
 			SET('signin.response', response);
 			if (!response.success)

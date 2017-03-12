@@ -2548,6 +2548,35 @@ npm uninstall -g angular-cli @angular/cli
 npm cache clean
 npm install -g @angular/cli@latest
 ```
+//  NEXT TIME YOU RUN: ng serve YOU WILL BE PROMPTED WITH:
+
+You are running version 6.2.1 of Node, which will not be supported in future
+versions of the CLI. The official Node version that will be supported is 6.9 and greater.
+
+To disable this warning use "ng set --global warnings.nodeDeprecation=false".The package "angular-cli" has been renamed to "@angular/
+cli". The old package will be deprecated soon.
+
+Please take the following steps to avoid issues:
+
+```javascript
+npm uninstall --save-dev angular-cli
+npm install --save-dev @angular/cli@latest
+```
+
+Update to the latest Node.js version, using the helper 'n' on Linux or Mac:
+
+[For windows, just download the installer from nodejs.org]
+
+```javascript
+node -v
+npm cache clean -f
+npm install -g n
+n stable
+node -v
+```
+
+// FOLLOW ABOVE INSTRUCTIONS
+//
 //**********************************************************************************
 
 #TotalJS

@@ -45,6 +45,7 @@ function json_schema_save() {
 }
 
 function json_schema_exec() {
+	console.log("controllers/internal.js, json_schema_exec called");
 	var self = this;
 	self.$workflow('exec', self, self.callback());
 }
