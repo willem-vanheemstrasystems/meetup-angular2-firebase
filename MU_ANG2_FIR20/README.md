@@ -2537,6 +2537,18 @@ ng serve
 // to be continued...
 
 
+//***************************************** NOTE ***********************************
+//
+//  THERE IS A NEW VERSION OF ANGULAR-CLI
+//
+//  INSTALL AS FOLLOWS:
+
+```javascript
+npm uninstall -g angular-cli @angular/cli
+npm cache clean
+npm install -g @angular/cli@latest
+```
+//**********************************************************************************
 
 #TotalJS
 
