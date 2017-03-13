@@ -18,6 +18,8 @@ NEWSCHEMA('Login').make(function(schema) {
 
 	schema.addWorkflow('exec', function(error, model, controller, callback) {
 
+        console.log("schema-login.js schema.addWorkflow - model = ", model);
+
 		var err = protection(controller);
 		if (err) {
 			error.push(err);
@@ -25,12 +27,17 @@ NEWSCHEMA('Login').make(function(schema) {
 		}
 
 		var user = USERS.findItem('login', model.login);
+
+        console.log("schema-login.js schema.addWorkflow - user = ", user);
+
 		if (!user || user.password !== model.password) {
+			console.log("schema-login.js schema.addWorkflow error-login");
 			error.push('error-login');
 			return callback();
 		}
 
 		if (user.blocked) {
+			console.log("schema-login.js schema.addWorkflow error-login-blocked");
 			error.push('error-login-blocked');
 			return callback();
 		}
@@ -39,6 +46,7 @@ NEWSCHEMA('Login').make(function(schema) {
 		controller.cookie(CONFIG('cookie'), F.encrypt({ id: user.id, resetcounter: user.resetcounter, expire: F.datetime.add(CONFIG('cookie-expiration')).getTime() }), '5 days');
 
 		// Sends a response
+		console.log("schema-login.js schema.addWorkflow SUCCESS(true)");
 		callback(SUCCESS(true));
 	});
 

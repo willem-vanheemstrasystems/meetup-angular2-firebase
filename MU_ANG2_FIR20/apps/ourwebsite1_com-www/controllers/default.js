@@ -27,6 +27,7 @@ function view_login() {
 	}
 
 	GETSCHEMA('Login').workflow2('token', self, function(err, response) {
+		console.log("default.js - function view_login GETSCHEMA('Login'), err = ", err, ", response = ", response);
 		if (err)
 			return self.view('login');
 		self.redirect('/account/?password=1');

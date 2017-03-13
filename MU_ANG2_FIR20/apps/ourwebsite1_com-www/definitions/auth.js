@@ -1,6 +1,6 @@
 // A simple authorization delegate
 F.onAuthorize = function(req, res, flags, next) {
-
+    console.log("definitions/auth.js - F.onAuthorize called");
 	var cookie = req.cookie(CONFIG('cookie'));
 	if (!cookie)
 		return next(false);
@@ -18,7 +18,7 @@ F.onAuthorize = function(req, res, flags, next) {
 	next(true, session);
 };
 
-// Sets online=false fo all users each 5 minute
+// Sets online=false for all users each 5 minute
 F.on('service', function(interval) {
 	if (interval % 5 !== 0)
 		return;

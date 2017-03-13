@@ -166,6 +166,7 @@ function json_dashboard_widgets_save() {
 }
 
 function json_account_save() {
+	console.log("controllers/internal.js, json_account_save called");
 	var self = this;
 	self.$save(self, self.callback());
 }
