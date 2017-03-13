@@ -7,7 +7,7 @@ global.APPLICATIONS = [];
 function Application() {
 
 	// openplatform.json:
-	this.id = 'url-to-openplatform.json';
+	this.id = 'openplatform.json';  // WAS url-to-openplatform.json
 	this.name = '';
 	this.icon = '';
 	this.version = '';
