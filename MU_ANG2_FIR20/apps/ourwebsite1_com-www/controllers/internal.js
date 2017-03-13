@@ -38,6 +38,7 @@ exports.install = function() {
 };
 
 function json_schema_save() {
+	console.log("controllers/internal.js, json_schema_save called");	
 	var self = this;
 	if (!self.user.superadmin)
 		return self.invalid().push('error-permission');
@@ -51,15 +52,18 @@ function json_schema_exec() {
 }
 
 function json_schema_delete() {
+	console.log("controllers/internal.js, json_schema_delete called");	
 	var self = this;
 	self.$remove(self.body.id, self.callback());
 }
 function json_dashboard_applications() {
+	console.log("controllers/internal.js, json_dashboard_applications called");
 	var self = this;
 	self.json(self.user.getApplications());
 }
 
 function json_dashboard_notifications() {
+	console.log("controllers/internal.js, json_dashboard_notifications called");	
 	var self = this;
 	self.user.getNotifications(function(err, response) {
 		if (err)
@@ -69,6 +73,7 @@ function json_dashboard_notifications() {
 }
 
 function json_dashboard_widgets_content(id) {
+	console.log("controllers/internal.js, json_dashboard_widgets_content called");	
 	var self = this;
 	var arr = id.split('X');
 
@@ -100,6 +105,7 @@ function json_dashboard_widgets_content(id) {
 }
 
 function json_users_query() {
+	console.log("controllers/internal.js, json_users_query called");	
 	var self = this;
 	if (!self.user.superadmin)
 		return self.invalid().push('error-permission');
@@ -111,6 +117,7 @@ function json_users_query() {
 }
 
 function json_applications_query() {
+	console.log("controllers/internal.js, json_applications_query called");		
 	var self = this;
 	if (!self.user.superadmin)
 		return self.invalid().push('error-permission');
@@ -118,6 +125,7 @@ function json_applications_query() {
 }
 
 function json_applications_download() {
+	console.log("controllers/internal.js, json_applications_download called");		
 	var self = this;
 
 	if (!self.user.superadmin)
@@ -133,6 +141,7 @@ function json_applications_download() {
 }
 
 function json_upload_photo() {
+	console.log("controllers/internal.js, json_upload_photo called");	
 	var self = this;
 	var file = self.files[0];
 	var email = self.user.superadmin ? self.body.email || '' : self.user.email;
@@ -161,6 +170,7 @@ function json_upload_photo() {
 }
 
 function json_dashboard_widgets_save() {
+	console.log("controllers/internal.js, json_dashboard_widgets_save called");	
 	var self = this;
 	self.$save(self, self.callback());
 }
@@ -172,6 +182,7 @@ function json_account_save() {
 }
 
 function json_dashboard_users() {
+	console.log("controllers/internal.js, json_dashboard_users called");	
 	var self = this;
 	var arr = [];
 
@@ -186,6 +197,7 @@ function json_dashboard_users() {
 }
 
 function json_applications_refresh() {
+	console.log("controllers/internal.js, json_applications_refresh called");	
 	var self = this;
 	var app = APPLICATIONS.findItem('id', self.query.id);
 	if (!app)
@@ -194,11 +206,13 @@ function json_applications_refresh() {
 }
 
 function json_settings_read() {
+	console.log("controllers/internal.js, json_settings_read called");	
 	var self = this;
 	self.$read(self.callback());
 }
 
 function json_settings_save() {
+	console.log("controllers/internal.js, json_settings_save called");	
 	var self = this;
 	self.$async(self.callback(), 1).$workflow('smtp', self).$save(self);
 }
