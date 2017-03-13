@@ -15,6 +15,7 @@ $(document).ready(function() {
 });
 
 $(window).on('message', function(e) {
+	console.log("public/js/default.js on message triggered");
 	var data = JSON.parse(e.originalEvent.data);
 	if (!data.openplatform)
 		return;
@@ -23,6 +24,7 @@ $(window).on('message', function(e) {
 	var tmp;
 	var app;
 
+	console.log("public/js/default.js on message - data.type = ", data.type);
 	switch (data.type) {
 
 		case 'profile':
@@ -232,6 +234,7 @@ Tangular.register('photo', function(value) {
 });
 
 function success() {
+	console.log("public/js/default.js on message triggered");
 	var el = $('#success');
 	SETTER('loading', 'hide', 500);
 	el.delay(500).fadeIn(100, function() {
