@@ -1,1 +1,40 @@
-[]
+[{
+	"id": "openplatform.json",
+	"name": "",
+	"icon": "",
+	"version": "",
+	"author": "",
+	"description": "",
+	"email": "",
+	"url": "",                // Application URL
+	"url_session": "",        // URL to create a session
+	"url_register": "",
+	"url_unregister": "",
+	"url_subscribe": "",
+	"responsive": false,
+	"service": false,
+
+	// internal properties:
+	"status": "",
+	"search": "",
+	"internal": 0,
+	"title": "",
+	"secret": "",
+	"config": "",             // Custom configuration
+
+	"online": false,          // Current application state according to the `openplatform` url address
+	"notifications": false,   // Can create notifications for users
+	"serviceworker": false,   // Can communicate via API
+	"users": false,           // Can read all users?
+	"applications": false,    // Would be read all applications?
+	"mobile": false,          // Is to be visible for mobile devices?
+
+	"events": null,           // Registered events for service worker
+	"origin": null, 		  // Can contains only IP address
+	"widgets": null,          // Widgets (Object Array)
+	"roles": null,            // Roles (Stirng Array)
+
+	// Meta data
+	"datecreated": null,
+	"dateupdated": null
+}]
