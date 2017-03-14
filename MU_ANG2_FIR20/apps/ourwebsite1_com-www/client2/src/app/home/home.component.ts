@@ -10,6 +10,8 @@ export class HomeComponent implements OnInit {
   isDarkTheme: boolean = false;
   lastDialogResult: string;
 
+  fullImagePath: string;
+
   foods: any[] = [
     {name: 'Pizza', rating: 'Excellent'},
     {name: 'Burritos', rating: 'Great'},
@@ -23,6 +25,8 @@ export class HomeComponent implements OnInit {
     setInterval(() => {
       this.progress = (this.progress + Math.floor(Math.random() * 4) + 1) % 100;
     }, 200);
+
+    this.fullImagePath = "assets/images/placeholder.png";
   }
 
   ngOnInit() {
