@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Pakketkeuze Tool</h4>
+        <p>In 10 seconden bij jouw ideale pakket!</p>
+      </div>
+      <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+       <div formArrayName="questions">
+          <div *ngFor="let question of myForm.controls.questions.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+              <span>Vraag {{i + 1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i)"></span>
+            </div>
+            <!-- VRAAG 1 -->            
+            <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 1">
+              <div class="form-group col-xs-6">
+                <label>{{questions[i].display}}</label>
+                <div *ngFor="let use of uses">
+                  <input type="radio" class="form-control" formControlName="answer" [value]=use>{{use.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div> 
+             <br/>
+            </div><!-- eof VRAAG 1 -->
+            <!-- VRAAG 2 -->
+            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 2">
+              <div class="form-group col-xs-6">
+                <label>{{questions[i].display}}</label>
+                <div *ngFor="let profession of professions">
+                  <input type="radio" class="form-control" formControlName="answer" [value]="profession">{{profession.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div>
+             <br/>
+            </div><!-- eof VRAAG 2 -->
+            <!-- VRAAG 3 -->
+            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 3">
+              <div class="form-group col-xs-6">
+                <label>{{questions[i].display}}</label>
+                <div *ngFor="let usage of usages">
+                  <input type="radio" class="form-control" formControlName="answer" [value]="usage">{{usage.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div>
+             <br/>
+            </div><!-- eof VRAAG 3 -->
+            <!-- VRAAG 4 -->
+            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 4">
+              <div class="form-group col-xs-6">
+                <label>{{questions[i].display}}</label>
+                <div *ngFor="let invoice of invoices">
+                  <input type="radio" class="form-control" formControlName="answer" [value]="invoice">{{invoice.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div>
+             <br/>
+            </div><!-- eof VRAAG 4 -->
+            <!-- VRAAG 5 -->
+            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 5">
+              <div class="form-group col-xs-6">
+                <label>{{questions[i].display}}</label>
+                <div *ngFor="let administration of administrations">
+                  <input type="radio" class="form-control" formControlName="answer" [value]="administration">{{administration.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div>
+             <br/>
+            </div><!-- eof VRAAG 5 -->
+            <!-- VRAAG 6 -->
+            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 6">
+              <div class="form-group col-xs-6">
+                <label>{{questions[i].display}}</label>
+                <div *ngFor="let functionality of functionalities">
+                  <input type="radio" class="form-control" formControlName="answer" [value]="functionality">{{functionality.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div>
+             <br/>
+            </div><!-- eof VRAAG 6 -->
+            <!-- GEEN VOLGENDE VRAAG -->
+          </div>
+        </div>
+        <br/>
+
+        <div class="margin-20">
+          <a (click)="addQuestion()" style="cursor: default" *ngIf="moreQuestions">
+            Volgende vraag
+          </a>
+          <a (click)="showRecommendations()" style="cursor: default" *ngIf="!moreQuestions && !showRecommendation">
+            Bekijk advies
+          </a>          
+        </div>
+
+        <div class="margin-20" *ngIf="showRecommendation">
+            Het geselecteerde pakket
+        </div>
+
+        <br/>
+        <!--<div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+        </div>-->
+        <div class="clearfix"></div>
+        <br/>
+        <hr/>
+        <div class="margin-20">
+          <div>Formulier details:-</div>
+          <pre>Is het formulier geldig?: <br>{{myForm.valid | json}}</pre>
+          <pre>Formulier waarden: <br>{{myForm.value | json}}</pre>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

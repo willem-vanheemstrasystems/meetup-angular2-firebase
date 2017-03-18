@@ -1,0 +1,10 @@
+<!--<div id="demo">-->
+<md-icon role="img" class="material-icons" aria-label="apps">apps</md-icon>
+<span class="display-1">Product</span><br/>
+<app-product-form
+	[product]="product"
+	(saveProduct)="saveProduct($event)"
+	(deleteProduct)="deleteProduct($event)"
+	(cancelProduct)="cancelProduct($event)">
+</app-product-form>
+<!--</div>-->

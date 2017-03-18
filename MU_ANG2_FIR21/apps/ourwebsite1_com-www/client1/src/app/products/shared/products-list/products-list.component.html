@@ -1,0 +1,45 @@
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <input type="text" #listFilter (keyup)="0" class="form-control" id="searchInput1" required>
+      <span class="form-highlight"></span>
+      <span class="form-bar"></span>
+      <label class="search-label" for="searchInput1">Search</label>
+    </div>
+  </form>      
+
+  <p>Results: {{ count }}</p>
+
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+  <div class="table-responsive-vertical shadow-z-1">
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Link</th>
+          <th>Status</th>
+          <th>View</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products | filter:listFilter.value">
+          <td data-title="ID">{{ product.id }}</td>
+          <td data-title="Title">{{ product.title }}</td>
+          <td data-title="Link">
+            <a href="{{ product.link }}" target="_blank">IMDB</a>
+          </td>
+          <td data-title="Status">{{ product.status }}</td>
+          <td data-title="View">
+				    <button type="button" class="btn btn-raised btn-default" (click)="viewProductButton(product.id)">View</button>
+          </td>
+          <td data-title="Edit">
+				    <button type="button" class="btn btn-raised btn-default" (click)="editProductButton(product.id)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,11 @@
+<div id="demo">
+<md-icon role="img" class="material-icons" aria-label="apps">apps</md-icon>
+<span class="display-1">Questionnaire</span><br/>
+<div class="center">
+  <app-loader [loading]="loading" [failed]="failed"></app-loader>
+</div>
+<app-questionnaire-list
+  [questions]="questions"
+  [count]="count">
+</app-questionnaire-list>
+</div>

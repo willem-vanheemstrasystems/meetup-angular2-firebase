@@ -1,0 +1,170 @@
+<div class="container-empty"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<section class="fade">
+				<label><i class="fa fa-bell"></i>@(Notifications)</label>
+				<div class="padding">
+					<div data-component="notifications" data-component-path="dashboard.notifications" data-source="dashboard.applications" data-label-empty="@(You don't have any notifications.)" data-label-clear="@(Clear all notifications)"></div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-8">
+
+			<section data-component="visible" data-component-path="dashboard.applications" data-if="value.findIndex('running', true) !== -1" class="hidden">
+				<label><i class="fa fa-spin fa-refresh"></i>@(Running applications)</label>
+				<div class="padding">
+					<div data-component="applications" data-component-path="dashboard.applications" data-run="dashboard.current" data-running="true"></div>
+				</div>
+			</section>
+
+			<div data-component="widgets" data-component-path="user.widgets" data-source="dashboard.applications"></div>
+
+			<section data-component="visible" data-component-path="dashboard.applications" data-if="value.length" class="hidden">
+				<div class="section-button hidden" data-component="visible" data-component-path="dashboard.canwidgets"><a href="javascript:void(0)" data-component="click" data-component-path="common.form" data-value="widgets"><i class="fa fa-bar-chart"></i>@(Widgets)</a></div>
+				<label><i class="fa fa-th"></i>@(Applications)</label>
+				<div class="padding">
+					<div data-component="applications" data-component-path="dashboard.applications" data-run="dashboard.current"></div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<div data-component="processes" data-component-path="dashboard.current" data-source="dashboard.applications"></div>
+
+<script>
+	var dashboard = {};
+
+	dashboard.current = '';
+	dashboard.applications = [];
+	dashboard.notifications = [];
+	dashboard.notification = null;
+	dashboard.canwidgets = false;
+	dashboard.ready = false;
+
+	function dashboard_refresh() {
+
+		var running = {};
+
+		for (var i = 0, length = dashboard.applications.length; i < length; i++) {
+			var app = dashboard.applications[i];
+			if (app.running)
+				running[app.id] = app.token;
+		}
+
+		AJAX('GET /internal/dashboard/applications/', function(response, err) {
+
+			if (isError(err))
+				return;
+
+			dashboard.canwidgets = false;
+
+			var def;
+
+			for (var i = 0, length = response.length; i < length; i++) {
+				var a = response[i];
+				var token = running[a.id];
+				a.running = token ? true : false;
+				delete running[a.id];
+
+				if ('#' + a.linker === location.hash)
+					def = a;
+
+				// Kills the app when is offline or when the token is changed
+				if ((a.running && !a.online) || (token && token !== a.token)) {
+					a.running = false;
+					SETTER('processes', 'kill', a.id);
+				}
+
+				if (!a.widgets || !a.widgets.length || dashboard.canwidgets)
+					continue;
+
+				dashboard.canwidgets = true;
+			}
+
+			SET('dashboard.applications', response);
+			NOTIFY('dashboard.canwidgets');
+
+			if (!dashboard.ready && def) {
+				SETTER('loading', 'show');
+				SET('dashboard.current', def.id, 3000);
+			}
+
+			dashboard.ready = true;
+			setTimeout(function() {
+				Object.keys(running).forEach(function(id) {
+					SETTER('processes', 'kill', id);
+				});
+			}, 1000);
+		});
+	}
+
+	function dashboard_notifications() {
+		AJAX('GET /internal/dashboard/notifications/', dashboard_notifications_process);
+	}
+
+	function dashboard_notifications_process(response, err) {
+
+		if (isError(err))
+			return;
+
+		var arr = [];
+
+		for (var i = 0, length = response.length; i < length; i++) {
+			var item = response[i];
+			if (item.internal) {
+				var app = dashboard.applications.findItem('internal', item.internal);
+				if (!app)
+					continue;
+			}
+			arr.push(item);
+		}
+
+		if (!arr.length)
+			return;
+
+		SETTER('audio', 'play', '/sounds/beep.mp3');
+		PUSH('dashboard.notifications', arr);
+
+		if (!user.notifications || !window.Notification || window.Notification.permission !== 'granted' || !FIND('processes').is()) {
+			if (common.isfocused && jR.url === '/')
+				return;
+		}
+
+		var url = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+
+		if (dashboard.notification) {
+			dashboard.notification.onclick = null;
+			dashboard.notification = null;
+		}
+
+		dashboard.notification = new Notification(document.title, { icon: url + '/img/system.png', body: '@(You have new notifications ({0}x).)'.format(arr.length) });
+		dashboard.notification.onclick = function() {
+			SETTER('processes', 'minimize');
+			window.focus();
+			if (jR.url !== '/')
+				jR.redirect('/');
+			if (!dashboard.notification)
+				return;
+			dashboard.notification.close();
+			dashboard.notification = null;
+		};
+
+		setTimeout(function() {
+			if (!dashboard.notification)
+				return;
+			dashboard.notification.close();
+			dashboard.notification = null;
+		}, 10000);
+	}
+
+	setInterval(dashboard_notifications, 1000 * 30);
+	setTimeout(dashboard_notifications, 1000);
+
+	// Each 3 minutes will be refresh
+	setInterval(dashboard_refresh, 1000 * 60 * 3);
+	dashboard_refresh();
+
+</script>
+

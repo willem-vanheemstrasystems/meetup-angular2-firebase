@@ -1,0 +1,14 @@
+<div [formGroup]="questionForm">
+    <div class="form-group col-xs-6">
+        <label>Gebruik je reeds Minox?</label>
+        <small [hidden]="questionForm.controls.street.valid" class="text-danger">
+            Antwoord is vereist
+        </small>
+    </div>
+    <div class="form-group col-xs-6">
+        <label>Ben je ondernemer of accountant?</label>
+        <small [hidden]="questionForm.controls.street.valid" class="text-danger">
+            Antwoord is vereist
+        </small>
+    </div>    
+</div>
