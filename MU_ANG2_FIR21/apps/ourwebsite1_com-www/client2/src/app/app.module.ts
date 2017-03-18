@@ -14,6 +14,8 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { SearchListPaginationComponent } from './shared/search-list-pagination/search-list-pagination.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { QuestionsService } from './services/questions.service';
+import { QuestionnaireService } from './services/questionnaire.service';
 import { DataService } from './services/data.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { StoreComponent } from './store/store.component';
@@ -23,6 +25,15 @@ import { ProductViewerComponent } from './products/product-viewer/product-viewer
 import { ProductEditorComponent } from './products/product-editor/product-editor.component';
 import { ProductDetailsComponent } from './products/shared/product-details/product-details.component';
 import { ProductFormComponent } from './products/shared/product-form/product-form.component';
+import { QuestionnaireViewerComponent } from './questionnaires/questionnaire-viewer/questionnaire-viewer.component';
+import { QuestionnaireListComponent } from './questionnaires/shared/questionnaire-list/questionnaire-list.component';
+import { QuestionComponent } from './questions/question/question.component';
+import { QuestionsViewerComponent } from './questions/questions-viewer/questions-viewer.component';
+import { QuestionsListComponent } from './questions/shared/questions-list/questions-list.component';
+import { QuestionViewerComponent } from './questions/question-viewer/question-viewer.component';
+import { QuestionEditorComponent } from './questions/question-editor/question-editor.component';
+import { QuestionDetailsComponent } from './questions/shared/question-details/question-details.component';
+import { QuestionFormComponent } from './questions/shared/question-form/question-form.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +52,16 @@ import { ProductFormComponent } from './products/shared/product-form/product-for
     ProductViewerComponent,
     ProductEditorComponent,
     ProductDetailsComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    QuestionComponent,
+    QuestionnaireViewerComponent,
+    QuestionnaireListComponent,
+    QuestionsViewerComponent,
+    QuestionsListComponent,
+    QuestionViewerComponent,
+    QuestionEditorComponent,
+    QuestionDetailsComponent,
+    QuestionFormComponent    
   ],
   entryComponents: [DialogContent],
   imports: [
@@ -54,7 +74,7 @@ import { ProductFormComponent } from './products/shared/product-form/product-for
       apiKey: 'AIzaSyBJa7gl2Qf4grJI2--AXdptakh_6YwOTmw'
     })    
   ],
-  providers: [DataService],
+  providers: [DataService, QuestionsService, QuestionnaireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
