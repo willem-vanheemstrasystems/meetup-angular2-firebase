@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from '@angular/material';
@@ -68,6 +68,7 @@ import { QuestionFormComponent } from './questions/shared/question-form/question
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,    
     AppRoutingModule,
     MaterialModule,
     AgmCoreModule.forRoot({
