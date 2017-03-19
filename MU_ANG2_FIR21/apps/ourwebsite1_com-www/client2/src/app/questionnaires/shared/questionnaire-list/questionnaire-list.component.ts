@@ -33,6 +33,16 @@ export class QuestionnaireListComponent implements OnInit {
 
   @Input()
 	questions: QuestionModel[]; // REPLACES ABOVE 'questions'
+  // set questions(value){
+  //   this.questions = [
+  //     { id: '1', display: 'Gebruik je reeds Minox?' },
+  //     { id: '2', display: 'Ben je ondernemer of accountant?' },
+  //     { id: '3', display: 'Waarvoor ga je Minox gebruiken?' },
+  //     { id: '4', display: 'Hoeveel facturen maak je per jaar?' },
+  //     { id: '5', display: 'Hoeveel administraties voer je?' },
+  //     { id: '6', display: 'Hoe uitgebreid wens je de functionaliteit voor het boekhouden?' },
+  //   ];
+  // }
 
   @Input()
 	count: number;
@@ -40,8 +50,8 @@ export class QuestionnaireListComponent implements OnInit {
   // Gebruik je reeds Minox?
   public uses = [
     { id: '1', display: 'Nee' },
-    { id: '2', display: 'Minox Online' },
-    { id: '3', display: 'Minox voor Windows' } 
+    { id: '2', display: 'Speedo Online' },
+    { id: '3', display: 'Speedo voor Windows' } 
   ];
 
   // Ben je ondernemer of accountant?

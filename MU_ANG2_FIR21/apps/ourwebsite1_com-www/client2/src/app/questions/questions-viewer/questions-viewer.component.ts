@@ -39,6 +39,7 @@ export class QuestionsViewerComponent implements OnInit {
 		this.loading = true;
 		this.failed = false;
 		this.questionsService.getAll(offset, limit).subscribe(result => {
+			console.log("QuestionsViewerComponent - getAll, result = ", result);
 	    this.questions = result['questions'];
 	    this.count = result['count'];	
 			this.loading = false;
