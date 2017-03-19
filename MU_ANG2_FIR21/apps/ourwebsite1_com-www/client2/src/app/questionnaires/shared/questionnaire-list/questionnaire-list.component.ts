@@ -15,34 +15,12 @@ export class QuestionnaireListComponent implements OnInit {
   filterQuestions: string = '';
 
   public myForm: FormGroup;
-
   public moreQuestions: boolean = true;
-
   public totalQuestions: number = 6; // Set as is appropriate
-
   public showRecommendation: boolean = false;
 
-  // public questions: any = [
-  //   { id: '1', display: 'Gebruik je reeds Minox?' },
-  //   { id: '2', display: 'Ben je ondernemer of accountant?' },
-  //   { id: '3', display: 'Waarvoor ga je Minox gebruiken?' },
-  //   { id: '4', display: 'Hoeveel facturen maak je per jaar?' },
-  //   { id: '5', display: 'Hoeveel administraties voer je?' },
-  //   { id: '6', display: 'Hoe uitgebreid wens je de functionaliteit voor het boekhouden?' },
-  // ];
-
   @Input()
-	questions: QuestionModel[]; // REPLACES ABOVE 'questions'
-  // set questions(value){
-  //   this.questions = [
-  //     { id: '1', display: 'Gebruik je reeds Minox?' },
-  //     { id: '2', display: 'Ben je ondernemer of accountant?' },
-  //     { id: '3', display: 'Waarvoor ga je Minox gebruiken?' },
-  //     { id: '4', display: 'Hoeveel facturen maak je per jaar?' },
-  //     { id: '5', display: 'Hoeveel administraties voer je?' },
-  //     { id: '6', display: 'Hoe uitgebreid wens je de functionaliteit voor het boekhouden?' },
-  //   ];
-  // }
+	public questions: QuestionModel[] = [];  //WORKS!
 
   @Input()
 	count: number;
@@ -91,11 +69,10 @@ export class QuestionnaireListComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
 		protected questionsService: QuestionsService 
-    //protected questionsService: QuestionsService
   ) { }
 
   ngOnInit() {
-    console.log("QuestionnaireListComponent - ngOnInit(), this.questions", this.questions);	
+    console.log("QuestionnaireListComponent - ngOnInit()");
     this.myForm = this._fb.group({
       // name: ['', [Validators.required, Validators.minLength(5)]],
       questions: this._fb.array([

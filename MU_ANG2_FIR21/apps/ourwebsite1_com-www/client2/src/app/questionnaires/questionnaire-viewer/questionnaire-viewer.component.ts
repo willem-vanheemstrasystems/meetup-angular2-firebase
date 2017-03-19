@@ -12,22 +12,13 @@ import { QuestionnaireListComponent } from '../shared/questionnaire-list/questio
 })
 export class QuestionnaireViewerComponent implements OnInit {
 
-   count: number = 0;
-   offset: number = 0;
-   limit: number = 9999; // choose an appropriate number
-   range: number = 0; // not enough space for more
-   questions: QuestionModel[];
-   loading: boolean = false;
-   failed: boolean = false;
-
-//   public questions: any = [
-//     { id: '1', display: 'Gebruik je reeds Minox, echt?' },
-//     { id: '2', display: 'Ben je ondernemer of accountant?' },
-//     { id: '3', display: 'Waarvoor ga je Minox gebruiken?' },
-//     { id: '4', display: 'Hoeveel facturen maak je per jaar?' },
-//     { id: '5', display: 'Hoeveel administraties voer je?' },
-//     { id: '6', display: 'Hoe uitgebreid wens je de functionaliteit voor het boekhouden?' }
-//   ];
+  count: number = 0;
+  offset: number = 0;
+  limit: number = 9999; // choose an appropriate number
+  range: number = 0; // not enough space for more
+  questions: QuestionModel[] = [];
+  loading: boolean = false;
+  failed: boolean = false;
 
   constructor(
 		private router: Router,
@@ -44,17 +35,13 @@ export class QuestionnaireViewerComponent implements OnInit {
   }
 
   getAll(offset: number, limit: number) {
-    console.log("QuestionnaireViewerComponent - getAll, offset = ", offset, " limit = ", limit);
     this.questions = [];
     this.loading = true;
     this.failed = false;
     this.questionnaireService.getAll(offset, limit).subscribe(result => {
-      console.log("QuestionnaireViewerComponent - getAll - result = ", result);
       this.questions = result['questions'];
-      console.log("QuestionnaireViewerComponent - getAll - this.questions = ", this.questions);
-      this.count = result['count'];
-	  console.log("QuestionnaireViewerComponent - getAll - this.count = ", this.count);		
-	  this.loading = false;
+      this.count = result['count'];	
+	    this.loading = false;
     }, () => {
       this.loading = false;
       this.failed = true;
