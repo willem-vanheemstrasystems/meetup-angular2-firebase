@@ -25,6 +25,9 @@ export class QuestionnaireListComponent implements OnInit {
   @Input()
 	count: number;
 
+	@Output()
+	addQuestion: EventEmitter<FormArray> = new EventEmitter<FormArray>();
+
   // Gebruik je reeds Minox?
   public uses = [
     { id: '1', display: 'Nee' },
@@ -88,18 +91,30 @@ export class QuestionnaireListComponent implements OnInit {
     });
   }
 
-  addQuestion() {
+  // addQuestion() {
+  //   const control = <FormArray>this.myForm.controls['questions'];
+  //   control.push(this.initQuestion());
+  //   for(let i=0; i < control.value.length; i++) {
+  //     control.value[i].question = this.questions[i];
+  //   }
+  //   if(control.length >= this.totalQuestions) {
+  //     this.moreQuestions = false;
+  //   } else {
+  //     this.moreQuestions = true;
+  //   }
+  // }
+
+  addQuestionButton() {
+    console.log("QuestionnaireListComponent - addQuestionButton()");
     const control = <FormArray>this.myForm.controls['questions'];
     control.push(this.initQuestion());
     for(let i=0; i < control.value.length; i++) {
       control.value[i].question = this.questions[i];
     }
-    if(control.length >= this.totalQuestions) {
-      this.moreQuestions = false;
-    } else {
-      this.moreQuestions = true;
-    }
-  }
+    control.controls.pop(); // Removes the 'empty question, empty answer' FormGroup from the array
+    console.log("QuestionnaireListComponent - addQuestionButton(), AFTER pop() control.controls = ", control.controls);
+		this.addQuestion.emit(control);
+	}
 
   showRecommendations() {
     const control = <FormArray>this.myForm.controls['questions'];      

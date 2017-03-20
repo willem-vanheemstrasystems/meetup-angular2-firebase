@@ -6,6 +6,7 @@
 </div>
 <app-questionnaire-list
   [questions]="questions"
-  [count]="count">
+  [count]="count"
+  (addQuestion)="addQuestion($event)">
 </app-questionnaire-list>
 </div>

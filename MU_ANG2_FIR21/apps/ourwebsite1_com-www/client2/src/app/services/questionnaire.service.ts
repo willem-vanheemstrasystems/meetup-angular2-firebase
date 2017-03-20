@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import "rxjs/add/operator/map";
 
 import { QuestionModel } from '../models/question.model';
+import { QuestionAnswerModel } from '../models/questionAnswer.model';
 //START: ADDED
 import { QuestionnaireListResult } from "./questionnaire-list-result.interface";
 import { QuestionsBase } from "./questions.base";
@@ -56,6 +57,13 @@ export class QuestionnaireService {
   insert(question: QuestionModel): Observable<QuestionModel> {
     return this.http.post(`${this.baseUrl}/questions/`, JSON.stringify(question), this.requestOptions).map(res => res.json()).catch(this.handleError);
   }
+
+  insertAll(questionsAnswers: QuestionAnswerModel[]): Observable<QuestionnaireService> {
+		console.log("QuestionnaireService - insertAll, questionsAnswers = ", questionsAnswers);	
+    let myJSON = JSON.stringify(questionsAnswers);
+		console.log("QuestionnaireService - insertAll, myJSON = ", myJSON);
+    return this.http.post(`${this.baseUrl}/questionnaire/`, myJSON, this.requestOptions).map(res => res.json()).catch(this.handleError);
+	}
 
 	update(question: QuestionModel): Observable<QuestionModel> {
 		return this.http.put(`${this.baseUrl}/questions/` + encodeURIComponent(question.id.toString()),

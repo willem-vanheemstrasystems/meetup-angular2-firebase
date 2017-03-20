@@ -22,6 +22,9 @@ exports.install = function() {
 	F.route('/api/users/',         json_users,         ['#authorize']);
 	F.route('/session/',           json_session);      // Uses `controller.query.token`
 	F.route('/openplatform/',      json_info);         // Doesn't need authorize, it's a public data
+
+    // Special case, it will return the next question and possible answers
+	F.route('/api/questionnaire/', json_questionnaire, ['post', '*Questionnaire']);		
 };
 
 function json_query() {
@@ -124,6 +127,13 @@ F.middleware('authorize', function(req, res, next, options, controller) {
 
 // Sends data to other applications
 function json_serviceworker() {
+	var self = this;
+	self.$save(self, self.callback());
+}
+
+// Return next question, based on previous questions and answers
+function json_questionnaire() {
+    console.log("controllers - api.js, json_questionnaire() called");	
 	var self = this;
 	self.$save(self, self.callback());
 }
