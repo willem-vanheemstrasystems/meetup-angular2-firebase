@@ -160,7 +160,7 @@ var ProductsService = (function () {
     return ProductsService;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/products.service.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/products.service.js.map
 
 /***/ }),
 
@@ -198,7 +198,7 @@ var AboutComponent = (function () {
     ], AboutComponent);
     return AboutComponent;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/about.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/about.component.js.map
 
 /***/ }),
 
@@ -278,7 +278,7 @@ var DialogContent = (function () {
     return DialogContent;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/home.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/home.component.js.map
 
 /***/ }),
 
@@ -296,7 +296,7 @@ var ProductModel = (function () {
     }
     return ProductModel;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/product.model.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/product.model.js.map
 
 /***/ }),
 
@@ -367,7 +367,7 @@ var ProductEditorComponent = (function () {
     return ProductEditorComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/product-editor.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/product-editor.component.js.map
 
 /***/ }),
 
@@ -421,7 +421,7 @@ var ProductViewerComponent = (function () {
     return ProductViewerComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/product-viewer.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/product-viewer.component.js.map
 
 /***/ }),
 
@@ -508,7 +508,7 @@ var ProductsViewerComponent = (function () {
     return ProductsViewerComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/products-viewer.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/products-viewer.component.js.map
 
 /***/ }),
 
@@ -554,7 +554,7 @@ var DataService = (function () {
     ], DataService);
     return DataService;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/data.service.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/data.service.js.map
 
 /***/ }),
 
@@ -589,7 +589,7 @@ var StoreComponent = (function () {
     ], StoreComponent);
     return StoreComponent;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/store.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/store.component.js.map
 
 /***/ }),
 
@@ -626,7 +626,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/main.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/main.js.map
 
 /***/ }),
 
@@ -660,7 +660,7 @@ var routes = [
     { path: 'product/:id/edit', component: __WEBPACK_IMPORTED_MODULE_6__products_product_editor_product_editor_component__["a" /* ProductEditorComponent */] }
 ];
 var AppRoutingModule = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/app-routing.module.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/app-routing.module.js.map
 
 /***/ }),
 
@@ -694,7 +694,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/app.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/app.component.js.map
 
 /***/ }),
 
@@ -803,7 +803,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/app.module.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/app.module.js.map
 
 /***/ }),
 
@@ -820,7 +820,7 @@ var DataModel = (function () {
     ;
     return DataModel;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/data.model.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/data.model.js.map
 
 /***/ }),
 
@@ -874,7 +874,7 @@ var FilterPipe = (function () {
     ], FilterPipe);
     return FilterPipe;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/filter.pipe.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/filter.pipe.js.map
 
 /***/ }),
 
@@ -916,7 +916,7 @@ var ProductDetailsComponent = (function () {
     return ProductDetailsComponent;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/product-details.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/product-details.component.js.map
 
 /***/ }),
 
@@ -1002,7 +1002,7 @@ var ProductFormComponent = (function () {
     return ProductFormComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/product-form.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/product-form.component.js.map
 
 /***/ }),
 
@@ -1162,7 +1162,7 @@ var ProductsListComponent = (function () {
     return ProductsListComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/products-list.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/products-list.component.js.map
 
 /***/ }),
 
@@ -1235,7 +1235,7 @@ var SearchListComponent = (function () {
     return SearchListComponent;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/search-list.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/search-list.component.js.map
 
 /***/ }),
 
@@ -1321,7 +1321,7 @@ var DataBase = [
     new __WEBPACK_IMPORTED_MODULE_0__models_data_model__["a" /* DataModel */](71, "Six O'Clock News"),
     new __WEBPACK_IMPORTED_MODULE_0__models_data_model__["a" /* DataModel */](72, "Jackie Gleason: American Scene Magazine"),
 ];
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/data.base.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/data.base.js.map
 
 /***/ }),
 
@@ -1363,7 +1363,7 @@ var LoaderComponent = (function () {
     ], LoaderComponent);
     return LoaderComponent;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/loader.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/loader.component.js.map
 
 /***/ }),
 
@@ -1472,7 +1472,7 @@ var PaginationComponent = (function () {
     return PaginationComponent;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/pagination.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/pagination.component.js.map
 
 /***/ }),
 
@@ -1546,7 +1546,7 @@ var SearchListPaginationComponent = (function () {
     return SearchListPaginationComponent;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/search-list-pagination.component.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/search-list-pagination.component.js.map
 
 /***/ }),
 
@@ -1562,7 +1562,7 @@ var SearchListPaginationComponent = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/environment.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/environment.js.map
 
 /***/ }),
 
@@ -1618,7 +1618,7 @@ var environment = {
 
 
 
-//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR20/apps/ourwebsite1_com-www/client1/src/polyfills.js.map
+//# sourceMappingURL=C:/Users/user/git/Willem-vanHeemstraSystems/meetup-angular2-firebase/MU_ANG2_FIR21/apps/ourwebsite1_com-www/client1/src/polyfills.js.map
 
 /***/ }),
 

@@ -2,7 +2,8 @@ import { Component, OnInit, Renderer } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionModel } from '../../models/question.model';
 import { QuestionAnswerModel } from '../../models/questionAnswer.model';
-import { QuestionnaireService } from '../../services/questionnaire.service';
+import { QuestionnaireModel } from '../../models/questionnaire.model';
+import { QuestionnairesService } from '../../services/questionnaires.service';
 import { QuestionnaireListComponent } from '../shared/questionnaire-list/questionnaire-list.component';
 import { FormArray } from '@angular/forms';
 
@@ -10,60 +11,82 @@ import { FormArray } from '@angular/forms';
   selector: 'app-questionnaire-viewer',
   templateUrl: './questionnaire-viewer.component.html',
   styleUrls: ['./questionnaire-viewer.component.scss'],
-  providers: [QuestionnaireService]
+  providers: [QuestionnairesService]
 })
 export class QuestionnaireViewerComponent implements OnInit {
 
-  count: number = 0;
-  offset: number = 0;
-  limit: number = 9999; // choose an appropriate number
-  range: number = 0; // not enough space for more
-  questions: QuestionModel[] = [];
-  questionsAnswers: QuestionAnswerModel[] = [];
+  // WE WON'T BE USING THESE ANYMORE, REMOVE
+  // count: number = 0;
+  // offset: number = 0;
+  // limit: number = 9999; // choose an appropriate number
+  // range: number = 0; // not enough space for more
+  // questions: QuestionModel[];
+  //REMOVE questionsAnswers: QuestionAnswerModel[] = [];
+
+  //questionnaire: QuestionnaireModel;
+  questionnaireId: number;
+  // TEMP
+  questionnaire: QuestionnaireModel = {
+    id: 1,
+    questionnaire: [
+      { 
+        question: { id: 1, display: 'Gebruik je reeds Speedo?' }, 
+        answers: [
+          { id: 1, display: 'Nee' },
+          { id: 2, display: 'Speedo Online' },
+          { id: 3, display: 'Speedo voor Windows' }
+        ]
+      }
+    ]
+  }; // MAKE DYNAMIC BY RETRIEVING THE (first) QUESTION AND ANSWERS FROM THE REST ENDPOINT IN ngOnInit
+
   loading: boolean = false;
   failed: boolean = false;
+
+//   public questions: any = [
+//     { id: '1', display: 'Gebruik je reeds Speedo, echt?' },
+//     { id: '2', display: 'Ben je ondernemer of accountant?' },
+//     { id: '3', display: 'Waarvoor ga je Speedo gebruiken?' },
+//     { id: '4', display: 'Hoeveel facturen maak je per jaar?' },
+//     { id: '5', display: 'Hoeveel administraties voer je?' },
+//     { id: '6', display: 'Hoe uitgebreid wens je de functionaliteit voor het boekhouden?' }
+//   ];
 
   constructor(
 		private router: Router,
 		private route: ActivatedRoute,  
-		private questionnaireService: QuestionnaireService
+		private questionnairesService: QuestionnairesService
   ) { }
 
   ngOnInit() {
-		let observable = this.route.params
-		  .map(params => params['nr'])
-		  .map(pageNr => (pageNr - 1) * this.limit);
-		observable.subscribe(offset => this.offset = offset);
-		observable.share().subscribe(offset => this.getAll(offset, this.limit));
-  }
-
-  getAll(offset: number, limit: number) {
-    this.questions = [];
     this.loading = true;
     this.failed = false;
-    this.questionnaireService.getAll(offset, limit).subscribe(result => {
-      this.questions = result['questions'];
-      this.count = result['count'];	
-	    this.loading = false;
-    }, () => {
-      this.loading = false;
-      this.failed = true;
+    this.questionnaireId = parseInt(this.route.params['id'],10);
+    this.route.params.subscribe(params => {
+      this.questionnaireId = parseInt(params['id'],10)
+      this.questionnairesService.get(this.questionnaireId)
+      .subscribe(questionnaire => {
+        console.log("QuestionnaireViewerComponent - ngOnInit, questionnaire = ", questionnaire);
+        this.questionnaire = questionnaire;
+        this.loading = false;
+      },() => {
+        this.loading = false;
+        this.failed = true;      
+      })
     });
   }
 
   insertAll(questionsAnswersArray: Array<QuestionAnswerModel>) {
     console.log("QuestionnaireViewerComponent - insertAll, questionsAnswersArray = ", questionsAnswersArray);
-    this.questionnaireService.insertAll(questionsAnswersArray).subscribe(result => {
+    this.questionnairesService.insertAll(questionsAnswersArray).subscribe(result => {
       console.log("QuestionnaireViewerComponent - insertAll - result = ", result);
-      // PLACEHOLDER
-      //this.questions = result['questions'];
       if(result['success']) {
         console.log("QuestionnaireViewerComponent - insertAll, SUCCESS = ", result['success']);
-
         console.log("QuestionnaireViewerComponent - insertAll, result['value'] = ", result['value']);
-        // Append the new question to the questions
-        this.questionsAnswers.push(result['value']);
-        console.log("QuestionnaireViewerComponent - insertAll, this.questionsAnswers = ", this.questionsAnswers);        
+        //Append the new question and answers to questionnaire
+        console.log("QuestionnaireViewerComponent - insertAll, BEFORE push this.questionnaire = ", this.questionnaire);
+        this.questionnaire.questionnaire.push(result['value']);
+        console.log("QuestionnaireViewerComponent - insertAll, AFTER push this.questionnaire = ", this.questionnaire);
       }
       else {
         console.log("QuestionnaireViewerComponent - insertAll, ERROR occurred: result = ", result);
@@ -92,10 +115,10 @@ export class QuestionnaireViewerComponent implements OnInit {
 //     this.router.navigate(['/question', questionId, 'edit']);
 // 	}
 
-  onPageChange(offset) {
-		console.log("QuestionnaireViewerComponent - onPageChange called with offset = ", offset);
-    this.offset = offset;
-    this.router.navigate(['/questionnaire/page', (offset / this.limit) + 1]);
-  }
-
+  // WE WON'T BE USING THIS ANYMORE, REMOVE
+  // onPageChange(offset) {
+	// 	console.log("QuestionnaireViewerComponent - onPageChange called with offset = ", offset);
+  //   this.offset = offset;
+  //   this.router.navigate(['/questionnaire/page', (offset / this.limit) + 1]);
+  // }
 }

@@ -8,11 +8,31 @@
       <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
        <div formArrayName="questions">
           <div *ngFor="let question of myForm.controls.questions.controls; let i=index" class="panel panel-default">
+
             <div class="panel-heading">
-              <span>Vraag {{i + 1}}</span>
+              <span>Vraag {{i+1}}</span>
               <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i)"></span>
             </div>
             <!-- VRAAG 1 -->            
+            <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 1">
+              <div class="form-group col-xs-6">
+                <label>{{questionnaire['questionnaire'][i]['question']['display']}}</label>
+                <div *ngFor="let answer of questionnaire['questionnaire'][i]['answers']">
+                  <input type="radio" class="form-control" formControlName="answer" [value]=answer>{{answer.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div> 
+             <br/>
+            </div><!-- eof VRAAG 1 -->
+
+<!-- START REMOVE VRAAG 1 -->
+            <!--<div class="panel-heading">
+              <span>Vraag {{i + 1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i)"></span>
+            </div>
+            VRAAG 1        
             <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 1">
               <div class="form-group col-xs-6">
                 <div *ngFor="let question of questions; let j=index">
@@ -26,9 +46,11 @@
                 </small>
               </div> 
              <br/>
-            </div><!-- eof VRAAG 1 -->
-            <!-- VRAAG 2 -->
-            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 2">
+            </div>-->
+<!-- END REMOVE VRAAG 1-->
+
+<!-- START REMOVE VRAAG 2 -->
+            <!--<div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 2">
               <div class="form-group col-xs-6">
                 <div *ngFor="let question of questions; let j=index">
                   <label *ngIf="j+1==2">{{question.display}}</label>
@@ -41,9 +63,11 @@
                 </small>
               </div>
              <br/>
-            </div><!-- eof VRAAG 2 -->
-            <!-- VRAAG 3 -->
-            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 3">
+            </div>-->
+<!-- END REMOVE VRAAG 2 -->
+
+<!-- START REMOVE VRAAG 3 -->
+            <!--<div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 3">
               <div class="form-group col-xs-6">
                 <div *ngFor="let question of questions; let j=index">
                   <label *ngIf="j+1==3">{{question.display}}</label>
@@ -56,9 +80,11 @@
                 </small>
               </div>
              <br/>
-            </div><!-- eof VRAAG 3 -->
-            <!-- VRAAG 4 -->
-            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 4">
+            </div>-->
+<!-- END REMOVE VRAAG 3 -->
+
+<!-- START REMOVE VRAAG 4 -->
+            <!--<div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 4">
               <div class="form-group col-xs-6">
                 <div *ngFor="let question of questions; let j=index">
                   <label *ngIf="j+1==4">{{question.display}}</label>
@@ -71,9 +97,11 @@
                 </small>
               </div>
              <br/>
-            </div><!-- eof VRAAG 4 -->
-            <!-- VRAAG 5 -->
-            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 5">
+            </div>-->
+<!-- END REMOVE VRAAG 4 -->
+
+<!-- START REMOVE VRAAG 5 -->
+            <!--<div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 5">
               <div class="form-group col-xs-6">
                 <div *ngFor="let question of questions; let j=index">
                   <label *ngIf="j+1==5">{{question.display}}</label>
@@ -86,9 +114,11 @@
                 </small>
               </div>
              <br/>
-            </div><!-- eof VRAAG 5 -->
-            <!-- VRAAG 6 -->
-            <div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 6">
+            </div>-->
+<!-- END REMOVE VRAAG 5 -->
+
+<!-- START REMOVE VRAAG 6 -->
+            <!--<div class="panel-body" [formGroupName]="i"  *ngIf="i+1 === 6">
               <div class="form-group col-xs-6">
                 <div *ngFor="let question of questions; let j=index">
                   <label *ngIf="j+1==6">{{question.display}}</label>
@@ -101,7 +131,9 @@
                 </small>
               </div>
              <br/>
-            </div><!-- eof VRAAG 6 -->
+            </div>-->
+<!-- END REMOVE VRAAG 6 -->
+
             <!-- GEEN VOLGENDE VRAAG -->
           </div>
         </div>

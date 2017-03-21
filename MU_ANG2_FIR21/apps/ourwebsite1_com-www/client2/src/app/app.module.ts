@@ -15,7 +15,7 @@ import { SearchListPaginationComponent } from './shared/search-list-pagination/s
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { QuestionsService } from './services/questions.service';
-import { QuestionnaireService } from './services/questionnaire.service';
+import { QuestionnairesService } from './services/questionnaires.service';
 import { DataService } from './services/data.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { StoreComponent } from './store/store.component';
@@ -75,7 +75,7 @@ import { QuestionFormComponent } from './questions/shared/question-form/question
       apiKey: 'AIzaSyBJa7gl2Qf4grJI2--AXdptakh_6YwOTmw'
     })    
   ],
-  providers: [DataService, QuestionsService, QuestionnaireService],
+  providers: [DataService, QuestionsService, QuestionnairesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

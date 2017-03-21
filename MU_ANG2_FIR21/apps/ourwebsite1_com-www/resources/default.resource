@@ -14,6 +14,9 @@ error-application-secret        : A secret key is not valid.
 error-application-permissions   : Application doesn't have permission for this operation.
 error-application-origin        : Your IP address is not valid for this operation.
 error-application-publish       : The application doesn't publish this event.
+error-product-404               : Product doesn't exist.
+error-question-404              : Question doesn't exist.
+error-questionnaire-404         : Questionnaire doesn't exist.
 error-user-404                  : User doesn't exist.
 error-user-notfound             : User not found.
 error-user-application          : User doesn't have allowed this application.
