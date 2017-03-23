@@ -1,5 +1,5 @@
 NEWSCHEMA('User').make(function(schema) {
-    console.log("models/user.js - NEWSCHEMA('User'), schema = ", schema);
+    //console.log("models/user.js - NEWSCHEMA('User'), schema = ", schema);
 	schema.define('id', 'UID');
 	schema.define('firstname', 'Capitalize(30)', true);
 	schema.define('lastname', 'Capitalize(30)', true);

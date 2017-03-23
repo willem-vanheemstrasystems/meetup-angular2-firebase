@@ -114,21 +114,9 @@ export class QuestionnaireListComponent implements OnInit {
     console.log("QuestionnaireListComponent - addQuestionButton()");
     const control = <FormArray>this.myForm.controls['questions'];
     control.push(this.initQuestion());
-    for(let i=0; i < control.value.length; i++) {
-      if(typeof this.questionnaire.questionnaire[i] !== 'undefined') {
-        console.log("QuestionnaireListComponent - addQuestionButton(), this.questionnaire.questionnaire[i].question = ", this.questionnaire.questionnaire[i].question);
-        control.value[i].question = this.questionnaire.questionnaire[i].question;
-        console.log("QuestionnaireListComponent - addQuestionButton(), control.value[i].question = ", control.value[i].question);  
-      }
-    }
-    if(control.length >= this.totalQuestions) {
-      this.moreQuestions = false;    
-    } else {
-      this.moreQuestions = true;
-    } 
-    console.log("QuestionnaireListComponent - addQuestionButton(), this.moreQuestions = ", this.moreQuestions);      
-    control.controls.pop(); // Removes the 'empty question, empty answer' FormGroup from the array
-    console.log("QuestionnaireListComponent - addQuestionButton(), AFTER pop() control.controls = ", control.controls);
+    this.syncQuestionnaireWithForm();
+    // Do NOT pop the 'empty question, empty answer' FormControl here, keep it.
+    // It will be dealt with by QuestionnaireViewerComponent.
 		this.addQuestion.emit(control);
 	}
 
@@ -154,6 +142,23 @@ export class QuestionnaireListComponent implements OnInit {
     // call API to save
     // ...
     console.log(model);
+  }
+
+  syncQuestionnaireWithForm() {
+    const control = <FormArray>this.myForm.controls['questions'];
+    console.log("QuestionnaireListComponent - syncQuestionnaireWithForm(), BEFORE SYNC WITH questionnaire control = ", control);
+    for(let i=0; i < control.value.length; i++) {
+      if(typeof this.questionnaire.questionnaire[i] !== 'undefined') {      
+        control.value[i].question = this.questionnaire.questionnaire[i].question;
+      }
+    }
+    console.log("QuestionnaireListComponent - syncQuestionnaireWithForm(), AFTER SYNC WITH questionnaire control = ", control);
+    if(control.length >= this.totalQuestions) {
+      this.moreQuestions = false;    
+    } else {
+      this.moreQuestions = true;
+    }   
+    console.log("QuestionnaireListComponent - addQuestionButton(), this.moreQuestions = ", this.moreQuestions);  
   }
 
 }

@@ -25,7 +25,7 @@ exports.install = function() {
 	F.route('/openplatform/',      json_info);         // Doesn't need authorize, it's a public data
 
     // Special case, it will return the next question and possible answers
-	F.route('/api/questionnaire/', json_questionnaire, ['post', '*Questionnaire']);		
+	F.route('/api/questionnaire/', json_questionnaire, ['#questionnaire', 'post', '*Questionnaire']);	
 };
 
 function json_query() {
@@ -37,7 +37,7 @@ function json_query() {
 	self.$query(options, self.callback());
 }
 
-function json_read(id) {
+function json_read(id) {	
 	var self = this;
 	var options = {};
 
@@ -126,6 +126,29 @@ F.middleware('authorize', function(req, res, next, options, controller) {
 	next();
 });
 
+// Middleware for API (a questionnaire element)
+F.middleware('questionnaire', function(req, res, next, options, controller) {
+    console.log("controllers - api.js - F.middleware questionnaire called");
+    //console.log("+++++++++++++ controllers - api.js - F.middleware questionnaire, controller.req.body = ", controller.req.body);
+    //console.log("+++++++++++++ controllers - api.js - F.middleware questionnaire, req = ", req);
+
+    // var body = "";
+    // req.on('data', function (chunk) {
+    //   body += chunk;
+    // });
+    // req.on('end', function () {
+    //   console.log('body: ' + body);
+    //   var jsonObj = JSON.parse(body);
+    //   console.log(jsonObj.$key);
+    // });
+	// req.on('error', function(error){
+    //   console.log(error);
+    // });
+    // res.end('Hello, World!');
+
+	next();
+});
+
 // Sends data to other applications
 function json_serviceworker() {
 	var self = this;
@@ -136,6 +159,14 @@ function json_serviceworker() {
 function json_questionnaire() {
     console.log("controllers - api.js, json_questionnaire() called");	
 	var self = this;
+
+    //console.log("controllers - api.js, json_questionnaire(), self.body = ", self.body);
+	//console.log("controllers - api.js, json_questionnaire(), Object.keys(self.body) = ", Object.keys(self.body));
+    // self.body is same as self.post
+//    var isEmpty = Object.keys(self.body).length === 0);
+//    self.json({ result: isEmpty });
+
+
 	self.$save(self, self.callback());
 }
 

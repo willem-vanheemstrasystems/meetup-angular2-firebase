@@ -1,5 +1,7 @@
 NEWSCHEMA('Questionnaire').make(function(schema) {
 
+    var _self = this;
+
 	schema.define('id', 'UID');
 	//schema.define('display', 'Text', true);
 	//schema.define('questionnaire.question.display', 'Text', true); // NOT VALID
@@ -13,11 +15,9 @@ NEWSCHEMA('Questionnaire').make(function(schema) {
 		// item.internal = controller.app.internal;
 		// controller.user.notify(item);
 
-        // TEMP SOLUTION HARDCODED, THIS SHOULD BECOME DYNAMIC
-        var questionAnswersArray = {'question':{'id':'2', 'display':'Ben je ondernemer of accountant?'}, 'answers': [{'id':'1', 'display':'Ondernemer'},{'id':'2', 'display':'Accountant'}]};
-
-        console.log("schema-questionnaire - schema.setSave(), questionAnswersArray = ", questionAnswersArray);
-		callback(SUCCESS(true, questionAnswersArray));
+		var _nextQuestion = _self.nextQuestion(model, controller);
+        console.log("schema-questionnaire - schema.setSave(), _nextQuestion = ", _nextQuestion);
+		callback(SUCCESS(true, _nextQuestion));
 	});
 
 	schema.setGet(function(error, model, options, callback) {
@@ -47,5 +47,11 @@ NEWSCHEMA('Questionnaire').make(function(schema) {
 			builder.callback(callback);
 		});
 	});
-
+    // THE BELOW FUNCTION NEEDS TO BE MOVED TO SOMEWHERE MORE APROPRIATE
+	_self.nextQuestion = function(model, controller) {
+		console.log("schema-questionnaire - nextQuestion, model = ", model);
+		console.log("schema-questionnaire - nextQuestion, controller = ", controller);
+        var questionAnswersArray = {'question':{'id':'2', 'display':'Ben je ondernemer of accountant?'}, 'answers': [{'id':'1', 'display':'Ondernemer'},{'id':'2', 'display':'Accountant'}]};
+        return questionAnswersArray;
+	};
 });

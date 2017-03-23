@@ -1,13 +1,13 @@
 // A simple authorization delegate
 F.onAuthorize = function(req, res, flags, next) {
-    console.log("definitions/auth.js - F.onAuthorize called");
+    //console.log("definitions/auth.js - F.onAuthorize called");
 	var cookie = req.cookie(CONFIG('cookie'));
-	console.log("definitions/auth.js - F.onAuthorize, cookie = ", cookie);
+	//console.log("definitions/auth.js - F.onAuthorize, cookie = ", cookie);
 	if (!cookie)
 		return next(false);
 
 	var user = F.decrypt(cookie);
-	console.log("definitions/auth.js - F.onAuthorize, user = ", user);
+	//console.log("definitions/auth.js - F.onAuthorize, user = ", user);
 	if (!user || user.expire < F.datetime.getTime())
 		return next(false);
 
@@ -17,7 +17,7 @@ F.onAuthorize = function(req, res, flags, next) {
 
 	session.datelogged = F.datetime;
 	session.online = true;
-	console.log("definitions/auth.js - F.onAuthorize, session = ", session);
+	//console.log("definitions/auth.js - F.onAuthorize, session = ", session);
 	next(true, session);
 };
 

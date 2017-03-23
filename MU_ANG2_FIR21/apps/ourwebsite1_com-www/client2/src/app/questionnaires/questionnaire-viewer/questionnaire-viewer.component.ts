@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionModel } from '../../models/question.model';
 import { QuestionAnswerModel } from '../../models/questionAnswer.model';
@@ -15,30 +15,20 @@ import { FormArray } from '@angular/forms';
 })
 export class QuestionnaireViewerComponent implements OnInit {
 
-  // WE WON'T BE USING THESE ANYMORE, REMOVE
-  // count: number = 0;
-  // offset: number = 0;
-  // limit: number = 9999; // choose an appropriate number
-  // range: number = 0; // not enough space for more
-  // questions: QuestionModel[];
-  //REMOVE questionsAnswers: QuestionAnswerModel[] = [];
+  @ViewChild(QuestionnaireListComponent)
+    private questionnaireListComponent: QuestionnaireListComponent;
 
-  //questionnaire: QuestionnaireModel;
   questionnaireId: number;
-  // TEMP
+  // Placeholder, necessary!
   questionnaire: QuestionnaireModel = {
     id: 1,
     questionnaire: [
       { 
-        question: { id: 1, display: 'Gebruik je reeds Speedo?' }, 
-        answers: [
-          { id: 1, display: 'Nee' },
-          { id: 2, display: 'Speedo Online' },
-          { id: 3, display: 'Speedo voor Windows' }
-        ]
-      }
+        question: { id: 1, display: '' }, 
+        answers: []
+      }    
     ]
-  }; // MAKE DYNAMIC BY RETRIEVING THE (first) QUESTION AND ANSWERS FROM THE REST ENDPOINT IN ngOnInit
+  };
 
   loading: boolean = false;
   failed: boolean = false;
@@ -87,6 +77,7 @@ export class QuestionnaireViewerComponent implements OnInit {
         console.log("QuestionnaireViewerComponent - insertAll, BEFORE push this.questionnaire = ", this.questionnaire);
         this.questionnaire.questionnaire.push(result['value']);
         console.log("QuestionnaireViewerComponent - insertAll, AFTER push this.questionnaire = ", this.questionnaire);
+        this.questionnaireListComponent.syncQuestionnaireWithForm();
       }
       else {
         console.log("QuestionnaireViewerComponent - insertAll, ERROR occurred: result = ", result);
@@ -98,11 +89,16 @@ export class QuestionnaireViewerComponent implements OnInit {
 	  console.log("QuestionnaireViewerComponent - addQuestion, control = ", control);
     let questionsAnswersArray: Array<QuestionAnswerModel> = [];
     for(let i=0; i < control.controls.length; i++) {
-      questionsAnswersArray.push(control.controls[i].value);
+      // Check here for 'empty question, empty answer' control, and skip those
+      console.log("QuestionnaireViewerComponent - addQuestion, control.controls[i].value =", control.controls[i].value);
+      if(control.controls[i].value.question !== "") {
+        questionsAnswersArray.push(control.controls[i].value);
+      }
     }
     console.log("QuestionnaireViewerComponent - addQuestion, questionsAnswersArray = ", questionsAnswersArray);
     // POST the questions to the REST endpoint, then process the returned question
     this.insertAll(questionsAnswersArray);
+    console.log("QuestionnaireViewerComponent - this.questionnaire = ", this.questionnaire);
   }
 
 // 	viewQuestion(questionId: number) {
