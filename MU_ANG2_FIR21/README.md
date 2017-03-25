@@ -2616,6 +2616,54 @@ NOTE: Do not forget to run ```ng build``` inside the /client1 directory to have 
 //
 //  See also http://angularjs.blogspot.nl/2017/03/angular-400-now-available.html
 //
+//  For comparison:
+//
+//  A build for production of client2 with Angular 2 has the following sizes:
+//
+```javascript
+Hash: 9c6acf39a2f36122ac00
+Time: 114562ms
+chunk    {0} main.3fd43b40699bcf6f75fb.bundle.js (main) 2.43 MB {3} [initial] [rendered]
+chunk    {1} scripts.8913257eeea96dbd8c80.bundle.js (scripts) 946 bytes {4} [initial] [rendered]
+chunk    {2} styles.723e921d743c2a11e2bd.bundle.css (styles) 69 bytes {4} [initial] [rendered]
+chunk    {3} vendor.36b1466bd789b10e59f7.bundle.js (vendor) 3.19 MB [initial] [rendered]
+chunk    {4} inline.cc96ae7c6eed3bc11fc0.bundle.js (inline) 0 bytes [entry] [rendered]
+```
+//
+// A build for production of client2 with Angular 4.0.0 has the following sizes:
+//
+```javascript
+
+```
+//
+//  That is a reduction in size of: on average
+//
 //  INSTALL AS FOLLOWS:
 //
+#Updating to 4.0.0
 
+Updating to 4 is as easy as updating your Angular dependencies to the latest version, and double checking if you want animations. This will work for most use cases.
+
+##On Linux/Mac: 
+
+```javascript
+npm install @angular/{common,compiler,compiler-cli,core,forms,http,platform-browser,platform-browser-dynamic,platform-server,router,animations}@latest typescript@latest --save 
+```
+
+##On Windows:
+
+```javascript
+npm install @angular/common@latest @angular/compiler@latest @angular/compiler-cli@latest @angular/core@latest @angular/forms@latest @angular/http@latest @angular/platform-browser@latest @angular/platform-browser-dynamic@latest @angular/platform-server@latest @angular/router@latest @angular/animations@latest typescript@latest --save
+```
+
+Then run whatever ```ng serve``` or ```npm start``` command you normally use, and everything should work.
+
+If you rely on Animations, import the new BrowserAnimationsModule from @angular/platform-browser/animations in your root NgModule. Without this, your code will compile and run, but animations will trigger an error. 
+
+Imports from @angular/core were deprecated, use imports from the new package import { trigger, state, style, transition, animate } from '@angular/animations';.
+
+We are beginning work on an interactive [Angular Update Guide](https://angular-update-guide.firebaseapp.com/) if you would like to see more information about making any needed changes to your application.
+//
+// FOLLOW ABOVE INSTRUCTIONS
+//
+//**********************************************************************************
