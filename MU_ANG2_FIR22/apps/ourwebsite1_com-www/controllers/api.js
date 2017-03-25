@@ -152,6 +152,10 @@ function json_serviceworker() {
 function json_questionnaire() {
     console.log("controllers - api.js, json_questionnaire() called");	
 	var self = this;
+
+    //console.log("controllers - api.js, json_questionnaire(), self.query = ", self.query); // This gets the form data from the POST request URL
+    //console.log("controllers - api.js, json_questionnaire(), self.body.$clean() = ", self.body.$clean()); // This gets the form data from the POST request body
+
 	self.$save(self, self.callback());
 }
 
