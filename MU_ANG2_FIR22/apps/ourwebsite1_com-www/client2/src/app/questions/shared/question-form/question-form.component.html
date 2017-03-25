@@ -1,0 +1,18 @@
+<div class="container">
+  <form novalidate>
+	ID: {{question?.id}}
+    <h1>{{question.display}}</h1>
+    <div class="form-group">
+      <input type="text" [(ngModel)]="question.display"  name="questionDisplay" required="required" #questionDisplay="ngModel"/>
+      <label for="input" class="control-label">Display</label><i class="bar"></i>
+		<span *ngIf="!questionDisplay.valid && (questionDisplay.touched || !!questionDisplay.id)">
+			Please enter a Question display.
+		</span>	  
+    </div>
+  </form>
+  <div class="button-container">
+	<button type="button" class="btn btn-raised btn-default" (click)="saveQuestionButton(question)">Save</button>
+	<button type="button" class="btn btn-raised btn-default" (click)="cancelQuestionButton(question)">Cancel</button>
+	<button type="button" class="btn btn-raised btn-default" (click)="deleteQuestionButton(question)" *ngIf="!!question.id">Delete</button>
+  </div><br/><br/>
+</div>

@@ -1,0 +1,169 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Pakketkeuze Tool</h4>
+        <p>In 10 seconden bij jouw ideale pakket!</p>
+      </div>
+      <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+       <div formArrayName="questions">
+          <div *ngFor="let question of myForm.controls.questions.controls; let i=index" class="panel panel-default">
+            <!-- VRAAG 1 -->  
+            <div class="panel-heading" *ngIf="i+1 === 1"><!-- increased by 1 -->
+              <span>Vraag {{i+1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i)"></span>
+            </div>
+            <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 1"><!-- increased by 1 -->
+              <div class="form-group col-xs-6">
+                <label>{{questionnaire['questionnaire'][i]['question']['display']}}</label>
+                <div *ngFor="let answer of questionnaire['questionnaire'][i]['answers']">
+                  <input type="radio" class="form-control" formControlName="answer" [value]=answer>{{answer.display}}
+                </div>
+                <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                    Antwoord is vereist
+                </small>
+              </div> 
+             <br/>
+            </div>
+            <!-- eof VRAAG 1 -->
+            <div *ngFor="let questionnaire of questionnaire['questionnaire']; let k=index">  
+              <div *ngIf="k+1 === 2">
+                <!-- VRAAG 2 -->  
+                <div class="panel-heading" *ngIf="i+1 === 2"><!-- increased by 1 -->
+                  <span>Vraag {{i+1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i+1)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 2"><!-- increased by 1 -->
+                  <div class="form-group col-xs-6">
+                    <label>{{questionnaire['question']['display']}}</label>
+                    <div *ngFor="let answer of questionnaire['answers']">
+                      <input type="radio" class="form-control" formControlName="answer" [value]="answer">
+                      {{answer.display}}
+                    </div>
+                    <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                      Antwoord is vereist
+                    </small>
+                  </div>
+                  <br/>
+                </div>
+                <!-- eof VRAAG 2 -->
+              </div>
+              <div *ngIf="k+1 === 3">
+                <!-- VRAAG 3 --> 
+                <div class="panel-heading" *ngIf="i+1 === 3"><!-- increased by 1 -->
+                  <span>Vraag {{i+1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i+2)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 3"><!-- increased by 1 -->
+                  <div class="form-group col-xs-6">
+                    <label>{{questionnaire['question']['display']}}</label>
+                    <div *ngFor="let answer of questionnaire['answers']">
+                      <input type="radio" class="form-control" formControlName="answer" [value]="answer">
+                      {{answer.display}}
+                    </div>
+                    <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                      Antwoord is vereist
+                    </small>
+                  </div>
+                  <br/>
+                </div>
+                <!-- eof VRAAG 3 -->
+              </div>
+              <div *ngIf="k+1 === 4">
+                <!-- VRAAG 4 --> 
+                <div class="panel-heading" *ngIf="i+1 === 4"><!-- increased by 1 -->
+                  <span>Vraag {{i+1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i+3)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 4"><!-- increased by 1 -->
+                  <div class="form-group col-xs-6">
+                    <label>{{questionnaire['question']['display']}}</label>
+                    <div *ngFor="let answer of questionnaire['answers']">
+                      <input type="radio" class="form-control" formControlName="answer" [value]="answer">
+                      {{answer.display}}
+                    </div>
+                    <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                      Antwoord is vereist
+                    </small>
+                  </div>
+                  <br/>
+                </div>
+                <!-- eof VRAAG 4 -->
+              </div>
+              <div *ngIf="k+1 === 5">
+                <!-- VRAAG 5 --> 
+                <div class="panel-heading" *ngIf="i+1 === 5"><!-- increased by 1 -->
+                  <span>Vraag {{i+1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i+4)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 5"><!-- increased by 1 -->
+                  <div class="form-group col-xs-6">
+                    <label>{{questionnaire['question']['display']}}</label>
+                    <div *ngFor="let answer of questionnaire['answers']">
+                      <input type="radio" class="form-control" formControlName="answer" [value]="answer">
+                      {{answer.display}}
+                    </div>
+                    <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                      Antwoord is vereist
+                    </small>
+                  </div>
+                  <br/>
+                </div>
+                <!-- eof VRAAG 5 -->
+              </div>
+              <div *ngIf="k+1 === 6">
+                <!-- VRAAG 6 --> 
+                <div class="panel-heading" *ngIf="i+1 === 6"><!-- increased by 1 -->
+                  <span>Vraag {{i+1}}</span>
+                  <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.questions.controls.length > 1" (click)="removeQuestion(i+5)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i" *ngIf="i+1 === 6"><!-- increased by 1 -->
+                  <div class="form-group col-xs-6">
+                    <label>{{questionnaire['question']['display']}}</label>
+                    <div *ngFor="let answer of questionnaire['answers']">
+                      <input type="radio" class="form-control" formControlName="answer" [value]="answer">
+                      {{answer.display}}
+                    </div>
+                    <small [hidden]="myForm.controls.questions.controls[i].controls.answer.valid" class="text-danger">
+                      Antwoord is vereist
+                    </small>
+                  </div>
+                  <br/>
+                </div>
+                <!-- eof VRAAG 6 -->
+              </div>       
+            </div>
+            <!-- GEEN VOLGENDE VRAAG -->
+          </div>
+        </div>
+        <br/>
+
+        <div class="margin-20">
+          <button (click)="addQuestionButton()" style="cursor: default" *ngIf="moreQuestions" [disabled]="!myForm.valid">
+            Volgende vraag
+          </button>
+          <button (click)="showRecommendations()" style="cursor: default" *ngIf="!moreQuestions && !showRecommendation" [disabled]="!myForm.valid">
+            Bekijk advies
+          </button>     
+        </div>
+
+        <div class="margin-20" *ngIf="showRecommendation">
+            Het geselecteerde pakket
+        </div>
+
+        <br/>
+        <!--<div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+        </div>-->
+        <div class="clearfix"></div>
+        <br/>
+        <hr/>
+        <div class="margin-20">
+          <div>Formulier details:-</div>
+          <pre>Is het formulier geldig?: <br>{{myForm.valid | json}}</pre>
+          <pre>Formulier waarden: <br>{{myForm.value | json}}</pre>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

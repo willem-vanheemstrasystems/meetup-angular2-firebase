@@ -1,0 +1,8 @@
+<md-icon role="img" class="material-icons" aria-label="apps">apps</md-icon>
+<span class="display-1">Question</span><br/>
+<app-question-form
+	[question]="question"
+	(saveQuestion)="saveQuestion($event)"
+	(deleteQuestion)="deleteQuestion($event)"
+	(cancelQuestion)="cancelQuestion($event)">
+</app-question-form>

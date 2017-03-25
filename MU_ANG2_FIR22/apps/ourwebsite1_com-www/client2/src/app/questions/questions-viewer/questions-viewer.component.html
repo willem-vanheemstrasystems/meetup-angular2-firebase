@@ -1,0 +1,14 @@
+<div id="demo">
+<md-icon role="img" class="material-icons" aria-label="apps">apps</md-icon>
+<span class="display-1">Questions</span><br/>
+<div class="center">
+  <app-loader [loading]="loading" [failed]="failed"></app-loader>
+</div>
+<app-questions-list
+  [questions]="questions"
+  [count]="count"
+  (viewQuestion)="viewQuestion($event)"
+  (editQuestion)="editQuestion($event)">
+</app-questions-list>
+<app-pagination [offset]="offset" [limit]="limit" [range]="range" [size]="count" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
