@@ -2610,3 +2610,12 @@ http://localhost:8001/api/
 
 NOTE: Do not forget to run ```ng build``` inside the /client1 directory to have the latest version of the Angular app.
 
+//***************************************** NOTE ***********************************
+//
+//  THERE IS A NEW VERSION OF ANGULAR: version 4.0.0
+//
+//  See also http://angularjs.blogspot.nl/2017/03/angular-400-now-available.html
+//
+//  INSTALL AS FOLLOWS:
+//
+
