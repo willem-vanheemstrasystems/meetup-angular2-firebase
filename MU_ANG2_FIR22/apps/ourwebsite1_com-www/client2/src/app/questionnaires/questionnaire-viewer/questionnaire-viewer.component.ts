@@ -66,9 +66,9 @@ export class QuestionnaireViewerComponent implements OnInit {
     });
   }
 
-  insertAll(questionsAnswersArray: Array<QuestionAnswerModel>) {
+  insertAll(questionnaireId: number, questionsAnswersArray: Array<QuestionAnswerModel>) {
     console.log("QuestionnaireViewerComponent - insertAll, questionsAnswersArray = ", questionsAnswersArray);
-    this.questionnairesService.insertAll(questionsAnswersArray).subscribe(result => {
+    this.questionnairesService.insertAll(questionnaireId, questionsAnswersArray).subscribe(result => {
       console.log("QuestionnaireViewerComponent - insertAll - result = ", result);
       if(result['success']) {
         console.log("QuestionnaireViewerComponent - insertAll, SUCCESS = ", result['success']);
@@ -97,7 +97,7 @@ export class QuestionnaireViewerComponent implements OnInit {
     }
     console.log("QuestionnaireViewerComponent - addQuestion, questionsAnswersArray = ", questionsAnswersArray);
     // POST the questions to the REST endpoint, then process the returned question
-    this.insertAll(questionsAnswersArray);
+    this.insertAll(this.questionnaireId, questionsAnswersArray);
     console.log("QuestionnaireViewerComponent - this.questionnaire = ", this.questionnaire);
   }
 

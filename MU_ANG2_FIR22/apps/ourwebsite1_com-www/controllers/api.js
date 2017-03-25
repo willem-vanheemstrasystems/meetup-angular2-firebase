@@ -27,7 +27,7 @@ exports.install = function() {
     // Special case, it will return the next question and possible answers
 	F.route('/api/questionnaire/', json_questionnaire, ['#questionnaire', 'post', '*Questionnaire']);
 	// Expects a JSON POST request, like:
-	// {"id": "1", "values":[{ "question":{"id":"2", "display":"Ben je ondernemer of accountant?"}, "answer":{"id":"1", "display":"Ondernemer"}}]}
+	// {"id": "1", "values":[{ "question":{"id":"1", "display":"Gebruik je reeds Speedo?"}, "answer":{"id":"2", "display":"Speedo Online"}}]}
 };
 
 function json_query() {
@@ -156,7 +156,127 @@ function json_questionnaire() {
     //console.log("controllers - api.js, json_questionnaire(), self.query = ", self.query); // This gets the form data from the POST request URL
     //console.log("controllers - api.js, json_questionnaire(), self.body.$clean() = ", self.body.$clean()); // This gets the form data from the POST request body
 
-	self.$save(self, self.callback());
+	// Based on http://petecleary.github.io/DecisionTreeJS/examples/Node-BasicApp/index.html
+
+    //create a data object to process
+//    var data = { "question": {"id": 2, "display": "Gebruik je reeds Speedo?"}, "answer": {"id": 2, "display": "Speedo Online"}};
+    var data = self.body.$clean();
+	var DecisionTree = require("../decisions/decision-tree-" + data.id + ".js");
+	var DecisionTreeLib = require("../decisions/decisiontree-full.min.js");
+	data = data.values;
+	data = data.pop(); // Get last object in Array, i.e. latest question answered
+	//console.log("controllers - api.js, json_questionnaire(), data = ", data); // WORKS!
+
+	var DecisionApp = exports;
+	(function (DecisionApp) {
+		//logs messages to the console
+		DecisionApp.log = function (message) {
+			console.log(message);
+		};
+
+		//add new question with answers function
+		function addNewQuestionWithAnswers(data, shape, callback) {
+			try {
+				DecisionApp.log("*************");
+				DecisionApp.log("add new question with answers function called");
+				DecisionApp.log("adding: " + shape.properties.new_question);
+				data.new_question = shape.properties.new_question;
+				DecisionApp.log("adding: " + shape.properties.new_answers);
+				data.new_answers = shape.properties.new_answers;
+				callback(null, shape);  
+			} catch (e) {
+				callback(e, shape);
+			}
+		}
+		DecisionApp.addNewQuestionWithAnswers = addNewQuestionWithAnswers;
+
+		//check question id function
+		function checkQuestionId(data, shape, callback) {
+			try  {
+				DecisionApp.log("*************");
+				DecisionApp.log("checkQuestionId function called");
+				DecisionApp.log("checking data.question.id (" + data.question.id + ") is equal to shape.paths[i].value");
+				for(var i=0; i<shape.paths.length; i++) {
+				if(Number(data.question.id) == Number(shape.paths[i].value)) {
+					DecisionApp.log("data.question.id " + data.question.id + " == shape.paths[" + i + "].value " + shape.paths[i].value + ", selecting path[" + i + "]");
+					shape.paths[i].selected = true;
+				}
+				}
+				callback(null, shape);
+			} catch (e) {
+				callback(e, shape);
+			}
+		}
+		DecisionApp.checkQuestionId = checkQuestionId;
+
+		//check answer id function
+		function checkAnswerId(data, shape, callback) {
+			try  {
+				DecisionApp.log("*************");
+				DecisionApp.log("checkAnswerId function called");       
+				DecisionApp.log("checking data.answer.id (" + data.answer.id + ") is equal to shape.paths[i].value");
+				for(var i=0; i<shape.paths.length; i++) {
+				if(Number(data.answer.id) == Number(shape.paths[i].value)) {
+					DecisionApp.log("data.answer.id " + data.answer.id + " == shape.paths[" + i + "].value " + shape.paths[i].value + ", selecting path[" + i + "]");
+					shape.paths[i].selected = true;
+				}
+				}
+				callback(null, shape);
+			} catch (e) {
+				callback(e, shape);
+			}
+		}
+		DecisionApp.checkAnswerId = checkAnswerId;
+
+		//complete function
+		function complete(err, result, processedShapes) {
+			DecisionApp.log("*************");
+			DecisionApp.log("complete function called");
+			DecisionApp.log("error: " + err);
+			DecisionApp.log("question: " + JSON.stringify(result.question));
+			DecisionApp.log("answer: " + JSON.stringify(result.answer));  
+			for(var x = 0; x < processedShapes.length; x++) {
+				DecisionApp.log("processed Shape: " + processedShapes[x].description + " id:" + processedShapes[x].id);
+			}
+			DecisionApp.log("new question: " + JSON.stringify(result.new_question));
+			DecisionApp.log("new answers: " + JSON.stringify(result.new_answers));        
+			DecisionApp.log("Processed shapes JSON");
+			//DecisionApp.log(JSON.stringify(processedShapes));
+
+			var response = {};
+			response.success = true;
+			response.value = {};
+			response.value.question = result.new_question;
+			response.value.answers = result.new_answers;
+
+			// {
+			//   "success": true,
+			//   "value": {
+			//     "question": {
+			//       "id": "2",
+			//       "display": "Ben je ondernemer of accountant?"
+			//     },
+			//     "answers": [
+			//       {
+			//         "id": "1",
+			//         "display": "Ondernemer"
+			//       },
+			//       {
+			//         "id": "2",
+			//         "display": "Accountant"
+			//       }
+			//     ]
+			//   }
+			// }
+
+			self.json(response);
+		}
+		DecisionApp.complete = complete;
+	})(DecisionApp || (DecisionApp = {}));
+
+	//execute the tree on the root shape
+	DecisionTreeLib.execute(DecisionTree.shape, data, DecisionApp.complete, { "DecisionApp": DecisionApp });
+
 }
 
 // Creates a notification

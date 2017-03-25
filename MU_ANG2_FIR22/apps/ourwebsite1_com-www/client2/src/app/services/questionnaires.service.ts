@@ -38,9 +38,12 @@ export class QuestionnairesService {
     return this.http.post(`${this.baseUrl}/questionnaires/`, JSON.stringify(questionnaire), this.requestOptions).map(res => res.json()).catch(this.handleError);
   }
 
-  insertAll(questionsAnswers: QuestionAnswerModel[]): Observable<QuestionnairesService> {
-		console.log("QuestionnairesService - insertAll, questionsAnswers = ", questionsAnswers);	
-    let myJSON = JSON.stringify(questionsAnswers);
+  insertAll(questionnaireId: number, questionsAnswers: QuestionAnswerModel[]): Observable<QuestionnairesService> {
+		console.log("QuestionnairesService - insertAll, questionsAnswers = ", questionsAnswers);
+		var questionnaire = {};
+		questionnaire['id'] = questionnaireId;
+    questionnaire['values'] = questionsAnswers;
+    let myJSON = JSON.stringify(questionnaire);
 		console.log("QuestionnairesService - insertAll, myJSON = ", myJSON);
     //return this.http.post(`${this.baseUrl}/questionnaire/`, myJSON, this.requestOptions).map(res => res.json()).catch(this.handleError);
     return this.http.post(`${this.tempUrl}/questionnaire/`, myJSON, this.requestOptions).map(res => res.json()).catch(this.handleError);
