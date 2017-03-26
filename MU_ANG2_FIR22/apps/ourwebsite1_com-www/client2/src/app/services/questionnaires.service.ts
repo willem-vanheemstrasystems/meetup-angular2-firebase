@@ -12,7 +12,6 @@ import { QuestionnairesListResult } from "./questionnaires-list-result.interface
 export class QuestionnairesService {
 
   private baseUrl: string = 'http://localhost:8001/api';
-	private tempUrl: string = 'http://localhost:8002/api';
 
 	requestOptions: RequestOptions = new RequestOptions({
 		headers: new Headers({ 'Content-Type': 'application/json' })
@@ -45,8 +44,7 @@ export class QuestionnairesService {
     questionnaire['values'] = questionsAnswers;
     let myJSON = JSON.stringify(questionnaire);
 		console.log("QuestionnairesService - insertAll, myJSON = ", myJSON);
-    //return this.http.post(`${this.baseUrl}/questionnaire/`, myJSON, this.requestOptions).map(res => res.json()).catch(this.handleError);
-    return this.http.post(`${this.tempUrl}/questionnaire/`, myJSON, this.requestOptions).map(res => res.json()).catch(this.handleError);
+    return this.http.post(`${this.baseUrl}/questionnaire/`, myJSON, this.requestOptions).map(res => res.json()).catch(this.handleError);
 	}
 
 	update(questionnaire: QuestionnaireModel): Observable<QuestionnaireModel> {

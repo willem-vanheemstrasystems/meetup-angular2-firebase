@@ -2616,6 +2616,9 @@ NOTE: Do not forget to run ```ng build``` inside the /client1 directory to have 
 //
 //  See also http://angularjs.blogspot.nl/2017/03/angular-400-now-available.html
 //
+//  UNTIL angular/material AND angular-google-maps ARE COMPATIBLE WITH ANGULAR 4
+//  THESE APP'S (client1 and client2) ARE NOT UPDATED
+//
 //  For comparison:
 //
 //  A build for production of client2 with Angular 2 has the following sizes:
