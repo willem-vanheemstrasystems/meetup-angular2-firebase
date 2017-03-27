@@ -2619,6 +2619,8 @@ NOTE: Do not forget to run ```ng build``` inside the /client1 directory to have 
 //  UNTIL angular/material AND angular-google-maps ARE COMPATIBLE WITH ANGULAR 4
 //  THESE APP'S (client1 and client2) ARE NOT UPDATED
 //
+//  UPDATE: @angular/material@2.0.0-alpha.9-3 WORKS WITH ANGULAR 4.0.0
+//
 //  For comparison:
 //
 //  A build for production of client2 with Angular 2 has the following sizes:

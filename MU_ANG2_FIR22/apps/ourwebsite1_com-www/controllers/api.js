@@ -178,7 +178,7 @@ function json_questionnaire() {
 		function addNewQuestionWithAnswers(data, shape, callback) {
 			try {
 				DecisionApp.log("*************");
-				DecisionApp.log("add new question with answers function called");
+				DecisionApp.log("add new question with answers function called");		
 				DecisionApp.log("adding: " + shape.properties.new_question);
 				data.new_question = shape.properties.new_question;
 				DecisionApp.log("adding: " + shape.properties.new_answers);
@@ -197,10 +197,11 @@ function json_questionnaire() {
 				DecisionApp.log("checkQuestionId function called");
 				DecisionApp.log("checking data.question.id (" + data.question.id + ") is equal to shape.paths[i].value");
 				for(var i=0; i<shape.paths.length; i++) {
-				if(Number(data.question.id) == Number(shape.paths[i].value)) {
-					DecisionApp.log("data.question.id " + data.question.id + " == shape.paths[" + i + "].value " + shape.paths[i].value + ", selecting path[" + i + "]");
-					shape.paths[i].selected = true;
-				}
+                   shape.paths[i].selected = false;  // RESET ALL paths TO false
+					if(Number(data.question.id) == Number(shape.paths[i].value)) {	
+						DecisionApp.log("data.question.id " + data.question.id + " == shape.paths[" + i + "].value " + shape.paths[i].value + ", selecting path[" + i + "]");
+						shape.paths[i].selected = true;
+					}
 				}
 				callback(null, shape);
 			} catch (e) {
@@ -216,10 +217,11 @@ function json_questionnaire() {
 				DecisionApp.log("checkAnswerId function called");       
 				DecisionApp.log("checking data.answer.id (" + data.answer.id + ") is equal to shape.paths[i].value");
 				for(var i=0; i<shape.paths.length; i++) {
-				if(Number(data.answer.id) == Number(shape.paths[i].value)) {
-					DecisionApp.log("data.answer.id " + data.answer.id + " == shape.paths[" + i + "].value " + shape.paths[i].value + ", selecting path[" + i + "]");
-					shape.paths[i].selected = true;
-				}
+                    shape.paths[i].selected = false;  // RESET ALL paths TO false
+					if(Number(data.answer.id) == Number(shape.paths[i].value)) {
+						DecisionApp.log("data.answer.id " + data.answer.id + " == shape.paths[" + i + "].value " + shape.paths[i].value + ", selecting path[" + i + "]");
+						shape.paths[i].selected = true;
+					}
 				}
 				callback(null, shape);
 			} catch (e) {

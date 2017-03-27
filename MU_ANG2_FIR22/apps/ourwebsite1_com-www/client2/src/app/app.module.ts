@@ -9,7 +9,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { HomeComponent, DialogContent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+//import { AgmCoreModule } from 'angular2-google-maps/core';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchListPaginationComponent } from './shared/search-list-pagination/search-list-pagination.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
@@ -70,10 +70,10 @@ import { QuestionFormComponent } from './questions/shared/question-form/question
     HttpModule,
     ReactiveFormsModule,    
     AppRoutingModule,
-    MaterialModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBJa7gl2Qf4grJI2--AXdptakh_6YwOTmw'
-    })    
+    MaterialModule//,
+    //AgmCoreModule.forRoot({
+    //  apiKey: 'AIzaSyBJa7gl2Qf4grJI2--AXdptakh_6YwOTmw'
+    //})    
   ],
   providers: [DataService, QuestionsService, QuestionnairesService],
   bootstrap: [AppComponent]
