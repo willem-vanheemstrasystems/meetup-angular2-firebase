@@ -7,7 +7,7 @@ var path = require("path");
 module.exports = {
     entry: './src/app/app.js',
     output: {
-        path: path.resolve(__dirname, "../public/omnifood"),
+        path: path.resolve(__dirname, "../public/client3"),
         filename: 'app.bundle.js'
     },
     module: {
@@ -28,7 +28,7 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: ['css-loader', 'resolve-url-loader', 'sass-loader?sourceMap'],
-                    publicPath: '../public/omnifood'
+                    publicPath: '../public/client3'
                 })
             },
             {
@@ -55,7 +55,7 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, "../public/omnifood"),
+        contentBase: path.join(__dirname, "../public/client3"),
         compress: true,
         stats: "errors-only",
         open: true
@@ -75,7 +75,7 @@ module.exports = {
             disable: false,
             allChunks: true
         }),
-        new CleanWebpackPlugin(['../public/omnifood']),
+        new CleanWebpackPlugin(['../public/client3']),
         new CopyWebpackPlugin([
             {
                 from: 'src/assets/images',
