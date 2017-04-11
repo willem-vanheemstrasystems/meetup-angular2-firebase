@@ -8,6 +8,7 @@ exports.install = function() {
 
 	F.route('/client1', view_client1);
 	F.route('/client2', view_client2);  
+	F.route('/client3', view_client3);  	
 
 	// Localization for client-side templates
 	F.localize('/templates/*.html', ['compress']);
@@ -52,6 +53,12 @@ function view_client2() {
   console.log("view_client2 called");
   var self = this;
   self.view('client2');
+}
+
+function view_client3() {
+  console.log("view_client3 called");
+  var self = this;
+  self.view('client3');
 }
 
 // Process user's photos
