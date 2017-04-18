@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@angular/compiler": "^4.0.2",
+    "@angular/compiler-cli": "^4.0.2",
     "@angular/core": "^4.0.2",
     "zone.js": "^0.8.4"
   },
