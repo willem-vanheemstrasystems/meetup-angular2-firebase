@@ -16,9 +16,12 @@
     "e2e": "protractor"
   },
   "dependencies": {
+    "@angular/common": "^4.0.2",
     "@angular/compiler": "^4.0.2",
     "@angular/compiler-cli": "^4.0.2",
     "@angular/core": "^4.0.2",
+    "@angular/platform-browser": "^4.0.2",
+    "@angular/router": "^4.0.2",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
