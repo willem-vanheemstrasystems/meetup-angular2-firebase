@@ -8,6 +8,8 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 // import { AboutComponent } from './about/about.component';
 //import { AgmCoreModule } from 'angular2-google-maps/core';
 // import { SearchListComponent } from './search-list/search-list.component';
@@ -39,6 +41,8 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     HomeComponent,
+    HeaderComponent,
+    FooterComponent,
     // DialogContent,
     // AboutComponent,
     // SearchListComponent,
