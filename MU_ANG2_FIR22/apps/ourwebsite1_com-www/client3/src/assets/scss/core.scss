@@ -12,6 +12,7 @@ $main-max-width: 1140px;
 // - Vendors -
 //
 
+@import "vendors/ionicons/ionicons";
 @import "vendors/normalize/normalize";
 
 //
@@ -36,7 +37,9 @@ $main-max-width: 1140px;
 // - Components -
 //
 
+@import 'components/core/box';
 @import 'components/core/button';
+@import 'components/core/icon';
 @import 'components/core/navigation';
 
 //

@@ -32,6 +32,13 @@ module.exports = {
                 })
             },
             {
+                test: /\.(svg|ttf|eot|woff(2)?)$/,
+                loader: 'file-loader',
+                query: {
+                    name: '../../../assets/fonts/[name].[ext]'
+                }
+            },            
+            {
                 test: /\.(gif|png|jpe?g|svg)$/,
                 loader: 'file-loader',
                 query: {
