@@ -1,3 +1,4 @@
+// tsconfig.json
 {
   "compilerOptions": {
     "baseUrl": "",
@@ -8,14 +9,19 @@
     "mapRoot": "./",
     "module": "es6",
     "moduleResolution": "node",
-    "outDir": "../dist/out-tsc",
+    "outDir": "../public/client2",
     "sourceMap": true,
     "target": "es5",
     "typeRoots": [
       "../node_modules/@types"
     ],
     "types": [
-      "hammerjs"
+      "hammerjs",
+      "jasmine"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules", 
+    "**/*.spec.ts"
+  ]
 }

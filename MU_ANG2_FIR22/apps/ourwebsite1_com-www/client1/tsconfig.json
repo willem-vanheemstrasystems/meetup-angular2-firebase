@@ -1,6 +1,27 @@
 // tsconfig.json
 {
   "compilerOptions": {
-    "outDir": "../public/client1"
-  }
+    "baseUrl": "",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es6", "dom"],
+    "mapRoot": "./",
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "../public/client1",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "hammerjs",
+      "jasmine"
+    ]
+  },
+  "exclude": [
+    "node_modules", 
+    "**/*.spec.ts"
+  ]
 }
