@@ -8,6 +8,7 @@
 
 $black:         #000;
 $lighten-black:   lighten($black, 10%);
+$gray:          #555;
 $white:         #fff;
 $darken-white:    darken($white, 10%);
 
@@ -63,6 +64,17 @@ $darken-secondary-color: darken($secondary-color, 10%);
 // - Alert Colors -
 //
 
+//
+// - Social Media Colors -
+//
+
+$facebook-primary-color: #3b5998;
+$twitter-primary-color: #00aced;
+$googleplus-primary-color: #dd4b39;
+$youtube-primary-color: #bb0000;
+$linkedin-primary-color: #007bb6;
+$instagram-primary-color: #517fa4;
+$pinterest-primary-color: #cb2027;
 
 //
 // - Other Colors -
