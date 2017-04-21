@@ -1,0 +1,23 @@
+//
+// === PAGE-SECTION ===
+//
+
+//
+// - Section -
+//
+
+section {
+    padding: 80px 0;
+}
+
+//
+// - Hero -
+//
+
+.hero-text-box {
+    position: absolute;
+    width: $main-max-width;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -35,7 +35,7 @@ module.exports = {
                 test: /\.(svg|ttf|eot|woff(2)?)$/,
                 loader: 'file-loader',
                 query: {
-                    name: '../../../assets/fonts/[name].[ext]'
+                    name: '/assets/fonts/[name].[ext]'
                 }
             },            
             {

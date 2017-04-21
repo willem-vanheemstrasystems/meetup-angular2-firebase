@@ -1,0 +1,48 @@
+//
+// === CORE FILE ===
+//
+
+//
+// - Main -
+//
+
+$main-max-width: 1140px;
+
+//
+// - Vendors -
+//
+
+@import "vendors/ionicons/ionicons";
+@import "vendors/normalize/normalize";
+
+//
+// - Base -
+//
+
+@import 'base/color';
+@import 'base/reset';
+@import 'base/typography';
+
+//
+// - Layout -
+//
+
+@import 'layout/core/footer';
+@import 'layout/core/grid';
+@import 'layout/core/header';
+@import 'layout/core/page';
+@import 'layout/core/page-section';
+
+//
+// - Components -
+//
+
+@import 'components/core/box';
+@import 'components/core/button';
+@import 'components/core/icon';
+@import 'components/core/navigation';
+
+//
+// - Views -
+//
+
