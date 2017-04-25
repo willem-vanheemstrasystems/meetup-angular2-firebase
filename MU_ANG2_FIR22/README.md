@@ -2672,3 +2672,29 @@ We are beginning work on an interactive [Angular Update Guide](https://angular-u
 // FOLLOW ABOVE INSTRUCTIONS
 //
 //**********************************************************************************
+
+# Keeping a fork up to date
+
+See also [https://gist.github.com/CristinaSolana/1885435](https://gist.github.com/CristinaSolana/1885435)
+
+## 1. Clone your fork:
+
+```javascript
+    git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
+```
+
+## 2. Add remote from original repository in your forked repository: 
+
+```javascript
+    cd into/cloned/fork-repo
+    git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git
+    git fetch upstream
+```
+
+where ORIGINAL-DEV-USERNAME = willem-vanheemstrasystems and REPO-YOU-FORKED-FROM.git = meetup-angular2-firebase.git
+
+## 3. Updating your fork from original repo to keep up with their changes:
+
+```javascript
+    git pull upstream master
+```
