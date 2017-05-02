@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { HeroComponent } from './hero/hero.component';
+import { SectionComponent } from './section/section.component';
+import { RowComponent } from './row/row.component';
 // import { AboutComponent } from './about/about.component';
 //import { AgmCoreModule } from 'angular2-google-maps/core';
 // import { SearchListComponent } from './search-list/search-list.component';
@@ -43,6 +47,10 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    NavigationComponent,
+    HeroComponent,
+    SectionComponent,
+    RowComponent,
     // DialogContent,
     // AboutComponent,
     // SearchListComponent,
