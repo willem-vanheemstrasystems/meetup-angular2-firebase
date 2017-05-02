@@ -14,6 +14,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HeroComponent } from './hero/hero.component';
 import { SectionComponent } from './section/section.component';
 import { RowComponent } from './row/row.component';
+import { ColumnComponent } from './column/column.component';
 // import { AboutComponent } from './about/about.component';
 //import { AgmCoreModule } from 'angular2-google-maps/core';
 // import { SearchListComponent } from './search-list/search-list.component';
@@ -51,6 +52,7 @@ import { RowComponent } from './row/row.component';
     HeroComponent,
     SectionComponent,
     RowComponent,
+    ColumnComponent,
     // DialogContent,
     // AboutComponent,
     // SearchListComponent,
